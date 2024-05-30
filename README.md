@@ -2,6 +2,18 @@
 
 ***
 
+***
+
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/clipassman?label=pypi%20downloads)](https://pypi.org/project/clipassman/)
+![GitHub top language](https://img.shields.io/github/languages/top/smartlegionlab/clipassman)
+[![PyPI](https://img.shields.io/pypi/v/clipassman)](https://pypi.org/project/clipassman)
+[![GitHub](https://img.shields.io/github/license/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/blob/master/LICENSE)
+[![PyPI - Format](https://img.shields.io/pypi/format/clipassman)](https://pypi.org/project/clipassman)
+
+
+***
+
 
 ## Short description:
 
@@ -26,9 +38,17 @@ Author and developer: ___A.A. Suvorov___
 
 ***
 
+## Help:
+
+`pip install clipassman`
+
+`clipassman`
+
+***
+
 ## What is news:
 
-__clipassman v0.5.0__
+__clipassman v0.5.1__
 
 ***
 
