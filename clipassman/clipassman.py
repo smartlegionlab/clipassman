@@ -6,9 +6,9 @@
 # --------------------------------------------------------
 # https://github.com/smartlegionlab/
 # --------------------------------------------------------
-from clipassman.managers import AppManager
+from clipassman.app_manager import AppManager
 
 
-def app():
+def main():
     app_manager = AppManager()
     app_manager.run()
