@@ -1,6 +1,0 @@
-setuptools
-wheel
-click~=8.0.1
-smartpasslib~=0.4.2
-smartcliapp~=0.4.0
-twine

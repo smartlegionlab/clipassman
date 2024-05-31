@@ -1,34 +1,28 @@
-# --------------------------------------------------------
-# Licensed under the terms of the BSD 3-Clause License
-# (see LICENSE for details).
-# Copyright © 2024, A.A. Suvorov
-# All rights reserved.
-# --------------------------------------------------------
-# https://github.com/smartlegionlab
-# --------------------------------------------------------
 import json
+import shutil
 from pathlib import Path
 
 from smartpasslib.generators import SmartPasswordMaster
 
+from clipassman.config import Config
+
+
+class OutputManager:
+
+    @classmethod
+    def print_text(self, text='', symbol='-'):
+        width = self._get_term_width()
+        text = f' {text} ' if text else ''
+        print(text.center(width, symbol))
+
+    @classmethod
+    def _get_term_width(self):
+        return shutil.get_terminal_size()[0]
+
 
 class SmartPassword:
-    """
-    Smart password.
-    Smart password with the ability to recover and
-    linking to a login and a secret phrase.
-    The password itself is not stored either in the open or
-    in encrypted form, but is generated on the fly.
-    """
 
     def __init__(self, login='', key='', length=12):
-        """
-        When creating an object, it should be passed:
-        :param login: login.
-        :param key: a public key that needs to be generated before creating a
-        password using a username and a secret phrase.
-        :param length: password length.
-        """
         self._login = login
         self._length = length
         self._key = key
@@ -50,12 +44,6 @@ class SmartPassword:
 
 
 class SmartPassMan:
-    """
-    Password manager.
-    Passwords are not stored in clear or encrypted form.
-    Passwords are generated on the fly using metadata.
-    """
-    # The path to the file where the password metadata will be stored.
     file = Path(Path.home()).joinpath('.cases.json')
 
     def __init__(self):
@@ -64,71 +52,35 @@ class SmartPassMan:
 
     @property
     def passwords(self):
-        """
-        Dictionary with password objects.
-        :return: <dict> - dictionary with password objects.
-        """
         return self._passwords
 
     @property
     def count(self):
-        """
-        Number of passwords.
-        :return: <int> - number of passwords.
-        """
         return len(self._passwords)
 
     def add(self, password):
-        """
-        Adds a password object to the store.
-        :param password: SmartPassword object.
-        :return: None
-        """
         if password not in self._passwords:
             self._passwords[password.login] = password
 
     def add_smart_pass(self, login, secret, length):
-        """
-        Creates and saves a new SmartPassword object.
-        :param login: login.
-        :param secret: secret phrase.
-        :param length: password length.
-        :return: SmartPassword object.
-        """
         key = self._generators.get_public_key(login=login, secret=secret)
         smart_password = SmartPassword(login=login, key=key, length=length)
         self.add(smart_password)
         return smart_password
 
     def add_passwords(self, passwords):
-        """
-        Adds passwords to the store.
-        :param passwords: an iterable with password objects.
-        :return: None
-        """
         for password in passwords:
             if isinstance(password, SmartPassword):
                 self.add(password)
 
     def get_password(self, login):
-        """
-        Looks for a password object in the store by login.
-        :param login: login.
-        :return: Returns a SmartPassword object.
-        """
         return self._passwords.get(login)
 
     def remove(self, login: str) -> None:
-        """
-        Removes a password object from storage.
-        :param login: login.
-        :return: None
-        """
         if login in self._passwords:
             del self._passwords[login]
 
     def load_file(self):
-        """Loads password objects from a file."""
         try:
             with open(self.file, 'r') as f:
                 json_data = json.load(f)
@@ -149,7 +101,6 @@ class SmartPassMan:
             return passwords
 
     def save_file(self):
-        """Saves password objects to a file."""
         passwords_dict = {name: {'login': password.login,
                                  'length': password.length,
                                  'key': password.key}
@@ -157,10 +108,62 @@ class SmartPassMan:
         self._save_file(passwords_dict)
 
     def clear(self):
-        """Cleans up storage."""
         self._passwords = {}
 
     def _save_file(self, passwords: dict):
         """Writes json data to a file."""
         with open(self.file, 'w') as f:
             json.dump(passwords, f, indent=4)
+
+
+class AppManager:
+    
+    def __init__(self):
+        self.printer = OutputManager()
+        self.manager = SmartPassMan()
+        self.config = Config()
+        self._init()
+
+    def _init(self):
+        self.manager.load_file()
+
+    def show_logo(self):
+        self.printer.print_text(symbol='*')
+        self.printer.print_text(text=self.config.name, symbol='*')
+        self.printer.print_text(text=f'Total passwords: {self.manager.count}', symbol='-')
+
+    def show_footer(self):
+        self.printer.print_text(text=self.config.url, symbol='-')
+        self.printer.print_text(text=self.config.info, symbol='-')
+        self.printer.print_text(symbol='=')
+
+    def main_menu(self):
+        while True:
+            print(f'a: Add password')
+            print(f'g: Get password')
+            print(f'e: Exit')
+
+            self.printer.print_text()
+            choice = input("Choose an action: ")
+            self.printer.print_text()
+
+            if choice == 'e':
+                return
+            elif choice == 'a':
+                self.add_password()
+            elif choice == 'g':
+                self.get_password()
+            else:
+                print('Wrong option...')
+            self.printer.print_text()
+
+    def add_password(self):
+        print('Show add password menu')
+
+    def get_password(self):
+        print('Show get password menu')
+
+    def run(self):
+        self.show_logo()
+        self.main_menu()
+        self.show_footer()

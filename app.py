@@ -6,8 +6,9 @@
 # --------------------------------------------------------
 # https://github.com/smartlegionlab
 # --------------------------------------------------------
-from clipassman.app import cli
+from clipassman.clipassman import app
 
 
 if __name__ == '__main__':
-    cli()
+    app()
+

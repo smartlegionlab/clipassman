@@ -6,5 +6,9 @@
 # --------------------------------------------------------
 # https://github.com/smartlegionlab/
 # --------------------------------------------------------
-"""Cross-platform console smart password generator and manager."""
-__version__ = '0.6.0'
+from clipassman.managers import AppManager
+
+
+def app():
+    app_manager = AppManager()
+    app_manager.run()
