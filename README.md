@@ -1,4 +1,4 @@
-# clipassman <sup>v0.6.1</sup>
+# clipassman <sup>v0.6.2</sup>
 
 ___clipassman___ - Cross-platform console smart password generator and manager.
 
@@ -50,9 +50,9 @@ Author and developer: ___A.A. Suvorov___
 
 ## What is news:
 
-__clipassman v0.6.1__
+__clipassman v0.6.2__
 
-This is a completely new, rewritten version. More simple and convenient. And just as safe.
+Fix errors.
 
 ***
 

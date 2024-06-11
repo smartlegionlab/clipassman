@@ -95,7 +95,7 @@ class AppManager:
                 for key, val in login_dict.items():
                     print(f'{key}. {val}')
                 print('0. <- Back')
-                cmd = input('Select the option you want: ')
+                cmd = input('Select: ')
                 try:
                     cmd = abs(int(cmd))
                     if not cmd:
@@ -111,10 +111,10 @@ class AppManager:
                     action = self._get_pass_action(smart_pass)
                     if action == 'get':
                         self._printer.print_text(text='Get Smart Password')
-                        login = input('Login: ')
+                        print(f'Login: {smart_pass.login} | Length: {smart_pass.length}')
                         secret = getpass.getpass("Enter secret phrase (hidden): ")
                         check_flag = self._manager.smart_pass_gen.check_data(
-                            login=login,
+                            login=smart_pass.login,
                             secret=secret,
                             public_key=smart_pass.key
                         )
