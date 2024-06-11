@@ -1,6 +1,10 @@
-# clipassman
+# clipassman <sup>v0.6.0</sup>
 
-***
+___clipassman___ - Cross-platform console smart password generator and manager.
+
+Working with passwords has never been so secure. 
+No encryption, smart passwords are not stored anywhere, they are generated on the fly.
+They do not need to be memorized or written down. You only need to remember the secret phrase.
 
 ***
 
@@ -16,8 +20,6 @@
 
 
 ## Short description:
-
-___clipassman___ - Cross-platform console smart password generator and manager.
 
 - Passwords are not stored anywhere, neither in open nor in encrypted form, they are generated on the fly.
 - Complex passwords up to 1000 characters.
@@ -48,7 +50,9 @@ Author and developer: ___A.A. Suvorov___
 
 ## What is news:
 
-__clipassman v0.5.1__
+__clipassman v0.6.0__
+
+This is a completely new, rewritten version. More simple and convenient. And just as safe.
 
 ***
 
@@ -76,7 +80,7 @@ but the secret phrase, very easy!).
  
 You will create smart passwords using your username (or any word that will be stored in clear text),
 the length of the password (no matter how long the password from will always be the same, 
-specifying the length you just count the required number of characters from the available ones (4-100)), 
+specifying the length you just count the required number of characters from the available ones (4-1000)), 
 as well as the secret phrase.
  
 A secret phrase is like your password to access a password. It will be stored in your head,
@@ -98,6 +102,24 @@ You need to keep your secret phrase secret.
 If an attacker finds out your username and secret phrase,
 it will easily generate your password. But still, it's almost impossible. 
 After all, read your secret phrase he can't get out of your head.
+
+You don't have to use real logins. Login in our case is simply the name of your case, 
+under which the case will be stored in the manager, 
+for further password generation on the fly. 
+It will also be used in the process of generating a smart password, 
+so it is important, but can be stored in clear text.
+
+A file will be created on your system, in your home folder. 
+It will store open data: 1. Login. 2. Password length. 3. 
+Public key for each case. Having stolen this data, the attacker will in any case 
+not be able to obtain your smart passwords, 
+since they can only be obtained by knowing the secret phrase, and it is stored in your head.
+
+---
+
+## Requirements:
+
+smartpasslib: [GitHub](https://github.com/smartlegionlab/smartpasslib/), [PyPi](https://pypi.org/project/smartpasslib/)
 
 ***
 
