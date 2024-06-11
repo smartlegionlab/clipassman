@@ -47,6 +47,7 @@ class SmartPasswordManager:
     def remove(self, login: str) -> None:
         if login in self._passwords:
             del self._passwords[login]
+        self.save_file()
 
     def load_file(self):
         try:

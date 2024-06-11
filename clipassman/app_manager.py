@@ -7,94 +7,169 @@ from clipassman.smart_pass_manager import SmartPasswordManager
 class AppManager:
     
     def __init__(self):
-        self.printer = OutputManager()
-        self.manager = SmartPasswordManager()
-        self.config = Config()
-        self._init()
+        self._printer = OutputManager()
+        self._manager = SmartPasswordManager()
+        self._config = Config()
+        self.__init()
 
-    def _init(self):
-        self.manager.load_file()
+    def __init(self):
+        self._manager.load_file()
 
-    def show_logo(self):
-        self.printer.print_text(symbol='*')
-        self.printer.print_text(text=self.config.name, symbol='*')
+    def _show_logo(self):
+        self._printer.print_text(symbol='*')
+        self._printer.print_text(text=self._config.name, symbol='*')
 
-    def show_footer(self):
-        self.printer.print_text(text=self.config.url, symbol='-')
-        self.printer.print_text(text=self.config.info, symbol='-')
-        self.printer.print_text(symbol='=')
+    def _show_footer(self):
+        self._printer.print_text(text=self._config.url, symbol='-')
+        self._printer.print_text(text=self._config.info, symbol='-')
+        self._printer.print_text(symbol='=')
+
+    def _show_error(self, title='ERROR!!!', text='Error! Invalid input.'):
+        self._printer.print_text(text=title)
+        print(text)
+        input('Enter to continue...')
 
     def main_menu(self):
         while True:
-            self.printer.print_text(text=f'Total passwords: {self.manager.count}', symbol='-')
-            print(f'a: Add password')
-            print(f'g: Get password')
+            self._printer.print_text(text=f'Main Menu | Total passwords: {self._manager.count}', symbol='-')
+            print(f'a: Add')
+            print(f'g: Get/Del')
             print(f'h: Help')
             print(f'e: Exit')
 
-            self.printer.print_text()
             cmd = input("Choose an action: ")
-            self.printer.print_text()
 
             if cmd == 'e':
                 return
             elif cmd == 'a':
-                self.add_password()
+                self._add_password()
             elif cmd == 'g':
-                self.get_password()
+                self._get_password()
             elif cmd == 'h':
-                print(f'Visit the documentation page: {self.config.url}')
-                input('Enter to continue...')
+                self._help()
             else:
-                print('Wrong option...')
-            self.printer.print_text()
+                self._show_error()
 
-    def add_password(self):
+    def _help(self):
+        self._printer.print_text('Help')
+        print(f'Visit the documentation page: {self._config.url}')
+        self._printer.print_text()
+        input('Enter to continue...')
+
+    def _add_password(self):
         while True:
-            login = self.get_login()
-            secret = self.get_secret()
-            length = self.get_password_length()
-            self.manager.add_smart_password(
+            self._printer.print_text(text='Add new smart password')
+            login = self._get_login()
+            secret = self._get_secret()
+            length = self._get_password_length()
+            self._manager.add_smart_password(
                 login=login,
                 secret=secret,
                 length=length
             )
-            password = self.manager.smart_pass_gen.get_smart_password(
+            password = self._manager.smart_pass_gen.get_smart_password(
                 login=login,
                 secret=secret,
                 length=length,
             )
-            self.manager.save_file()
+            self._manager.save_file()
             print(f'The new password has been added successfully.')
-            self.printer.print_text()
-            print(f'Your smart password:')
+            self._printer.print_text(text=f'Your smart password:')
             print(password)
-            self.printer.print_text()
+            self._printer.print_text()
             input('Enter to continue...')
             break
 
-    def get_password(self):
-        if not self.manager.count:
-            print(f'Not found...')
+    def _get_password(self):
+        if not self._manager.count:
+            print(f'Smart passwords not found...')
+            self._printer.print_text()
+            input('Enter to continue...')
             return
         else:
             while True:
-                self.printer.print_text(text='Login list:')
+                self._printer.print_text(text='Login list:')
                 login_dict = {
-                    n: login for n, login in enumerate(self.manager.passwords.keys(), 1)
+                    n: login for n, login in enumerate(self._manager.passwords.keys(), 1)
                 }
                 for key, val in login_dict.items():
                     print(f'{key}. {val}')
-                print('0. Back')
+                print('0. <- Back')
                 cmd = input('Select the option you want: ')
-                if cmd == '0':
-                    return
+                try:
+                    cmd = abs(int(cmd))
+                    if not cmd:
+                        return
+                    if cmd not in login_dict:
+                        raise ValueError
+                except:
+                    self._show_error()
+                    continue
+                else:
+                    login = login_dict[cmd]
+                    smart_pass = self._manager.passwords[login]
+                    action = self._get_pass_action(smart_pass)
+                    if action == 'get':
+                        self._printer.print_text(text='Get Smart Password')
+                        login = input('Login: ')
+                        secret = getpass.getpass("Enter secret phrase (hidden): ")
+                        check_flag = self._manager.smart_pass_gen.check_data(
+                            login=login,
+                            secret=secret,
+                            public_key=smart_pass.key
+                        )
+                        if check_flag:
+                            password = self._manager.smart_pass_gen.get_smart_password(
+                                login=login,
+                                secret=secret,
+                                length=smart_pass.length
+                            )
+                            self._printer.print_text(text='Smart Password:')
+                            print(password)
+                            self._printer.print_text()
+                            input('Enter to continue...')
+                        else:
+                            self._show_error(text='Error! You have entered incorrect information.')
 
-    def get_login(self):
+                    elif action == 'del':
+                        self._password_delete(smart_pass.login)
+                        self._printer.print_text()
+                        print('Password successfully removed!')
+                        self._printer.print_text()
+                        input('Enter to continue...')
+                        if not self._manager.count:
+                            break
+                    elif action == 'back':
+                        continue
+
+    def _password_delete(self, login):
+        self._manager.remove(login)
+
+    def _get_pass_action(self, smart_pass):
+        while 1:
+            self._printer.print_text(text=f'Login: {smart_pass.login} | Length: {smart_pass.length}')
+            print('1: Get smart password')
+            print('2: Delete smart password')
+            print('0: <- Back')
+            cmd = input('Select the option you want: ')
+            if cmd == '1':
+                return 'get'
+            elif cmd == '2':
+                act = input('Are you sure?(y/n): ')
+                if act in ['y', '']:
+                    return 'del'
+                else:
+                    continue
+            elif cmd == '0':
+                return 'back'
+            else:
+                self._show_error()
+
+    def _get_login(self):
         login = ''
         while not login:
             login = input('Enter login: ')
-            if login in self.manager.passwords.keys():
+            if login in self._manager.passwords.keys():
                 print('Error! This login is already in use.')
                 login = ''
                 continue
@@ -103,7 +178,7 @@ class AppManager:
         return login
 
     @staticmethod
-    def get_secret():
+    def _get_secret():
         secret = ''
         while not secret:
             secret = getpass.getpass("Enter secret phrase (hidden): ")
@@ -112,7 +187,7 @@ class AppManager:
         return secret
 
     @staticmethod
-    def get_password_length():
+    def _get_password_length():
         length = 0
         while not length:
             length = input('Enter password length (4-1000): ')
@@ -129,6 +204,6 @@ class AppManager:
         return length
 
     def run(self):
-        self.show_logo()
+        self._show_logo()
         self.main_menu()
-        self.show_footer()
+        self._show_footer()
