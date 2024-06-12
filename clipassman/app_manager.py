@@ -52,7 +52,7 @@ class AppManager:
 
     def _help(self):
         self._printer.print_text('Help')
-        print(f'Visit the documentation page: {self._config.url}')
+        print(f'Visit the documentation page: {self._config.help_url}')
         self._printer.print_text()
         input('Enter to continue...')
 
