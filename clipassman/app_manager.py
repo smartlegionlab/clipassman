@@ -147,7 +147,8 @@ class AppManager:
 
     def _get_pass_action(self, smart_pass):
         while 1:
-            self._printer.print_text(text=f'Login: {smart_pass.login} | Length: {smart_pass.length}')
+            self._printer.print_text()
+            print(f'Login: {smart_pass.login} | Length: {smart_pass.length}')
             print('1: Get smart password')
             print('2: Delete smart password')
             print('0: <- Back')
