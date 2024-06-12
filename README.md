@@ -1,10 +1,12 @@
-# clipassman <sup>v0.6.2</sup>
+# clipassman <sup>v0.6.3</sup>
 
 ___clipassman___ - Cross-platform console smart password generator and manager.
 
-Working with passwords has never been so secure. 
-No encryption, smart passwords are not stored anywhere, they are generated on the fly.
-They do not need to be memorized or written down. You only need to remember the secret phrase.
+Working with passwords has never been so secure.
+There is no encryption, smart passwords are not stored anywhere, they are generated on the fly.
+They do not need to be remembered, encrypted or written down. 
+You only need to remember the secret phrase. 
+And at the right time, using a secret phrase, you can simply generate your password on the fly.
 
 ***
 
@@ -25,7 +27,12 @@ They do not need to be memorized or written down. You only need to remember the 
 - Complex passwords up to 1000 characters.
 - The password does not need to be stored, memorized or written down anywhere, you only remember
 a secret phrase that you keep in your head. 
-
+- Only the login, password length and public key are stored in open form. 
+These entries are stored in a .cases.json file in your home directory. 
+If an attacker gains access to this file, they will not be able to obtain your passwords. 
+You can only get passwords by knowing the secret phrase, and it is stored in your head. 
+Or in any place that no one knows about, and cannot even assume that you are using 
+this text as a secret phrase.
 ***
 
 Author and developer: ___A.A. Suvorov___
@@ -46,14 +53,26 @@ Author and developer: ___A.A. Suvorov___
 
 `clipassman`
 
+or
+
+1. Download the project.
+2. Unpack to the desired folder.
+3. ```python -m venv venv```
+4. `source venv/bin/activate`
+5. `python app.py`
+
 ***
 
 ## What is news:
 
-__clipassman v0.6.2__
+__clipassman v0.6.3__
 
-Fix errors.
-
+1. Fix errors.
+2. Improved user interface.
+3. Restrictions for logins.
+4. Password length restrictions.
+5. Screenshot updated.
+6. Documentation has been corrected.
 ***
 
 ## Images:
@@ -61,61 +80,6 @@ Fix errors.
 ![LOGO](https://github.com/smartlegionlab/clipassman/raw/master/data/images/clipassman.png)
 
 ***
-
-# Description:
-
-___clipassman___ - Cross-platform console smart password generator and manager.
-
-- Passwords are not stored anywhere, neither in open nor in encrypted form, they are generated on the fly.
-- Complex passwords up to 1000 characters.
-- The password does not need to be stored, memorized or written down anywhere, you only remember
-a secret phrase that you keep in your head. 
- 
-The utility allows you to store and generate complex cryptographic passwords on the fly.
-Passwords are not stored in either plaintext or encrypted form. They are not stored anywhere at all,
-and are always in the calculated state, but you can only get them by knowing the secret phrase,
-which will be stored in your head (I'm sure the most reliable place! Moreover, 
-it is not realistic to store complex long passwords in your head!
-but the secret phrase, very easy!). 
- 
-You will create smart passwords using your username (or any word that will be stored in clear text),
-the length of the password (no matter how long the password from will always be the same, 
-specifying the length you just count the required number of characters from the available ones (4-1000)), 
-as well as the secret phrase.
- 
-A secret phrase is like your password to access a password. It will be stored in your head,
-and it will be required when generating a new password, 
-as well as each time your password is requested. 
-You can use the same secret phrase to generate different passwords using different usernames,
-in this case, the passwords will be different.
-After all, the main meaning is that the pair: login and secret phrase,
-they will always return the same password!
- 
-That's why you basically don't need your metadata file. 
-It is created only for convenience, and faster access to passwords.
-You can get your password from any device at any time using this utility, 
-and your password pair: login + secret phrase.
-Regardless of the system or device , you will receive your password. 
-This is convenient for securely storing, retrieving, and recovering your passwords.
- 
-You need to keep your secret phrase secret. 
-If an attacker finds out your username and secret phrase,
-it will easily generate your password. But still, it's almost impossible. 
-After all, read your secret phrase he can't get out of your head.
-
-You don't have to use real logins. Login in our case is simply the name of your case, 
-under which the case will be stored in the manager, 
-for further password generation on the fly. 
-It will also be used in the process of generating a smart password, 
-so it is important, but can be stored in clear text.
-
-A file will be created on your system, in your home folder. 
-It will store open data: 1. Login. 2. Password length. 3. 
-Public key for each case. Having stolen this data, the attacker will in any case 
-not be able to obtain your smart passwords, 
-since they can only be obtained by knowing the secret phrase, and it is stored in your head.
-
----
 
 ## Requirements:
 
