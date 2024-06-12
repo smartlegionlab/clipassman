@@ -192,17 +192,14 @@ class AppManager:
     def _get_password_length():
         length = 0
         while not length:
-            length = input('Enter password length (4-1000): ')
+            length = input('Enter password length (10-1000): ')
             try:
                 length = abs(int(length))
-                if length < 4 or length > 1000:
-                    if length < 4:
-                        length = 4
-                    if length > 1000:
-                        length = 1000
             except Exception:
                 print('Error! You did not enter a number.')
                 length = 0
+            else:
+                length = max(10, min(length, 1000))
         return length
 
     def run(self):

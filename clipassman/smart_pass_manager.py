@@ -64,7 +64,7 @@ class SmartPasswordManager:
                 SmartPassword(
                     login=json_data[obj]['login'],
                     key=json_data[obj]['key'],
-                    length=json_data[obj]['length']
+                    length=max(10, min(json_data[obj]['length'], 1000))
                 ) for obj in json_data]
             self.add_passwords(passwords)
             return passwords
