@@ -37,15 +37,15 @@ class AppManager:
             print(f'h: Help')
             print(f'e: Exit')
 
-            cmd = input("Choose an action: ")
+            cmd = input("Choose an action: ").lower()
 
-            if cmd == 'e':
+            if cmd in ['e', 'у']:
                 return
-            elif cmd == 'a':
+            elif cmd in ['a', 'ф']:
                 self._add_password()
-            elif cmd == 'g':
+            elif cmd in ['g', 'п']:
                 self._get_password()
-            elif cmd == 'h':
+            elif cmd in ['h', 'р']:
                 self._help()
             else:
                 self._show_error()
@@ -156,8 +156,8 @@ class AppManager:
             if cmd == '1':
                 return 'get'
             elif cmd == '2':
-                act = input('Are you sure?(y/n): ')
-                if act in ['y', '']:
+                act = input('Are you sure?(y/n): ').lower()
+                if act in ['y', 'yes', 'н']:
                     return 'del'
                 else:
                     continue
