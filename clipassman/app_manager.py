@@ -168,13 +168,14 @@ class AppManager:
     def _get_login(self):
         login = ''
         while not login:
-            login = input('Enter login: ')
+            print(f'Attention! Login length must be no less than 4 and no more than 35 characters.')
+            login = input('Enter login: ').strip(' ')
             if login in self._manager.passwords.keys():
                 print('Error! This login is already in use.')
                 login = ''
                 continue
-            if not login:
-                print('Error! You have not entered your login.')
+            if len(login) not in range(6, 36):
+                print('Error! Invalid login length.')
         return login
 
     @staticmethod
