@@ -73,6 +73,7 @@ class AppManager:
                 length=length,
             )
             self._manager.save_file()
+            self._printer.print_text()
             print(f'The new password has been added successfully.')
             self._printer.print_text(text=f'Your smart password:')
             print(password)
