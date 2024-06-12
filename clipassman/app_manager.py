@@ -178,6 +178,8 @@ class AppManager:
                 continue
             if len(login) not in range(4, 36):
                 print('Error! Invalid login length.')
+                login = ''
+                continue
         return login
 
     @staticmethod
