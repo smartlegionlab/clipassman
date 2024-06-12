@@ -175,7 +175,7 @@ class AppManager:
                 print('Error! This login is already in use.')
                 login = ''
                 continue
-            if len(login) not in range(6, 36):
+            if len(login) not in range(4, 36):
                 print('Error! Invalid login length.')
         return login
 
