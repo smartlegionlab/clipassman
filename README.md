@@ -1,4 +1,4 @@
-# clipassman <sup>v0.6.3</sup>
+# clipassman <sup>v0.6.4</sup>
 
 ___clipassman___ - Cross-platform console smart password generator and manager.
 
@@ -65,7 +65,7 @@ or
 
 ## What is news:
 
-__clipassman v0.6.3__
+__clipassman v0.6.4__
 
 1. Fix errors.
 2. Improved user interface.
