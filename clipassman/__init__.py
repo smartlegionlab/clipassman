@@ -6,5 +6,5 @@
 # --------------------------------------------------------
 # https://github.com/smartlegionlab/
 # --------------------------------------------------------
-"""Cross-platform console smart password generator and manager."""
-__version__ = '0.6.4'
+"""Cross-platform console Smart Password manager and generator."""
+__version__ = '0.7.0'

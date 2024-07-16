@@ -1,6 +1,6 @@
-# clipassman <sup>v0.6.4</sup>
+# clipassman <sup>v0.7.0</sup>
 
-___clipassman___ - Cross-platform console smart password generator and manager.
+___clipassman___ - Cross-platform console Smart Password manager and generator.
 
 Working with passwords has never been so secure.
 There is no encryption, smart passwords are not stored anywhere, they are generated on the fly.
@@ -22,6 +22,8 @@ And at the right time, using a secret phrase, you can simply generate your passw
 
 
 ## Short description:
+
+___clipassman___ - Cross-platform console Smart Password manager and generator.
 
 - Passwords are not stored anywhere, neither in open nor in encrypted form, they are generated on the fly.
 - Complex passwords up to 1000 characters.
@@ -47,9 +49,20 @@ Author and developer: ___A.A. Suvorov___
 
 ***
 
+
+## What is news:
+
+__clipassman v0.7.0__
+
+- For ease of launch and use, the dependency on [smartpasslib](https://github.com/smartlegionlab/smartpasslib/) is no longer used. The necessary code is integrated directly into the application.
+
+***
+
 ## Help:
 
 `pip install clipassman`
+
+> On some systems, when running the command `pip install clipassman` an error occurs, you can solve it like this `pip install clipassman --break-system-packages`
 
 `clipassman`
 
@@ -57,22 +70,8 @@ or
 
 1. Download the project.
 2. Unpack to the desired folder.
-3. ```python -m venv venv```
-4. `source venv/bin/activate`
-5. `python app.py`
+3. `python app.py`
 
-***
-
-## What is news:
-
-__clipassman v0.6.4__
-
-1. Fix errors.
-2. Improved user interface.
-3. Restrictions for logins.
-4. Password length restrictions.
-5. Screenshot updated.
-6. Documentation has been corrected.
 ***
 
 ## Images:

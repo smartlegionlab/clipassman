@@ -9,8 +9,7 @@
 import json
 from pathlib import Path
 
-from smartpasslib.generators import SmartPasswordMaster
-
+from clipassman.smart_pass_gen import SmartPasswordMaster
 from clipassman.smart_password_factory import SmartPasswordFactory, SmartPassword
 
 
