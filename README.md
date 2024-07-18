@@ -80,12 +80,6 @@ or
 
 ***
 
-## Requirements:
-
-smartpasslib: [GitHub](https://github.com/smartlegionlab/smartpasslib/), [PyPi](https://pypi.org/project/smartpasslib/)
-
-***
-
 ## Disclaimer of liability:
 
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
