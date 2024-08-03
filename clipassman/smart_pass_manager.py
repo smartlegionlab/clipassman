@@ -15,11 +15,26 @@ from clipassman.smart_password_factory import SmartPasswordFactory, SmartPasswor
 
 class SmartPasswordManager:
     file_path = Path(Path.home()).joinpath('.cases.json')
-    smart_pass_gen = SmartPasswordMaster()
     smart_pass_factory = SmartPasswordFactory()
 
     def __init__(self):
         self._passwords = {}
+
+    @staticmethod
+    def generate_base_password(length=10):
+        return SmartPasswordMaster.generate_strong_password(length)
+
+    @classmethod
+    def generate_default_smart_password(cls, secret='', length=10):
+        return SmartPasswordMaster.generate_default_smart_password(secret, length)
+
+    @classmethod
+    def generate_smart_password(cls, login='', secret='', length=10):
+        return SmartPasswordMaster.generate_smart_password(login, secret, length)
+
+    @classmethod
+    def check_public_key(cls, login, secret, public_key):
+        return SmartPasswordMaster.check_public_key(login, secret, public_key)
 
     @property
     def passwords(self):
@@ -34,7 +49,7 @@ class SmartPasswordManager:
             self._passwords[password.login] = password
 
     def add_smart_password(self, login, secret, length):
-        key = self.smart_pass_gen.get_public_key(login=login, secret=secret)
+        key = SmartPasswordMaster.generate_public_key(login=login, secret=secret)
         smart_password = self.smart_pass_factory.create_smart_password(
             login=login,
             key=key,

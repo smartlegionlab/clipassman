@@ -1,4 +1,4 @@
-# clipassman <sup>v0.7.0</sup>
+# clipassman <sup>v0.7.1</sup>
 
 ___clipassman___ - Cross-platform console Smart Password manager and generator.
 
@@ -35,6 +35,10 @@ If an attacker gains access to this file, they will not be able to obtain your p
 You can only get passwords by knowing the secret phrase, and it is stored in your head. 
 Or in any place that no one knows about, and cannot even assume that you are using 
 this text as a secret phrase.
+
+- Library for creating smart password generators and managers: [smartpasslib](https://github.com/smartlegionlab/smartpasslib/)
+- Console Smart Password Generator: [clipassgen](https://github.com/smartlegionlab/clipassgen/)
+
 ***
 
 Author and developer: ___A.A. Suvorov___
@@ -52,9 +56,17 @@ Author and developer: ___A.A. Suvorov___
 
 ## What is news:
 
-__clipassman v0.7.0__
+__clipassman v0.7.1__
 
-- For ease of launch and use, the dependency on [smartpasslib](https://github.com/smartlegionlab/smartpasslib/) is no longer used. The necessary code is integrated directly into the application.
+> WARNING! Due to changes made to improve security, old public keys will no longer work. They must be regenerated. 
+> Regenerate your smart passwords. ALL PASSWORDS WILL REMAIN THE SAME, only the public keys used for verification during generation will change.
+
+- Fix errors.
+- Improved user interface.
+- Improved security.
+- When you create a smart password, you see a secret phrase (to make sure you entered exactly what you wanted), 
+when you receive a smart password, a hidden input is used.
+- Improved performance.
 
 ***
 
@@ -62,7 +74,11 @@ __clipassman v0.7.0__
 
 `pip install clipassman`
 
-> On some systems, when running the command `pip install clipassman` an error occurs, you can solve it like this `pip install clipassman --break-system-packages`
+`clipassman`
+
+On some systems, when running the command `pip install clipassman` an error occurs, you can solve it like this 
+
+`pip install clipassman --break-system-packages`
 
 `clipassman`
 
@@ -77,12 +93,6 @@ or
 ## Images:
 
 ![LOGO](https://github.com/smartlegionlab/clipassman/raw/master/data/images/clipassman.png)
-
-***
-
-## Requirements:
-
-smartpasslib: [GitHub](https://github.com/smartlegionlab/smartpasslib/), [PyPi](https://pypi.org/project/smartpasslib/)
 
 ***
 
