@@ -9,7 +9,7 @@ You only need to remember the secret phrase.
 And at the right time, using a secret phrase, you can simply generate your password on the fly.
 
 ***
-
+[![PyPI Downloads](https://static.pepy.tech/badge/clipassman)](https://pepy.tech/projects/clipassman)
 ![GitHub top language](https://img.shields.io/github/languages/top/smartlegionlab/clipassman)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/)
 [![PyPI](https://img.shields.io/pypi/v/clipassman)](https://pypi.org/project/clipassman)
