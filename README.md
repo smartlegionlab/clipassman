@@ -1,4 +1,4 @@
-# clipassman <sup>v0.7.1</sup>
+# clipassman <sup>v0.7.2</sup>
 
 ___clipassman___ - Cross-platform console Smart Password manager and generator.
 
@@ -58,7 +58,7 @@ Author and developer: ___A.A. Suvorov___
 
 ## What is news:
 
-__clipassman v0.7.1__
+__clipassman v0.7.2__
 
 > WARNING! Due to changes made to improve security, old public keys will no longer work. They must be regenerated. 
 > Regenerate your smart passwords. ALL PASSWORDS WILL REMAIN THE SAME, only the public keys used for verification during generation will change.
