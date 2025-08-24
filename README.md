@@ -1,4 +1,4 @@
-# clipassman <sup>v0.7.2</sup>
+# clipassman <sup>v0.7.3</sup>
 
 ___clipassman___ - Cross-platform console Smart Password manager and generator.
 
@@ -58,7 +58,7 @@ Author and developer: ___A.A. Suvorov___
 
 ## What is news:
 
-__clipassman v0.7.2__
+__clipassman v0.7.3__
 
 > WARNING! Due to changes made to improve security, old public keys will no longer work. They must be regenerated. 
 > Regenerate your smart passwords. ALL PASSWORDS WILL REMAIN THE SAME, only the public keys used for verification during generation will change.
@@ -113,10 +113,18 @@ or
 
 ***
 
-## Copyright:
-    --------------------------------------------------------
-    Licensed under the terms of the BSD 3-Clause License
-    (see LICENSE for details).
-    Copyright © 2018-2024, A.A. Suvorov
-    All rights reserved.
-    --------------------------------------------------------
+## 📜 Licensing
+
+This project uses a dual licensing system:
+
+### 🆓 BSD 3-Clause License
+- For non-commercial use
+- For academic and research purposes
+- For open-source projects
+
+### 💼 Commercial License
+- For commercial products and services
+- For enterprises using the code in proprietary solutions
+- For additional features and support
+
+**To obtain a commercial license:** [smartlegiondev@gmail.com](mailto:smartlegiondev@gmail.com)
