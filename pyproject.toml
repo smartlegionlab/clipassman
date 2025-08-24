@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clipassman"
-version = "0.7.5"
+version = "0.7.6"
 description = "Cross-platform console Smart Password manager and generator."
 authors = [
     {name = "A.A Suvorov", email = "smartlegiondev@gmail.com"}
@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/smartlegionlab/clipassgen"
+Homepage = "https://github.com/smartlegionlab/clipassman"
 
 [tool.setuptools.packages.find]
 where = ["."]
