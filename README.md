@@ -1,4 +1,4 @@
-# clipassman <sup>v0.7.4</sup>
+# clipassman <sup>v0.7.5</sup>
 
 ___clipassman___ - Cross-platform console Smart Password manager and generator.
 

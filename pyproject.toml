@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clipassman"
-version = "0.7.4"
+version = "0.7.5"
 description = "Cross-platform console Smart Password manager and generator."
 authors = [
     {name = "A.A Suvorov", email = "smartlegiondev@gmail.com"}
@@ -27,8 +27,7 @@ classifiers = [
     "Environment :: Console",
 ]
 dependencies = [
-    "smart-tsp-benchmark~=0.1.6",
-    "numba==0.61.2"
+
 ]
 
 [project.urls]
