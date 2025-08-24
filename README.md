@@ -1,4 +1,4 @@
-# clipassman <sup>v0.7.3</sup>
+# clipassman <sup>v0.7.4</sup>
 
 ___clipassman___ - Cross-platform console Smart Password manager and generator.
 
@@ -55,23 +55,6 @@ Author and developer: ___A.A. Suvorov___
 
 ***
 
-
-## What is news:
-
-__clipassman v0.7.3__
-
-> WARNING! Due to changes made to improve security, old public keys will no longer work. They must be regenerated. 
-> Regenerate your smart passwords. ALL PASSWORDS WILL REMAIN THE SAME, only the public keys used for verification during generation will change.
-
-- Fix errors.
-- Improved user interface.
-- Improved security.
-- When you create a smart password, you see a secret phrase (to make sure you entered exactly what you wanted), 
-when you receive a smart password, a hidden input is used.
-- Improved performance.
-
-***
-
 ## Help:
 
 `pip install clipassman`
@@ -98,33 +81,25 @@ or
 
 ***
 
-## Disclaimer of liability:
-
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-***
-
 ## 📜 Licensing
 
-This project uses a dual licensing system:
+This project is offered under a dual-licensing model.
 
-### 🆓 BSD 3-Clause License
-- For non-commercial use
-- For academic and research purposes
-- For open-source projects
+### 🆓 Option 1: BSD 3-Clause License (for Non-Commercial Use)
+This license is **free of charge** and allows you to use the software for:
+- Personal and educational purposes
+- Academic research and open-source projects
+- Evaluation and testing
 
-### 💼 Commercial License
-- For commercial products and services
-- For enterprises using the code in proprietary solutions
-- For additional features and support
+**Important:** Any use by a commercial organization or for commercial purposes (including internal development and prototyping) requires a commercial license.
 
-**To obtain a commercial license:** [smartlegiondev@gmail.com](mailto:smartlegiondev@gmail.com)
+### 💼 Option 2: Commercial License (for Commercial Use)
+A commercial license is **required** for:
+- Integrating this software into proprietary products
+- Using it in internal operations within a company
+- SaaS and hosted services that incorporate this software
+
+**Important:** The commercial license provides usage rights but **does not include any indemnification or liability**. The software is provided "AS IS" without any warranties as described in the full license agreement.
+
+**To obtain a commercial license,** please contact us directly at:  
+📧 **smartlegiondev@gmail.com**
