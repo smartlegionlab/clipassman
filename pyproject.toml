@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clipassman"
-version = "0.7.7"
+version = "1.0.1"
 description = "Cross-platform console Smart Password manager and generator."
 authors = [
     {name = "A.A Suvorov", email = "smartlegiondev@gmail.com"}
 ]
-license = "AGPL-3.0-or-later"
+license = "BSD-3-Clause"
 readme = "README.md"
 requires-python = ">=3.6"
 classifiers = [
