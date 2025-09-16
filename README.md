@@ -1,99 +1,174 @@
-# clipassman <sup>v1.0.1</sup>
-
-___clipassman___ - Cross-platform console Smart Password manager and generator.
-
-Working with passwords has never been so secure.
-There is no encryption, smart passwords are not stored anywhere, they are generated on the fly.
-They do not need to be remembered, encrypted or written down. 
-You only need to remember the secret phrase. 
-And at the right time, using a secret phrase, you can simply generate your password on the fly.
-
-***
+# clipassman <sup>v1.1.1</sup>
 
 [![PyPI Downloads](https://static.pepy.tech/badge/clipassman)](https://pepy.tech/projects/clipassman)
-[![PyPI Downloads](https://static.pepy.tech/badge/clipassman/month)](https://pepy.tech/projects/clipassman)
-[![PyPI Downloads](https://static.pepy.tech/badge/clipassman/week)](https://pepy.tech/projects/clipassman)
+[![PyPI Monthly Downloads](https://static.pepy.tech/badge/clipassman/month)](https://pepy.tech/projects/clipassman)
+[![PyPI Weekly Downloads](https://static.pepy.tech/badge/clipassman/week)](https://pepy.tech/projects/clipassman)
 ![GitHub top language](https://img.shields.io/github/languages/top/smartlegionlab/clipassman)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/)
-[![PyPI](https://img.shields.io/pypi/v/clipassman)](https://pypi.org/project/clipassman)
-[![GitHub](https://img.shields.io/github/license/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/blob/master/LICENSE)
-[![PyPI - Format](https://img.shields.io/pypi/format/clipassman)](https://pypi.org/project/clipassman)
+[![GitHub release](https://img.shields.io/github/v/release/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/)
+[![PyPI version](https://img.shields.io/pypi/v/clipassman)](https://pypi.org/project/clipassman)
+[![GitHub license](https://img.shields.io/github/license/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/blob/master/LICENSE)
+[![PyPI format](https://img.shields.io/pypi/format/clipassman)](https://pypi.org/project/clipassman)
 
+## 🖥️ Console Smart Password Manager
 
-***
+A cross-platform command-line password manager that revolutionizes security by eliminating password storage. Built on deterministic cryptography principles, it generates passwords on-demand without ever storing them.
 
+> **Powered by** [smartpasslib](https://github.com/smartlegionlab/smartpasslib) - The core deterministic password generation library
 
-## Short description:
+## 🌟 Revolutionary Security Model
 
-___clipassman___ - Cross-platform console Smart Password manager and generator.
+- 🔒 **Zero Password Storage** - No passwords stored in any form (encrypted or plaintext)
+- ⚡ **On-Demand Generation** - Passwords generated instantly when needed
+- 🧠 **Secret Phrase Only** - Remember one secret phrase instead of multiple passwords
+- 🔐 **Cryptographic Security** - SHA3-512 and system entropy for maximum protection
+- 📁 **Metadata Only Storage** - Only stores login, length, and public verification key
 
-- Passwords are not stored anywhere, neither in open nor in encrypted form, they are generated on the fly.
-- Complex passwords up to 1000 characters.
-- The password does not need to be stored, memorized or written down anywhere, you only remember
-a secret phrase that you keep in your head. 
-- Only the login, password length and public key are stored in open form. 
-These entries are stored in a .cases.json file in your home directory. 
-If an attacker gains access to this file, they will not be able to obtain your passwords. 
-You can only get passwords by knowing the secret phrase, and it is stored in your head. 
-Or in any place that no one knows about, and cannot even assume that you are using 
-this text as a secret phrase.
+## 🌌 The Paradox at the Core
 
-- Library for creating smart password generators and managers: [smartpasslib](https://github.com/smartlegionlab/smartpasslib/)
-- Console Smart Password Generator: [clipassgen](https://github.com/smartlegionlab/clipassgen/)
+This manager embodies a beautiful cryptographic paradox: **perfect reproducibility meets complete unpredictability**. 
 
-***
+The system is both:
+- **Perfectly reproducible** - Identical inputs (login + secret phrase) will always generate the exact same password, every time, on any device
+- **Completely unpredictable** - Without the exact inputs, the output is computationally impossible to guess or reverse-engineer
 
-Author and developer: ___A.A. Suvorov___
+This paradox is powered by deterministic cryptography - the same revolutionary concept explored in our foundational articles:
+- [**The Password That Never Was**](https://dev.to/smartlegionlab/the-password-that-never-was-how-to-access-secrets-that-were-always-there-smart-password-library-4h16) - How passwords emerge from mathematical space rather than being created
+- [**Chrono-Library Messenger**](https://dev.to/smartlegionlab/i-created-a-messenger-that-doesnt-send-any-data-heres-how-it-works-4ecp) - The cryptographic framework enabling this paradigm
+- [**Messages That Have Always Been With Us**](https://dev.to/smartlegionlab/the-magic-of-messages-that-have-always-been-with-us-48gp) - Philosophical foundation of pre-existing information
 
-***
+Your passwords don't need to be stored because they were never created - they already exist as mathematical certainties, waiting to be discovered through the correct combination of login and secret phrase.
 
-## Supported:
+## 📦 Installation
 
-- Linux: All.
-- Windows: 7/8/10.
-- Termux (Android).
+```bash
+pip install clipassman
+```
 
-***
+For systems with package conflicts:
+```bash
+pip install clipassman --break-system-packages
+```
 
-## Help:
+## 🚀 Quick Start
 
-`pip install clipassman`
+### Interactive Mode
+```bash
+clipassman
+```
 
-`clipassman`
+### Store Password Metadata
+```bash
+# Add a new smart password entry
+clipassman --add --login "email@example.com" --length 16
+# The system will prompt for your secret phrase
+```
 
-On some systems, when running the command `pip install clipassman` an error occurs, you can solve it like this 
+### Generate Password When Needed
+```bash
+# Generate password by providing secret phrase
+clipassman --get --login "email@example.com"
+# Enter your secret phrase when prompted
+```
 
-`pip install clipassman --break-system-packages`
+## 🛡️ Security Architecture
 
-`clipassman`
+### What's Stored (Publicly Safe)
+- Login/identifier
+- Password length
+- Public verification key (cannot reveal password)
 
-or
+### What's Never Stored (Kept in Memory)
+- Secret phrase
+- Actual passwords
+- Private keys
 
-1. Download the project.
-2. Unpack to the desired folder.
-3. `python app.py`
+### Breach Protection
+Even if attackers access your `.cases.json` file, they cannot:
+- Recover your passwords
+- Determine your secret phrase
+- Generate future passwords
 
-***
+## 🔄 Ecosystem Integration
 
-## Images:
+### Complementary Tools
+- [**CLI PassGen**](https://github.com/smartlegionlab/clipassgen/) - Console password generator
+- [**SmartPassLib**](https://github.com/smartlegionlab/smartpasslib/) - Core Python library
+- [**Desktop Manager**](https://github.com/smartlegionlab/smart-password-manager-desktop) - Graphical interface
+- [**Web Manager**](https://github.com/smartlegionlab/smart-password-manager) - Web-based interface
 
-![LOGO](https://github.com/smartlegionlab/clipassman/raw/master/data/images/clipassman.png)
+### Consistency Guarantee
+Passwords generated with clipassman are identical to those generated by other ecosystem tools when using the same inputs.
 
-***
+## 💻 Advanced Usage
 
-## 📜 License & Disclaimer
+### Batch Operations
+```bash
+# Add multiple accounts
+clipassman --add --login "github" --length 20
+clipassman --add --login "banking" --length 22
+clipassman --add --login "email" --length 18
+
+# Generate when needed
+clipassman --get --login "github"
+clipassman --get --login "banking"
+```
+
+### File Location
+Password metadata is stored in: `~/.cases.json`
+
+## 🤝 Supported Platforms
+
+- **Linux** - All major distributions
+- **Windows** - 7, 8, 10, 11
+- **macOS** - Fully supported
+- **Android** - Via Termux
+
+## 🐛 Troubleshooting
+
+### Common Issues
+```bash
+# If 'clipassman' command not found:
+python -m clipassman
+
+# Alternative direct execution:
+python -m clipassman.app
+```
+
+### Manual Installation
+```bash
+# Clone and run manually
+git clone https://github.com/smartlegionlab/clipassman.git
+cd clipassman
+python app.py
+```
+
+## 📜 License
 
 BSD 3-Clause License
 
 Copyright (c) 2025, Alexander Suvorov
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
+
+## 🌟 Experience Password Management Revolution
+
+Stop storing passwords and start generating them securely. With clipassman, your passwords exist only when you need them and disappear immediately after use.
+
+**Ready to transform your security practice?** [Install clipassman](https://pypi.org/project/clipassman/) today and join the revolution in password management.
+
+---
+
+*Explore more innovative security tools at [Smart Legion Lab](https://github.com/smartlegionlab)*
+
+![CLI Interface](https://github.com/smartlegionlab/clipassman/raw/master/data/images/clipassman.png)
