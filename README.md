@@ -15,27 +15,6 @@ A cross-platform command-line password manager that revolutionizes security by e
 
 > **Powered by** [smartpasslib](https://github.com/smartlegionlab/smartpasslib) - The core deterministic password generation library
 
-## 🌟 Revolutionary Security Model
-
-- 🔒 **Zero Password Storage** - No passwords stored in any form (encrypted or plaintext)
-- ⚡ **On-Demand Generation** - Passwords generated instantly when needed
-- 🧠 **Secret Phrase Only** - Remember one secret phrase instead of multiple passwords
-- 🔐 **Cryptographic Security** - SHA3-512 and system entropy for maximum protection
-- 📁 **Metadata Only Storage** - Only stores login, length, and public verification key
-
-## 🌌 The Paradox at the Core
-
-This manager embodies a beautiful cryptographic paradox: **perfect reproducibility meets complete unpredictability**. 
-
-The system is both:
-- **Perfectly reproducible** - Identical inputs (login + secret phrase) will always generate the exact same password, every time, on any device
-- **Completely unpredictable** - Without the exact inputs, the output is computationally impossible to guess or reverse-engineer
-
-This paradox is powered by deterministic cryptography - the same revolutionary concept explored in our foundational articles:
-- [**The Password That Never Was**](https://dev.to/smartlegionlab/the-password-that-never-was-how-to-access-secrets-that-were-always-there-smart-password-library-4h16) - How passwords emerge from mathematical space rather than being created
-- [**Chrono-Library Messenger**](https://dev.to/smartlegionlab/i-created-a-messenger-that-doesnt-send-any-data-heres-how-it-works-4ecp) - The cryptographic framework enabling this paradigm
-- [**Messages That Have Always Been With Us**](https://dev.to/smartlegionlab/the-magic-of-messages-that-have-always-been-with-us-48gp) - Philosophical foundation of pre-existing information
-
 Your passwords don't need to be stored because they were never created - they already exist as mathematical certainties, waiting to be discovered through the correct combination of login and secret phrase.
 
 ## 📦 Installation
