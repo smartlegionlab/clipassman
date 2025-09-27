@@ -109,6 +109,16 @@ Password metadata is stored in: `~/.cases.json`
 - **macOS** - Fully supported
 - **Android** - Via Termux
 
+## 🐛 Troubleshooting
+
+### Manual Installation
+```bash
+# Clone and run manually
+git clone https://github.com/smartlegionlab/clipassman.git
+cd clipassman
+python app.py
+```
+
 ## 📜 License
 
 BSD 3-Clause License
