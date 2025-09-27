@@ -104,15 +104,6 @@ Password metadata is stored in: `~/.cases.json`
 
 ## 🐛 Troubleshooting
 
-### Common Issues
-```bash
-# If 'clipassman' command not found:
-python -m clipassman
-
-# Alternative direct execution:
-python -m clipassman.app
-```
-
 ### Manual Installation
 ```bash
 # Clone and run manually
