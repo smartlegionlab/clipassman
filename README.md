@@ -139,3 +139,4 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
 
 ![CLI Interface](https://github.com/smartlegionlab/clipassman/raw/master/data/images/clipassman.png)
+
