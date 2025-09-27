@@ -1,4 +1,4 @@
-# clipassman <sup>v1.1.1</sup>
+# clipassman <sup>v1.1.2</sup>
 
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/clipassman?label=pypi%20downloads)](https://pypi.org/project/clipassman/)
 [![PyPI Downloads](https://static.pepy.tech/badge/clipassman)](https://pepy.tech/projects/clipassman)
@@ -139,15 +139,5 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
-
-## 🌟 Experience Password Management Revolution
-
-Stop storing passwords and start generating them securely. With clipassman, your passwords exist only when you need them and disappear immediately after use.
-
-**Ready to transform your security practice?** [Install clipassman](https://pypi.org/project/clipassman/) today and join the revolution in password management.
-
----
-
-*Explore more innovative security tools at [Smart Legion Lab](https://github.com/smartlegionlab)*
 
 ![CLI Interface](https://github.com/smartlegionlab/clipassman/raw/master/data/images/clipassman.png)
