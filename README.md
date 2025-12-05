@@ -1,4 +1,4 @@
-# clipassman (Console Smart Password Manager CLI) <sup>v2.0.1</sup>
+# clipassman (Console Smart Password Manager CLI) <sup>v2.0.2</sup>
 
 ---
 
@@ -21,7 +21,7 @@ Cross-platform command-line interface for managing password metadata using deter
 
 > **Powered by** [smartpasslib v2.0.0](https://github.com/smartlegionlab/smartpasslib) - The core library for deterministic password generation
 
-### ⚠️ **BREAKING CHANGES in v2.0.1**
+### ⚠️ **BREAKING CHANGES in v2.0.2**
 
 **WARNING:** This version introduces breaking changes:
 - All passwords generated with v1.x are now **INVALID**
@@ -82,7 +82,7 @@ clipassman
 
 ### Deterministic Password Generation
 - **Same secret** → **Same password** every time
-- Passwords are **mathematical functions** of your secret phrase
+- Deterministic generation - Your secret phrase always generates the same password. Enter the same secret, get the same password every time.
 - No password database to breach
 
 ### Security by Design
@@ -106,7 +106,7 @@ clipassman
 - Require master password decryption
 - Risk of data breaches
 
-**clipassman v2.0.1:**
+**clipassman v2.0.2:**
 1. **You provide**: Description + Secret phrase
 2. **System generates**: Public key (hash of secret)
 3. **System stores**: Only description, length, and public key
@@ -170,15 +170,15 @@ This CLI manager is part of a comprehensive suite of applications built on deter
 ## 📋 Migration from v1.x
 
 ### Important Notes:
-- **v2.0.1 is NOT backward compatible** with v1.x
-- **All v1.x passwords are invalid** in v2.0.1
+- **v2.0.2 is NOT backward compatible** with v1.x
+- **All v1.x passwords are invalid** in v2.0.2
 - **You must recreate all passwords** using your secret phrases
 
 ### Migration Steps:
 1. **Backup** any critical passwords from v1.x
-2. **Install** v2.0.1 fresh
+2. **Install** v2.0.2 fresh
 3. **Delete** old `~/.cases.json` file
-4. **Launch** clipassman v2.0.1
+4. **Launch** clipassman v2.0.2
 5. **Recreate** all passwords using your secret phrases
 6. **Update** all service credentials with new passwords
 
