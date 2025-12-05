@@ -1,7 +1,6 @@
 # Copyright © 2025, Alexander Suvorov
-from clipassman.clipassman import main
-
+from clipassman.app_manager import AppManager
 
 if __name__ == '__main__':
-    main()
-
+    app_manager = AppManager()
+    app_manager.run()

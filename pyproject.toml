@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clipassman"
-version = "1.2.0"
-description = "Cross-platform console Smart Password manager and generator."
+version = "2.0.0"
+description = "Console Smart Password Manager - Command-line smart password manager implementing deterministic password generation - passwords are never stored, only regenerated when needed."
 authors = [
-    {name = "A.A Suvorov", email = "smartlegiondev@gmail.com"}
+    {name = "Alexander Suvorov", email = "smartlegiondev@gmail.com"}
 ]
 license = "BSD-3-Clause"
 readme = "README.md"
