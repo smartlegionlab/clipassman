@@ -14,7 +14,7 @@ class AppManager:
     def _show_logo():
         SmartPrinter.print_center(symbol='*')
         SmartPrinter.print_center(text=Config.name, symbol='*')
-        SmartPrinter.print_center(text=f"Version: v2.0.2", symbol='*')
+        SmartPrinter.print_center(text=f"Version: v2.1.0", symbol='*')
 
     @staticmethod
     def _show_footer():
@@ -54,7 +54,7 @@ class AppManager:
     def _help(self):
         SmartPrinter.print_center('Help')
         print("""
-        SMART PASSWORD MANAGER v2.0.2
+        SMART PASSWORD MANAGER v2.1.0
         =============================
 
         Breaking Changes from v1.x:
@@ -86,7 +86,7 @@ class AppManager:
         while True:
             SmartPrinter.print_center(text='Add new smart password')
             description = self._get_description()
-            secret = self._get_secret(secure_flag=False)
+            secret = self._get_secret(secure_flag=True)
             length = self._get_password_length()
 
             try:
@@ -333,7 +333,7 @@ class AppManager:
         self._show_logo()
 
         print("\n" + "=" * 60)
-        print("⚠️  IMPORTANT: CLIPASSMAN v2.0.2")
+        print("⚠️  IMPORTANT: CLIPASSMAN v2.1.0")
         print("=" * 60)
         print("Breaking Changes:")
         print("• Login parameter removed - use only secret phrase")

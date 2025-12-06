@@ -1,3 +1,4 @@
 # Copyright © 2025, Alexander Suvorov
-"""Cross-platform console Smart Password manager and generator."""
-__version__ = '2.0.2'
+"""Terminal-based smart password manager with deterministic password generation.
+Generate, manage, and retrieve passwords without storing them - all from your command line."""
+__version__ = '2.1.0'

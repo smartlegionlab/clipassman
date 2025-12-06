@@ -1,8 +1,8 @@
-# clipassman (Console Smart Password Manager CLI) <sup>v2.0.2</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v2.1.0</sup>
 
 ---
 
-> **Command-line smart password manager** implementing deterministic password generation - passwords are never stored, only regenerated when needed.
+**Terminal-based smart password manager with deterministic password generation. Generate, manage, and retrieve passwords without storing them - all from your command line.**
 
 ---
 
@@ -15,209 +15,412 @@
 [![GitHub license](https://img.shields.io/github/license/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/blob/master/LICENSE)
 [![PyPI format](https://img.shields.io/pypi/format/clipassman)](https://pypi.org/project/clipassman)
 
-## 🖥️ Console Smart Password Manager CLI
+---
 
-Cross-platform command-line interface for managing password metadata using deterministic password generation.
+## **🔐 Core Principles:**
 
-> **Powered by** [smartpasslib v2.0.0](https://github.com/smartlegionlab/smartpasslib) - The core library for deterministic password generation
+- 🔐 **Zero-Password Storage**: No passwords are ever stored or transmitted
+- 🔑 **Deterministic Regeneration**: Passwords are recreated identically from your secret phrase
+- 📝 **Metadata Management**: Store only descriptions and verification keys
+- 💻 **Terminal Processing**: All cryptographic operations happen in your CLI
+- 🔄 **On-Demand Discovery**: Passwords exist only when you generate them
 
-### ⚠️ **BREAKING CHANGES in v2.0.2**
+**What You Can Do:**
+1. **Create Smart Passwords**: Generate deterministic passwords from secret phrases
+2. **Store Metadata Securely**: Keep password descriptions and lengths without storing passwords
+3. **Regenerate Passwords**: Recreate passwords anytime using your secret phrase
+4. **Manage Services**: Organize passwords for different accounts and services
+5. **Secure Terminal Input**: Hidden secret phrase entry with getpass
+6. **Verify Secrets**: Prove knowledge of secrets without exposing them
+7. **Cross-Platform Management**: Works on any system with Python
+8. **No GUI Dependencies**: Pure terminal interface for servers and remote systems
 
-**WARNING:** This version introduces breaking changes:
-- All passwords generated with v1.x are now **INVALID**
-- **Login parameter removed** - now uses only secret phrase and description
-- You must create **NEW** passwords using your secret phrases
-- Simplified API - only secret phrase required
+**Key Features:**
+- ✅ **No Password Database**: Eliminates password storage completely
+- ✅ **Interactive Terminal UI**: Clean, centered text with visual framing
+- ✅ **Public Key Verification**: Verify secret knowledge without exposure
+- ✅ **List View**: See all your password metadata in clear lists
+- ✅ **Bulk Operations**: Clear all passwords with double confirmation
+- ✅ **Secure Hidden Input**: Hidden secret phrase entry via getpass
+- ✅ **No Dependencies**: Only Python standard library + smartpasslib
+- ✅ **Server Ready**: Perfect for headless systems and remote management
+
+**Security Model:**
+- **Proof of Knowledge**: Verify you know a secret without storing it
+- **Deterministic Security**: Same secret + length = same password, always
+- **Metadata Separation**: Non-sensitive data stored separately from verification
+- **Local Processing**: No data leaves your computer
+- **No Recovery Backdoors**: Lost secret = permanently lost access (by design)
 
 ---
 
-## 📦 Installation
+## ⚠️ Critical Notice
 
-### Standard Installation
+**BEFORE USING THIS SOFTWARE, READ THE COMPLETE LEGAL DISCLAIMER BELOW**
+
+[View Legal Disclaimer & Liability Waiver](#-legal-disclaimer)
+
+*Usage of this software constitutes acceptance of all terms and conditions.*
+
+---
+
+## 📚 Research Paradigms & Publications
+
+- **[Pointer-Based Security Paradigm](https://doi.org/10.5281/zenodo.17204738)** - Architectural Shift from Data Protection to Data Non-Existence
+- **[Local Data Regeneration Paradigm](https://doi.org/10.5281/zenodo.17264327)** - Ontological Shift from Data Transmission to Synchronous State Discovery
+
+---
+
+## 🔬 Technical Foundation
+
+Powered by **[smartpasslib v2.1.0+](https://github.com/smartlegionlab/smartpasslib)** - The core library for deterministic password generation.
+
+**Key principle**: Instead of storing passwords, you store verification metadata. The actual password is regenerated on-demand from your secret phrase.
+
+**What's NOT stored**:
+- Your secret phrase
+- The actual password
+- Any reversible password data
+
+**What IS stored** (in `~/.cases.json`):
+- Public verification key (hash of secret)
+- Service description
+- Password length parameter
+
+**Security model**: Proof of secret knowledge without secret storage or password transmission.
+
+---
+
+## 🆕 What's New in v2.1.0
+
+### ⚠️ **BREAKING CHANGES WARNING**
+
+**CRITICAL**: v2.1.0 is **NOT** backward compatible with v1.x. All passwords generated with v1.x are now **INVALID**. You must recreate all passwords using your secret phrases.
+
+### Major Improvements:
+
+**Simplified Architecture:**
+- **Login parameter removed** - now uses only secret phrase and description
+- **Streamlined API** - single authentication factor (secret phrase)
+- **Cleaner codebase** - reduced complexity and better maintainability
+
+**Enhanced Terminal Interface:**
+- **SmartPrinter class** for beautiful centered and framed text output
+- **Better visual hierarchy** with consistent symbol borders
+- **Improved menu layouts** for clearer navigation
+- **Automatic terminal width detection** for perfect centering
+
+**Security Improvements:**
+- **Stronger public key verification** using enhanced cryptographic methods
+- **Better input validation** with clear error messages
+- **Duplicate detection** - prevents creating multiple entries with same secret
+- **Case-sensitive secrets** with clear user warnings
+
+**User Experience:**
+- **Clear migration warnings** with step-by-step instructions
+- **Interactive confirmation dialogs** for destructive operations
+- **Better help system** with comprehensive documentation
+- **Password list numbering** for easy selection
+
+### Breaking Changes:
+
+**Compatibility:**
+- **NOT compatible** with v1.x password generation
+- Requires **smartpasslib v2.1.0+**
+- **All v1.x passwords must be recreated**
+- **Login parameter completely removed**
+
+**Migration Required:**
 ```bash
-pip install clipassman
+# Important: Backup old passwords before migration
+# Step 1: Recover passwords using v1.x if needed
+# Step 2: Delete old ~/.cases.json file
+# Step 3: Install clipassman v2.1.0
+# Step 4: Recreate all passwords with your secret phrases
+# Step 5: Update all account credentials
 ```
 
-### For Systems with Package Conflicts
+### New Features:
+
+**Terminal UI Enhancements:**
+```python
+# Centered text output with custom symbols
+# Framed text for important messages
+# Automatic terminal width detection
+# Consistent visual styling throughout
+```
+
+**Security Features:**
+- Duplicate secret phrase detection
+- Public key display (first and last 16 characters)
+- Clear case-sensitivity warnings
+- Input validation with helpful error messages
+
+**Management Features:**
+- Total password count display in main menu
+- Individual password deletion with confirmation
+- Bulk clear operation with double confirmation
+- Password list with descriptions and lengths
+
+### Key Improvements:
+
+1. **Simplified Workflow** - No login parameter needed
+2. **Better Terminal UI** - Professional-looking output
+3. **Enhanced Security** - Stronger verification methods
+4. **Clearer Migration** - Step-by-step upgrade path
+5. **Improved Error Handling** - User-friendly messages
+
+---
+
+## 📦 Installation & Quick Start
+
+### Prerequisites
+- **Python 3.7+** required
+- **pip** for package management
+
+### Quick Installation
 ```bash
+# Install from PyPI
+pip install clipassman
+
+# For systems with package conflicts
 pip install clipassman --break-system-packages
+
+# Verify installation
+clipassman --help
 ```
 
 ### Manual Installation
 ```bash
-# Clone and install from source
+# Clone repository
 git clone https://github.com/smartlegionlab/clipassman.git
 cd clipassman
+
+# Install in development mode
 pip install -e .
+
+# Or install from local source
+pip install .
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Usage Guide
 
-### Interactive Mode (Recommended)
+### Launching the Application
 ```bash
+# Start interactive terminal interface
 clipassman
-```
-Launches the interactive terminal interface.
 
-### Store Password Metadata
+# Or if installed locally
+python -m clipassman.clipassman
+```
+
+### Creating Your First Password
+1. Launch `clipassman`
+2. Select option **1: Add Password**
+3. Enter service description (e.g., "GitHub Account")
+4. Enter your secret phrase (never shared or stored)
+5. Confirm your secret phrase
+6. Set password length (4-100 characters)
+7. Password is generated and displayed
+8. Save it securely (not stored by system)
+
+### Retrieving a Password
+1. Launch `clipassman`
+2. Select option **2: Get/Delete Password**
+3. Choose password entry from numbered list
+4. Select **1: Get password**
+5. Enter your secret phrase (hidden input)
+6. Password regenerates identically
+
+### Managing Passwords
 ```bash
-# Launch interactive mode to add password
-clipassman
-# Then choose option 1: Add Password
+# Main menu options:
+1: Add Password          # Create new password
+2: Get/Delete Password   # Retrieve or remove password
+3: Clear All Passwords   # Remove all entries (double confirmation)
+4: Help                  # View documentation
+0: Exit                  # Quit application
 ```
 
-### Generate Password When Needed
+### Deleting Passwords
+1. Select option **2: Get/Delete Password**
+2. Choose password entry
+3. Select **2: Delete entry**
+4. Confirm deletion with 'y'
+5. Only metadata removed - password can be recreated with secret
+
+---
+
+## 🏗️ Core Components
+
+### Terminal Interface Features
+
+**Main Menu:**
+```
+********************************************************************************
+********************** Smart Password Manager CLI v2.1.0 ***********************
+******************************* Version: v2.1.0 ********************************
+
+============================================================
+⚠️  IMPORTANT: CLIPASSMAN v2.1.0
+============================================================
+Breaking Changes:
+• Login parameter removed - use only secret phrase
+• All v1.x passwords are INVALID
+• You must create NEW passwords
+• Old password metadata cannot be migrated
+============================================================
+
+If you have old passwords:
+1. Recover them using v1.x version
+2. Generate new ones here with your secret phrases
+3. Update your accounts with new passwords
+============================================================
+
+Press Enter to continue or 'q' to quit: 
+------------------------ Main Menu | Total passwords: 5 ------------------------
+1: Add Password
+2: Get/Delete Password
+3: Clear All Passwords
+4: Help
+0: Exit
+Choose an action: 
+
+```
+
+**Password Creation:**
+- Description input with validation
+- Secret phrase entry with confirmation
+- Password length selection (4-100 characters)
+- Public key generation and display
+- Generated password display
+
+**Password Retrieval:**
+- Numbered list of password entries
+- Secret phrase entry via getpass (hidden)
+- Public key verification
+- Password regeneration
+
+### SmartPrinter Class
+
+**Features:**
+- `print_center()` - Center text with custom border symbols
+- `print_framed()` - Create framed text blocks
+- `show_head()` - Header display with multiple symbols
+- `show_footer()` - Footer display with URLs and copyright
+- Automatic terminal width detection
+
+**Usage Examples:**
+```python
+SmartPrinter.print_center(text='Main Menu', symbol='-')
+SmartPrinter.print_framed('Important Message', symbol='*')
+```
+
+### Security Implementation
+
+**Public Key System:**
+```python
+# Generate public key from secret
+public_key = SmartPasswordMaster.generate_public_key(secret)
+
+# Verify secret without exposing it
+is_valid = SmartPasswordMaster.check_public_key(secret, public_key)
+
+# Generate password deterministically
+password = SmartPasswordMaster.generate_smart_password(secret, length)
+```
+
+**Input Security:**
+- Hidden secret input via `getpass.getpass()`
+- Case-sensitive secret validation
+- Duplicate detection prevention
+- Input sanitization and validation
+
+---
+
+## 💡 Advanced Usage
+
+### Password Management Strategy
+
+**For Multiple Accounts:**
 ```bash
-# Launch interactive mode
-clipassman
-# Choose option 2: Get/Delete Password
-# Select your password entry and enter secret phrase
+Description Examples:
+- GitHub Personal Account
+- Work Email - Office 365
+- Banking Portal - Chase
+- Social Media - Twitter
+- Cloud Storage - Dropbox
+
+Length Strategy:
+- Critical accounts: 20-24 characters
+- Important accounts: 16-20 characters
+- General accounts: 12-16 characters
+- Temporary accounts: 8-12 characters
+```
+
+### Secret Phrase Management
+
+**Best Practices:**
+1. **Unique per service** - Different secret for each account type
+2. **Memorable but complex** - Phrases you can remember but others can't guess
+3. **Case-sensitive** - v2.1.0 enforces exact case matching
+4. **No digital storage** - Keep only in memory or physical backup
+5. **Backup plan** - Physical written backup in secure location
+
+**Example Secret Phrases:**
+```
+Good: "MyFavoriteCoffeeShop@2025#Boston"
+Good: "PurpleElephantsDanceInMoonlight42"
+Avoid: "password123", "letmein", "123456"
 ```
 
 ---
 
-## 🎯 Key Features
+## 🔧 Ecosystem Integration
 
-### Deterministic Password Generation
-- **Same secret** → **Same password** every time
-- Deterministic generation - Your secret phrase always generates the same password. Enter the same secret, get the same password every time.
-- No password database to breach
+### Part of Smart Password Suite
 
-### Security by Design
-- **No password storage** - generated on-demand
-- **Local processing** - all operations on your machine
-- **Public key verification** - proof of secret knowledge without revealing it
-- **No internet connection required**
+**Core Technology:**
+- **[smartpasslib](https://github.com/smartlegionlab/smartpasslib)** - Core password generation library
 
-### User-Friendly Interface
-- **Interactive terminal UI** with clear menus
-- **Password strength customization** (4-100 characters)
-- **Descriptive service names** for easy identification
-- **Clear feedback** and error messages
+**Desktop Application:**
+- **[Desktop Smart Password Manager](https://github.com/smartlegionlab/smart-password-manager-desktop)** - Graphical interface with edit capabilities
 
----
+**Other CLI Tools:**
+- **[CLI Smart Password Generator](https://github.com/smartlegionlab/clipassgen/)** - Terminal-based password generation only
 
-## ⚙️ How It Works
+**Web Interface:**
+- **[Web Smart Password Manager](https://github.com/smartlegionlab/smart-password-manager)** - Browser-based access
 
-**Traditional Password Managers:**
-- Store encrypted passwords
-- Require master password decryption
-- Risk of data breaches
+### Data Compatibility
+- Uses same `~/.cases.json` format as desktop manager
+- Compatible metadata with smartpasslib ecosystem
+- Consistent cryptographic operations across platforms
+- Can share password metadata between CLI and desktop versions
 
-**clipassman v2.0.2:**
-1. **You provide**: Description + Secret phrase
-2. **System generates**: Public key (hash of secret)
-3. **System stores**: Only description, length, and public key
-4. **When needed**: Enter secret → Password regenerated
+### Comparison with Desktop Version
 
-### Creating a Password:
-```
-1. Choose "Add Password"
-2. Enter description (e.g., "GitHub Account")
-3. Enter secret phrase (never leaves your terminal)
-4. Set password length (4-100 characters)
-5. Password is generated and displayed
-```
+**CLI Advantages:**
+- No GUI dependencies
+- Works on servers and headless systems
+- Faster for keyboard-centric users
+- Scriptable and automatable
+- Lower resource usage
 
-### Retrieving a Password:
-```
-1. Choose "Get/Delete Password"
-2. Select password entry from list
-3. Enter your secret phrase
-4. Password is regenerated identically
-```
-
----
-
-## 🔄 Smart Password Ecosystem
-
-This CLI manager is part of a comprehensive suite of applications built on deterministic password technology:
-
-### 🛠️ Console Applications
-- [**CLI Smart Password Generator**](https://github.com/smartlegionlab/clipassgen/) - Smart passwords generator
-- **CLI Smart Password Manager** (this tool) - Smart Password manager
-
-### 🖥️ Desktop Applications
-- [**Desktop Smart Password Manager**](https://github.com/smartlegionlab/smart-password-manager-desktop) - Graphical interface
-
-### 🌐 Web Applications
-- [**Web Smart Password Manager**](https://github.com/smartlegionlab/smart-password-manager) - Browser-based interface
-
-### 💡 Core Technology
-- [**SmartPassLib v2.0.0**](https://github.com/smartlegionlab/smartpasslib) - Core password generation library
-
----
-
-## 🛡️ Security Features
-
-### What Makes It Secure:
-- **No Password Storage** - Passwords exist only when generated
-- **Deterministic Generation** - Same inputs → same output, every time
-- **Local Processing** - No data leaves your computer
-- **Verification Without Storage** - Public keys verify secret knowledge
-- **Open Source** - Transparent codebase for security verification
-
-### Data Privacy:
-- All data stored locally in `~/.cases.json`
-- No internet connectivity required
-- No telemetry or data collection
-- No cloud synchronization
-
----
-
-## 📋 Migration from v1.x
-
-### Important Notes:
-- **v2.0.2 is NOT backward compatible** with v1.x
-- **All v1.x passwords are invalid** in v2.0.2
-- **You must recreate all passwords** using your secret phrases
-
-### Migration Steps:
-1. **Backup** any critical passwords from v1.x
-2. **Install** v2.0.2 fresh
-3. **Delete** old `~/.cases.json` file
-4. **Launch** clipassman v2.0.2
-5. **Recreate** all passwords using your secret phrases
-6. **Update** all service credentials with new passwords
-
-### Why the Breaking Changes?
-- Simplified API (removed login parameter)
-- Improved cryptographic algorithms
-- Better security model
-- Cleaner codebase
-
----
-
-## 🐛 Troubleshooting
-
-### Common Issues:
-
-**"Module not found" errors:**
-```bash
-# Reinstall with pip
-pip install --force-reinstall clipassman
-
-# Check Python version (requires 3.7+)
-python --version
-```
-
-**Password generation fails:**
-- Ensure secret phrase is entered correctly
-- Check Caps Lock and keyboard layout
-- Verify password length is between 4-100 characters
-
-### Getting Help:
-1. Check [GitHub Issues](https://github.com/smartlegionlab/clipassman/issues)
-2. Review the [smartpasslib documentation](https://github.com/smartlegionlab/smartpasslib)
-3. Create a new issue with details of your problem
+**Desktop Advantages:**
+- Graphical interface with table view
+- Edit functionality for metadata
+- Copy to clipboard with one click
+- Better visual feedback
+- Mouse support
 
 ---
 
 ## 📜 License
 
-**BSD 3-Clause License**
+**[BSD 3-Clause License](LICENSE)**
 
 Copyright (c) 2025, Alexander Suvorov
 
@@ -236,19 +439,213 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ---
 
-## 🔗 Links & Resources
+## 🆘 Support
 
-- **GitHub Repository**: [clipassman](https://github.com/smartlegionlab/clipassman)
-- **Core Library**: [smartpasslib](https://github.com/smartlegionlab/smartpasslib)
-- **Issues & Support**: [GitHub Issues](https://github.com/smartlegionlab/clipassman/issues)
-- **PyPI Package**: [clipassman on PyPI](https://pypi.org/project/clipassman/)
-- **Pointer-Based Security Paradigm**: [Paper](https://doi.org/10.5281/zenodo.17204738)
-- **Local Data Regeneration Paradigm**: [Paper](https://doi.org/10.5281/zenodo.17264327)
+- **CLI Manager Issues**: [GitHub Issues](https://github.com/smartlegionlab/clipassman/issues)
+- **Core Library Issues**: [smartpasslib Issues](https://github.com/smartlegionlab/smartpasslib/issues)
+- **Documentation**: Inline help (option 4) and this README
+
+**Note**: Always test password generation with non-essential accounts first. Implementation security depends on proper usage.
 
 ---
 
-**Note**: Always keep backup copies of your secret phrases. If you lose your secret phrase, you cannot regenerate your passwords. The system only stores verification data, not the secrets themselves.
+## ⚠️ Security Warnings
 
-**Warning**: Upgrading from v1.x requires recreating all passwords. Plan your migration accordingly.
+**Version Incompatibility**: v2.1.0 passwords are incompatible with v1.x.
+Never mix secret phrases across different versions.
 
-![CLI Interface](https://github.com/smartlegionlab/clipassman/raw/master/data/images/clipassman.png)
+### Secret Phrase Security
+
+**Your secret phrase is the cryptographic master key**
+
+1. **Permanent data loss**: Lost secret phrase = irreversible loss of all derived passwords
+2. **No recovery mechanisms**: No password recovery, no secret reset, no administrative override
+3. **Deterministic generation**: Identical input (secret + length) = identical output (password)
+4. **Single point of failure**: Secret phrase is the sole authentication factor for all passwords
+5. **Secure storage required**: Digital storage of secret phrases is prohibited
+
+**Critical**: Test password regeneration with non-essential accounts before production use
+
+---
+
+## 📄 Legal Disclaimer
+
+**COMPLETE AND ABSOLUTE RELEASE FROM ALL LIABILITY**
+
+**SOFTWARE PROVIDED "AS IS" WITHOUT ANY WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.**
+
+The copyright holder, contributors, and any associated parties **EXPLICITLY DISCLAIM AND DENY ALL RESPONSIBILITY AND LIABILITY** for:
+
+1. **ANY AND ALL DATA LOSS**: Complete or partial loss of passwords, accounts, credentials, cryptographic keys, or any data whatsoever
+2. **ANY AND ALL SECURITY INCIDENTS**: Unauthorized access, data breaches, account compromises, theft, or exposure of sensitive information
+3. **ANY AND ALL FINANCIAL LOSSES**: Direct, indirect, incidental, special, consequential, or punitive damages of any kind
+4. **ANY AND ALL OPERATIONAL DISRUPTIONS**: Service interruptions, account lockouts, authentication failures, or denial of service
+5. **ANY AND ALL IMPLEMENTATION ISSUES**: Bugs, errors, vulnerabilities, misconfigurations, or incorrect usage
+6. **ANY AND ALL LEGAL OR REGULATORY CONSEQUENCES**: Violations of laws, regulations, compliance requirements, or terms of service
+7. **ANY AND ALL PERSONAL OR BUSINESS DAMAGES**: Reputational harm, business interruption, loss of revenue, or any other damages
+8. **ANY AND ALL THIRD-PARTY CLAIMS**: Claims made by any other parties affected by software usage
+
+**USER ACCEPTS FULL AND UNCONDITIONAL RESPONSIBILITY**
+
+By installing, accessing, or using this software in any manner, you irrevocably agree that:
+
+- You assume **ALL** risks associated with software usage
+- You bear **SOLE** responsibility for secret phrase management and security
+- You accept **COMPLETE** responsibility for all testing and validation
+- You are **EXCLUSIVELY** liable for compliance with all applicable laws
+- You accept **TOTAL** responsibility for any and all consequences
+- You **PERMANENTLY AND IRREVOCABLY** waive, release, and discharge all claims against the copyright holder, contributors, distributors, and any associated entities
+
+**NO WARRANTY OF ANY KIND**
+
+This software comes with **ABSOLUTELY NO GUARANTEES** regarding:
+- Security effectiveness or cryptographic strength
+- Reliability or availability
+- Fitness for any particular purpose
+- Accuracy or correctness
+- Freedom from defects or vulnerabilities
+
+**NOT A SECURITY PRODUCT OR SERVICE**
+
+This is experimental software. It is not:
+- Security consultation or advice
+- A certified cryptographic product
+- A guaranteed security solution
+- Professional security software
+- Endorsed by any security authority
+
+**FINAL AND BINDING AGREEMENT**
+
+Usage of this software constitutes your **FULL AND UNCONDITIONAL ACCEPTANCE** of this disclaimer. If you do not accept **ALL** terms and conditions, **DO NOT USE THE SOFTWARE.**
+
+**BY PROCEEDING, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS DISCLAIMER IN ITS ENTIRETY, UNDERSTAND ITS TERMS COMPLETELY, AND ACCEPT THEM WITHOUT RESERVATION OR EXCEPTION.**
+
+---
+
+**Version**: 2.1.0 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
+
+---
+
+**Note**: This is v2.1.0. If migrating from v1.x, all passwords must be regenerated with new secret phrases.
+
+---
+
+## Terminal Interface Examples
+
+### Main Interface
+```
+*********************************************************************************
+*********************** Smart Password Manager CLI v2.1.0 ***********************
+******************************** Version: v2.1.0 ********************************
+
+============================================================
+⚠️  IMPORTANT: CLIPASSMAN v2.1.0
+============================================================
+Breaking Changes:
+• Login parameter removed - use only secret phrase
+• All v1.x passwords are INVALID
+• You must create NEW passwords
+• Old password metadata cannot be migrated
+============================================================
+
+If you have old passwords:
+1. Recover them using v1.x version
+2. Generate new ones here with your secret phrases
+3. Update your accounts with new passwords
+============================================================
+
+Press Enter to continue or 'q' to quit: 
+------------------------- Main Menu | Total passwords: 0 ------------------------
+1: Add Password
+2: Get/Delete Password
+3: Clear All Passwords
+4: Help
+0: Exit
+Choose an action: 1
+----------------------------- Add new smart password ----------------------------
+---------------------------------------------------------------------------------
+Enter a descriptive name for this password (e.g., "GitHub Account", "Bank Login")
+---------------------------------------------------------------------------------
+Description: Account 1
+
+IMPORTANT: Your secret phrase:
+• Is case-sensitive
+• Should be memorable but secure
+• Will generate the same password every time
+• Is never stored - only the hash is saved
+
+Enter secret phrase (hidden): 
+Confirm secret phrase (hidden): 
+Enter password length (4-100): 16
+---------------------------------------------------------------------------------
+✓ Password metadata added successfully!
+Description: Account 1
+Length: 16 characters
+Public Key: d1d1a5671f7c6a58...050494dfef302e96
+---------------------------- Your generated password: ---------------------------
+EKoSq5Nqf&K_IyvI
+---------------------------------------------------------------------------------
+
+Press Enter to continue... 
+------------------------- Main Menu | Total passwords: 1 ------------------------
+1: Add Password
+2: Get/Delete Password
+3: Clear All Passwords
+4: Help
+0: Exit
+Choose an action: 2
+--------------------------------- Password List: --------------------------------
+1. Account 1 (16 chars)
+0. ← Back
+Select entry: 1
+---------------------------------------------------------------------------------
+Selected: Account 1
+Length: 16 characters
+1: Get password
+2: Delete entry
+0: ← Back
+Select action: 1
+---------------------------- Retrieve Smart Password ----------------------------
+Description: Account 1
+Length: 16 characters
+Enter secret phrase (hidden): 
+------------------------------ Generated Password: ------------------------------
+EKoSq5Nqf&K_IyvI
+---------------------------------------------------------------------------------
+
+Press Enter to continue... 
+--------------------------------- Password List: --------------------------------
+1. Account 1 (16 chars)
+0. ← Back
+Select entry: 0
+------------------------- Main Menu | Total passwords: 1 ------------------------
+1: Add Password
+2: Get/Delete Password
+3: Clear All Passwords
+4: Help
+0: Exit
+Choose an action: 2
+--------------------------------- Password List: --------------------------------
+1. Account 1 (16 chars)
+0. ← Back
+Select entry: 1
+---------------------------------------------------------------------------------
+Selected: Account 1
+Length: 16 characters
+1: Get password
+2: Delete entry
+0: ← Back
+Select action: 2
+Delete 'Account 1'? (y/n): y
+✓ 'Account 1' deleted successfully!
+------------------------- Main Menu | Total passwords: 0 ------------------------
+1: Add Password
+2: Get/Delete Password
+3: Clear All Passwords
+4: Help
+0: Exit
+Choose an action: 0
+------------------ https://github.com/smartlegionlab/clipassman -----------------
+---------------------- Copyright © 2025, Alexander Suvorov ----------------------
+=================================================================================
+```
