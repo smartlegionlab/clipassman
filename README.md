@@ -307,7 +307,6 @@ pip install pyinstaller
 #### Step 6: Build Executable
 ```cmd
 # Build single .exe file
-pyinstaller --onefile --name "clipassman.exe" clipassman/__main__.py
 pyinstaller --onefile --console --name "clipassman.exe" --additional-hooks-dir=. app.py
 
 # Wait for build to complete (1-2 minutes)
@@ -323,12 +322,6 @@ pyinstaller --onefile --console --name "clipassman.exe" --additional-hooks-dir=.
 4. Drag shortcut to desktop
 5. Rename shortcut to "CLIPassMan"
 6. Double-click to start
-
-**Run from command line:**
-```cmd
-C:\clipassman\dist\clipassman.exe --help
-C:\clipassman\dist\clipassman.exe --smart -s "mysecret" -l 16
-```
 
 **What you get:**
 - Single file: `clipassman.exe` (~15MB)
