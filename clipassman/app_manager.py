@@ -86,7 +86,7 @@ class AppManager:
         • Lost secret phrase = permanently lost passwords
         • Public key can be stored for verification
         
-        print(f"For more information, visit the project page on GitHub: {self._config.url}")
+        For more information, visit the project page on GitHub: {self._config.url}
         
         """)
         self._smart_printer.print_framed(f'Complete documentation: {self._config.help_url}')
@@ -171,16 +171,10 @@ class AppManager:
                 continue
 
             selected_pass = password_list[cmd - 1]
-            action = self._get_pass_action(selected_pass)
+            self._get_pass_action(selected_pass)
 
-            if action == 'get':
-                self._retrieve_password(selected_pass)
-            elif action == 'del':
-                self._delete_password(selected_pass)
-                if not self._manager.password_count:
-                    break
-            elif action == 'back':
-                continue
+            if not self._manager.password_count:
+                break
 
     def _retrieve_password(self, smart_pass):
         self._smart_printer.print_center(text='Retrieve Smart Password')
@@ -204,6 +198,7 @@ class AppManager:
                 self._smart_printer.print_center(text='Generated Password:')
                 print(password)
                 self._smart_printer.print_center()
+                self._continue()
             else:
                 self._show_error(
                     title='Invalid Secret',
@@ -214,8 +209,6 @@ class AppManager:
 
         except Exception as e:
             self._show_error(text=f'Failed to generate password: {str(e)}')
-
-        self._continue()
 
     def _delete_password(self, smart_pass):
         confirm = input(f"Delete '{smart_pass.description}'? (y/n): ").lower()
@@ -239,7 +232,7 @@ class AppManager:
             confirm2 = input("This cannot be undone. Type 'DELETE ALL' to confirm: ")
             if confirm2 == 'DELETE ALL':
                 self._manager.clear()
-                print(f"✓ All {self._manager.password_count} password entries cleared!")
+                print("✓ All passwords entries cleared!")
             else:
                 print("Clear operation cancelled")
         else:
@@ -258,11 +251,12 @@ class AppManager:
             cmd = input('Select action: ')
 
             if cmd == '1':
-                return 'get'
+                self._retrieve_password(smart_pass)
             elif cmd == '2':
-                return 'del'
+                self._delete_password(smart_pass)
+                break
             elif cmd == '0':
-                return 'back'
+                break
             else:
                 self._show_error()
 

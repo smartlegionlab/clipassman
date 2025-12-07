@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v2.1.1</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v2.1.2</sup>
 
 ---
 
@@ -91,11 +91,11 @@ Powered by **[smartpasslib v2.1.0+](https://github.com/smartlegionlab/smartpassl
 
 ---
 
-## 🆕 What's New in v2.1.1
+## 🆕 What's New in v2.1.2
 
 ### ⚠️ **BREAKING CHANGES WARNING**
 
-**CRITICAL**: v2.1.1 is **NOT** backward compatible with v1.x. All passwords generated with v1.x are now **INVALID**. You must recreate all passwords using your secret phrases.
+**CRITICAL**: v2.1.2 is **NOT** backward compatible with v1.x. All passwords generated with v1.x are now **INVALID**. You must recreate all passwords using your secret phrases.
 
 ### Major Improvements:
 
@@ -135,7 +135,7 @@ Powered by **[smartpasslib v2.1.0+](https://github.com/smartlegionlab/smartpassl
 # Important: Backup old passwords before migration
 # Step 1: Recover passwords using v1.x if needed
 # Step 2: Delete old ~/.cases.json file
-# Step 3: Install clipassman v2.1.1
+# Step 3: Install clipassman v2.1.2
 # Step 4: Recreate all passwords with your secret phrases
 # Step 5: Update all account credentials
 ```
@@ -187,7 +187,7 @@ pip install clipassman
 pip install clipassman --break-system-packages
 
 # Verify installation
-clipassman --help
+clipassman
 ```
 
 ### Manual Installation
@@ -338,8 +338,8 @@ pyinstaller --onefile --console --name "clipassman.exe" --additional-hooks-dir=.
 **Main Menu:**
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.1.1 ***********************
-******************************* Version: v2.1.1 ********************************
+********************** Smart Password Manager CLI v2.1.2 ***********************
+******************************* Version: v2.1.2 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -409,7 +409,7 @@ Length Strategy:
 **Best Practices:**
 1. **Unique per service** - Different secret for each account type
 2. **Memorable but complex** - Phrases you can remember but others can't guess
-3. **Case-sensitive** - v2.1.1 enforces exact case matching
+3. **Case-sensitive** - v2.1.2 enforces exact case matching
 4. **No digital storage** - Keep only in memory or physical backup
 5. **Backup plan** - Physical written backup in secure location
 
@@ -495,7 +495,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## ⚠️ Security Warnings
 
-**Version Incompatibility**: v2.1.1 passwords are incompatible with v1.x.
+**Version Incompatibility**: v2.1.2 passwords are incompatible with v1.x.
 Never mix secret phrases across different versions.
 
 ### Secret Phrase Security
@@ -566,11 +566,11 @@ Usage of this software constitutes your **FULL AND UNCONDITIONAL ACCEPTANCE** of
 
 ---
 
-**Version**: 2.1.1 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
+**Version**: 2.1.2 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
 
 ---
 
-**Note**: This is v2.1.1. If migrating from v1.x, all passwords must be regenerated with new secret phrases.
+**Note**: This is v2.1.2. If migrating from v1.x, all passwords must be regenerated with new secret phrases.
 
 ---
 
@@ -581,8 +581,8 @@ Usage of this software constitutes your **FULL AND UNCONDITIONAL ACCEPTANCE** of
 ### Main Interface
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.1.1 ***********************
-******************************* Version: v2.1.1 ********************************
+********************** Smart Password Manager CLI v2.1.2 ***********************
+******************************* Version: v2.1.2 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -655,7 +655,7 @@ Select entry: 0
 Choose an action: 4
 ------------------------------------- Help -------------------------------------
 
-        CLIPASSMAN v2.1.1 - Console Smart Password Manager
+        CLIPASSMAN v2.1.2 - Console Smart Password Manager
 
         BREAKING CHANGES WARNING:
         • Login parameter completely removed
