@@ -9,27 +9,28 @@ class AppManager:
 
     def __init__(self):
         self._manager = SmartPasswordManager()
+        self._config = Config()
+        self._smart_printer = SmartPrinter()
+        self._master = SmartPasswordMaster()
 
-    @staticmethod
-    def _show_logo():
-        SmartPrinter.print_center(symbol='*')
-        SmartPrinter.print_center(text=Config.name, symbol='*')
-        SmartPrinter.print_center(text=f"Version: v2.1.0", symbol='*')
+    def _show_logo(self):
+        self._smart_printer.print_center(symbol='*')
+        self._smart_printer.print_center(text=self._config.name, symbol='*')
+        self._smart_printer.print_center(text=f"Version: {self._config.version}", symbol='*')
 
-    @staticmethod
-    def _show_footer():
-        SmartPrinter.print_center(text=Config.url, symbol='-')
-        SmartPrinter.print_center(text=Config.info, symbol='-')
-        SmartPrinter.print_center(symbol='=')
+    def _show_footer(self):
+        self._smart_printer.print_center(text=self._config.url, symbol='-')
+        self._smart_printer.print_center(text=self._config.info, symbol='-')
+        self._smart_printer.print_center(symbol='=')
 
     def _show_error(self, title='ERROR!!!', text='Error! Invalid input.'):
-        SmartPrinter.print_center(text=title)
+        self._smart_printer.print_center(text=title)
         print(text)
         self._continue()
 
     def main_menu(self):
         while True:
-            SmartPrinter.print_center(text=f'Main Menu | Total passwords: {self._manager.password_count}', symbol='-')
+            self._smart_printer.print_center(text=f'Main Menu | Total passwords: {self._manager.password_count}', symbol='-')
             print(f'1: Add Password')
             print(f'2: Get/Delete Password')
             print(f'3: Clear All Passwords')
@@ -52,49 +53,59 @@ class AppManager:
                 self._show_error()
 
     def _help(self):
-        SmartPrinter.print_center('Help')
-        print("""
-        SMART PASSWORD MANAGER v2.1.0
-        =============================
+        self._smart_printer.print_center('Help')
+        print(f"""
+        CLIPASSMAN {self._config.version} - Console Smart Password Manager
 
-        Breaking Changes from v1.x:
-        • Login parameter removed - now uses only secret phrase
+        BREAKING CHANGES WARNING:
+        • Login parameter completely removed
+        • Now uses ONLY secret phrase
         • All v1.x passwords are INVALID
-        • You must create NEW passwords
+        • Old password metadata cannot be migrated
 
-        How it works:
-        1. You provide a description and secret phrase
+        MIGRATION REQUIRED:
+        If you have old passwords from v1.x:
+        1. Recover them using v1.x version
+        2. Generate new ones here with your secret phrases
+        3. Update all accounts with new passwords
+        4. Securely delete old password records
+
+        HOW IT WORKS:
+        1. Provide a secret phrase
         2. System generates a public key from the secret
         3. Password is generated deterministically
-        4. Only description and public key are stored
+        4. Same secret + same length = same password every time
 
         To retrieve a password:
-        1. Select password entry
-        2. Enter the same secret phrase
-        3. Password is regenerated
+        1. Enter the same secret phrase
+        2. Password is regenerated identically
 
-        Security Notes:
-        • Passwords are never stored
-        • Same secret → same password every time
+        SECURITY NOTES:
+        • Passwords are NEVER stored anywhere
         • Case-sensitive secret phrases
+        • Lost secret phrase = permanently lost passwords
+        • Public key can be stored for verification
+        
+        print(f"For more information, visit the project page on GitHub: {self._config.url}")
+        
         """)
-        SmartPrinter.print_framed(f'Documentation: {Config.help_url}')
-        SmartPrinter.print_center()
+        self._smart_printer.print_framed(f'Complete documentation: {self._config.help_url}')
+        self._smart_printer.print_center()
         self._continue()
 
     def _add_password(self):
         while True:
-            SmartPrinter.print_center(text='Add new smart password')
+            self._smart_printer.print_center(text='Add new smart password')
             description = self._get_description()
             secret = self._get_secret(secure_flag=True)
             length = self._get_password_length()
 
             try:
-                public_key = SmartPasswordMaster.generate_public_key(secret=secret)
+                public_key = self._master.generate_public_key(secret=secret)
 
                 if public_key in self._manager.passwords:
                     existing = self._manager.passwords[public_key]
-                    SmartPrinter.print_center(text="WARNING!")
+                    self._smart_printer.print_center(text="WARNING!")
                     print(f"A password with this secret phrase already exists:")
                     print(f"Description: {existing.description}")
                     print(f"Length: {existing.length} characters")
@@ -111,19 +122,19 @@ class AppManager:
 
                 self._manager.add_smart_password(smart_password)
 
-                password = SmartPasswordMaster.generate_smart_password(
+                password = self._master.generate_smart_password(
                     secret=secret,
                     length=length
                 )
 
-                SmartPrinter.print_center()
+                self._smart_printer.print_center()
                 print(f'✓ Password metadata added successfully!')
                 print(f'Description: {description}')
                 print(f'Length: {length} characters')
                 print(f'Public Key: {public_key[:16]}...{public_key[-16:]}')
-                SmartPrinter.print_center(text='Your generated password:')
+                self._smart_printer.print_center(text='Your generated password:')
                 print(password)
-                SmartPrinter.print_center()
+                self._smart_printer.print_center()
 
             except Exception as e:
                 self._show_error(text=f'Failed to create password: {str(e)}')
@@ -135,12 +146,12 @@ class AppManager:
     def _get_password(self):
         if not self._manager.password_count:
             print(f'No password entries found...')
-            SmartPrinter.print_center()
+            self._smart_printer.print_center()
             self._continue()
             return
 
         while True:
-            SmartPrinter.print_center(text='Password List:')
+            self._smart_printer.print_center(text='Password List:')
             password_list = list(self._manager.passwords.values())
 
             for idx, smart_pass in enumerate(password_list, 1):
@@ -172,27 +183,27 @@ class AppManager:
                 continue
 
     def _retrieve_password(self, smart_pass):
-        SmartPrinter.print_center(text='Retrieve Smart Password')
+        self._smart_printer.print_center(text='Retrieve Smart Password')
         print(f'Description: {smart_pass.description}')
         print(f'Length: {smart_pass.length} characters')
 
         secret = getpass.getpass("Enter secret phrase (hidden): ")
 
         try:
-            is_valid = SmartPasswordMaster.check_public_key(
+            is_valid = self._master.check_public_key(
                 secret=secret,
                 public_key=smart_pass.public_key
             )
 
             if is_valid:
-                password = SmartPasswordMaster.generate_smart_password(
+                password = self._master.generate_smart_password(
                     secret=secret,
                     length=smart_pass.length
                 )
 
-                SmartPrinter.print_center(text='Generated Password:')
+                self._smart_printer.print_center(text='Generated Password:')
                 print(password)
-                SmartPrinter.print_center()
+                self._smart_printer.print_center()
             else:
                 self._show_error(
                     title='Invalid Secret',
@@ -238,7 +249,7 @@ class AppManager:
 
     def _get_pass_action(self, smart_pass):
         while True:
-            SmartPrinter.print_center()
+            self._smart_printer.print_center()
             print(f'Selected: {smart_pass.description}')
             print(f'Length: {smart_pass.length} characters')
             print('1: Get password')
@@ -258,8 +269,8 @@ class AppManager:
     def _get_description(self):
         description = ''
         while not description:
-            SmartPrinter.print_framed(
-                'Enter a descriptive name for this password (e.g., "GitHub Account", "Bank Login")')
+            self._smart_printer.print_framed(
+                'Enter a descriptive name for this password (e.g., "GitHub Account")')
             description = input('Description: ').strip()
 
             if not description:
@@ -331,25 +342,5 @@ class AppManager:
 
     def run(self):
         self._show_logo()
-
-        print("\n" + "=" * 60)
-        print("⚠️  IMPORTANT: CLIPASSMAN v2.1.0")
-        print("=" * 60)
-        print("Breaking Changes:")
-        print("• Login parameter removed - use only secret phrase")
-        print("• All v1.x passwords are INVALID")
-        print("• You must create NEW passwords")
-        print("• Old password metadata cannot be migrated")
-        print("=" * 60)
-        print("\nIf you have old passwords:")
-        print("1. Recover them using v1.x version")
-        print("2. Generate new ones here with your secret phrases")
-        print("3. Update your accounts with new passwords")
-        print("=" * 60)
-
-        confirm = input("\nPress Enter to continue or 'q' to quit: ")
-        if confirm.lower() == 'q':
-            return
-
         self.main_menu()
         self._show_footer()

@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v2.1.0</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v2.1.1</sup>
 
 ---
 
@@ -91,11 +91,11 @@ Powered by **[smartpasslib v2.1.0+](https://github.com/smartlegionlab/smartpassl
 
 ---
 
-## 🆕 What's New in v2.1.0
+## 🆕 What's New in v2.1.1
 
 ### ⚠️ **BREAKING CHANGES WARNING**
 
-**CRITICAL**: v2.1.0 is **NOT** backward compatible with v1.x. All passwords generated with v1.x are now **INVALID**. You must recreate all passwords using your secret phrases.
+**CRITICAL**: v2.1.1 is **NOT** backward compatible with v1.x. All passwords generated with v1.x are now **INVALID**. You must recreate all passwords using your secret phrases.
 
 ### Major Improvements:
 
@@ -135,7 +135,7 @@ Powered by **[smartpasslib v2.1.0+](https://github.com/smartlegionlab/smartpassl
 # Important: Backup old passwords before migration
 # Step 1: Recover passwords using v1.x if needed
 # Step 2: Delete old ~/.cases.json file
-# Step 3: Install clipassman v2.1.0
+# Step 3: Install clipassman v2.1.1
 # Step 4: Recreate all passwords with your secret phrases
 # Step 5: Update all account credentials
 ```
@@ -253,6 +253,91 @@ python -m clipassman.clipassman
 
 ---
 
+## 📦 Windows Standalone Executable
+
+### Creating a Single-File *.exe
+
+Build a standalone `clipassman.exe` that runs without Python installation:
+
+#### Step 1: Get the Project Files
+1. **Download project ZIP:**
+   - Go to: https://github.com/smartlegionlab/clipassman
+   - Click green "Code" button
+   - Select "Download ZIP"
+   - Extract to: `C:\clipassman\`
+
+2. **Or clone with git (if installed):**
+   ```cmd
+   git clone https://github.com/smartlegionlab/clipassman.git
+   cd clipassman
+   ```
+
+#### Step 2: Install Python
+1. Download Python installer from: https://python.org/downloads/
+2. Run installer
+3. **IMPORTANT:** Check ✅ "Add Python to PATH"
+4. Click "Install Now"
+
+#### Step 3: Open Command Prompt
+1. Press `Win + R`
+2. Type `cmd`, press Enter
+3. Navigate to project folder:
+   ```cmd
+   cd C:\clipassman
+   ```
+
+#### Step 4: Create Virtual Environment
+```cmd
+# Create virtual environment
+python -m venv venv
+
+# Activate it (IMPORTANT!)
+.\venv\Scripts\activate
+
+# You should see (venv) in your command prompt
+```
+
+#### Step 5: Install Dependencies
+```cmd
+# Install PyInstaller in virtual environment
+pip install pyinstaller
+
+```
+
+#### Step 6: Build Executable
+```cmd
+# Build single .exe file
+pyinstaller --onefile --name "clipassman.exe" clipassman/__main__.py
+pyinstaller --onefile --console --name "clipassman.exe" --additional-hooks-dir=. app.py
+
+# Wait for build to complete (1-2 minutes)
+```
+
+#### Step 7: Find and Use
+**Location:** `C:\clipassman\dist\clipassman.exe`
+
+**Create desktop shortcut:**
+1. Open `C:\clipassman\dist\` folder
+2. Right-click `clipassman.exe`
+3. Select "Create shortcut"
+4. Drag shortcut to desktop
+5. Rename shortcut to "CLIPassMan"
+6. Double-click to start
+
+**Run from command line:**
+```cmd
+C:\clipassman\dist\clipassman.exe --help
+C:\clipassman\dist\clipassman.exe --smart -s "mysecret" -l 16
+```
+
+**What you get:**
+- Single file: `clipassman.exe` (~15MB)
+- No Python required to run
+- Works on any Windows 10/11 PC
+- Can be copied to USB drive
+
+---
+
 ## 🏗️ Core Components
 
 ### Terminal Interface Features
@@ -260,33 +345,15 @@ python -m clipassman.clipassman
 **Main Menu:**
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.1.0 ***********************
-******************************* Version: v2.1.0 ********************************
-
-============================================================
-⚠️  IMPORTANT: CLIPASSMAN v2.1.0
-============================================================
-Breaking Changes:
-• Login parameter removed - use only secret phrase
-• All v1.x passwords are INVALID
-• You must create NEW passwords
-• Old password metadata cannot be migrated
-============================================================
-
-If you have old passwords:
-1. Recover them using v1.x version
-2. Generate new ones here with your secret phrases
-3. Update your accounts with new passwords
-============================================================
-
-Press Enter to continue or 'q' to quit: 
------------------------- Main Menu | Total passwords: 5 ------------------------
+********************** Smart Password Manager CLI v2.1.1 ***********************
+******************************* Version: v2.1.1 ********************************
+------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
 3: Clear All Passwords
 4: Help
 0: Exit
-Choose an action: 
+Choose an action:
 
 ```
 
@@ -302,21 +369,6 @@ Choose an action:
 - Secret phrase entry via getpass (hidden)
 - Public key verification
 - Password regeneration
-
-### SmartPrinter Class
-
-**Features:**
-- `print_center()` - Center text with custom border symbols
-- `print_framed()` - Create framed text blocks
-- `show_head()` - Header display with multiple symbols
-- `show_footer()` - Footer display with URLs and copyright
-- Automatic terminal width detection
-
-**Usage Examples:**
-```python
-SmartPrinter.print_center(text='Main Menu', symbol='-')
-SmartPrinter.print_framed('Important Message', symbol='*')
-```
 
 ### Security Implementation
 
@@ -349,7 +401,6 @@ password = SmartPasswordMaster.generate_smart_password(secret, length)
 Description Examples:
 - GitHub Personal Account
 - Work Email - Office 365
-- Banking Portal - Chase
 - Social Media - Twitter
 - Cloud Storage - Dropbox
 
@@ -365,7 +416,7 @@ Length Strategy:
 **Best Practices:**
 1. **Unique per service** - Different secret for each account type
 2. **Memorable but complex** - Phrases you can remember but others can't guess
-3. **Case-sensitive** - v2.1.0 enforces exact case matching
+3. **Case-sensitive** - v2.1.1 enforces exact case matching
 4. **No digital storage** - Keep only in memory or physical backup
 5. **Backup plan** - Physical written backup in secure location
 
@@ -451,7 +502,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## ⚠️ Security Warnings
 
-**Version Incompatibility**: v2.1.0 passwords are incompatible with v1.x.
+**Version Incompatibility**: v2.1.1 passwords are incompatible with v1.x.
 Never mix secret phrases across different versions.
 
 ### Secret Phrase Security
@@ -522,50 +573,34 @@ Usage of this software constitutes your **FULL AND UNCONDITIONAL ACCEPTANCE** of
 
 ---
 
-**Version**: 2.1.0 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
+**Version**: 2.1.1 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
 
 ---
 
-**Note**: This is v2.1.0. If migrating from v1.x, all passwords must be regenerated with new secret phrases.
+**Note**: This is v2.1.1. If migrating from v1.x, all passwords must be regenerated with new secret phrases.
 
 ---
 
 ## Terminal Interface Examples
 
+![clipassman](https://github.com/smartlegionlab/clipassman/blob/master/data/images/clipassman.png)
+
 ### Main Interface
 ```
-*********************************************************************************
-*********************** Smart Password Manager CLI v2.1.0 ***********************
-******************************** Version: v2.1.0 ********************************
-
-============================================================
-⚠️  IMPORTANT: CLIPASSMAN v2.1.0
-============================================================
-Breaking Changes:
-• Login parameter removed - use only secret phrase
-• All v1.x passwords are INVALID
-• You must create NEW passwords
-• Old password metadata cannot be migrated
-============================================================
-
-If you have old passwords:
-1. Recover them using v1.x version
-2. Generate new ones here with your secret phrases
-3. Update your accounts with new passwords
-============================================================
-
-Press Enter to continue or 'q' to quit: 
-------------------------- Main Menu | Total passwords: 0 ------------------------
+********************************************************************************
+********************** Smart Password Manager CLI v2.1.1 ***********************
+******************************* Version: v2.1.1 ********************************
+------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
 3: Clear All Passwords
 4: Help
 0: Exit
 Choose an action: 1
------------------------------ Add new smart password ----------------------------
----------------------------------------------------------------------------------
-Enter a descriptive name for this password (e.g., "GitHub Account", "Bank Login")
----------------------------------------------------------------------------------
+---------------------------- Add new smart password ----------------------------
+-------------------------------------------------------------------
+Enter a descriptive name for this password (e.g., "GitHub Account")
+-------------------------------------------------------------------
 Description: Account 1
 
 IMPORTANT: Your secret phrase:
@@ -577,75 +612,103 @@ IMPORTANT: Your secret phrase:
 Enter secret phrase (hidden): 
 Confirm secret phrase (hidden): 
 Enter password length (4-100): 16
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ✓ Password metadata added successfully!
 Description: Account 1
 Length: 16 characters
-Public Key: d1d1a5671f7c6a58...050494dfef302e96
----------------------------- Your generated password: ---------------------------
-EKoSq5Nqf&K_IyvI
----------------------------------------------------------------------------------
+Public Key: d8295cdc1a8e3094...bb4b558bf7d70b4b
+--------------------------- Your generated password: ---------------------------
+wcJjBKIhsgV%!6Iq
+--------------------------------------------------------------------------------
 
 Press Enter to continue... 
-------------------------- Main Menu | Total passwords: 1 ------------------------
+------------------------ Main Menu | Total passwords: 1 ------------------------
 1: Add Password
 2: Get/Delete Password
 3: Clear All Passwords
 4: Help
 0: Exit
 Choose an action: 2
---------------------------------- Password List: --------------------------------
+-------------------------------- Password List: --------------------------------
 1. Account 1 (16 chars)
 0. ← Back
 Select entry: 1
----------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 Selected: Account 1
 Length: 16 characters
 1: Get password
 2: Delete entry
 0: ← Back
 Select action: 1
----------------------------- Retrieve Smart Password ----------------------------
+--------------------------- Retrieve Smart Password ----------------------------
 Description: Account 1
 Length: 16 characters
 Enter secret phrase (hidden): 
------------------------------- Generated Password: ------------------------------
-EKoSq5Nqf&K_IyvI
----------------------------------------------------------------------------------
+----------------------------- Generated Password: ------------------------------
+wcJjBKIhsgV%!6Iq
+--------------------------------------------------------------------------------
 
 Press Enter to continue... 
---------------------------------- Password List: --------------------------------
+-------------------------------- Password List: --------------------------------
 1. Account 1 (16 chars)
 0. ← Back
 Select entry: 0
-------------------------- Main Menu | Total passwords: 1 ------------------------
+------------------------ Main Menu | Total passwords: 1 ------------------------
 1: Add Password
 2: Get/Delete Password
 3: Clear All Passwords
 4: Help
 0: Exit
-Choose an action: 2
---------------------------------- Password List: --------------------------------
-1. Account 1 (16 chars)
-0. ← Back
-Select entry: 1
----------------------------------------------------------------------------------
-Selected: Account 1
-Length: 16 characters
-1: Get password
-2: Delete entry
-0: ← Back
-Select action: 2
-Delete 'Account 1'? (y/n): y
-✓ 'Account 1' deleted successfully!
-------------------------- Main Menu | Total passwords: 0 ------------------------
+Choose an action: 4
+------------------------------------- Help -------------------------------------
+
+        CLIPASSMAN v2.1.1 - Console Smart Password Manager
+
+        BREAKING CHANGES WARNING:
+        • Login parameter completely removed
+        • Now uses ONLY secret phrase
+        • All v1.x passwords are INVALID
+        • Old password metadata cannot be migrated
+
+        MIGRATION REQUIRED:
+        If you have old passwords from v1.x:
+        1. Recover them using v1.x version
+        2. Generate new ones here with your secret phrases
+        3. Update all accounts with new passwords
+        4. Securely delete old password records
+
+        HOW IT WORKS:
+        1. Provide a secret phrase
+        2. System generates a public key from the secret
+        3. Password is generated deterministically
+        4. Same secret + same length = same password every time
+
+        To retrieve a password:
+        1. Enter the same secret phrase
+        2. Password is regenerated identically
+
+        SECURITY NOTES:
+        • Passwords are NEVER stored anywhere
+        • Case-sensitive secret phrases
+        • Lost secret phrase = permanently lost passwords
+        • Public key can be stored for verification
+        
+        print(f"For more information, visit the project page on GitHub: https://github.com/smartlegionlab/clipassman")
+        
+----------------------------------------------------------------------
+Complete documentation: https://github.com/smartlegionlab/smartpasslib
+----------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Press Enter to continue... 
+------------------------ Main Menu | Total passwords: 1 ------------------------
 1: Add Password
 2: Get/Delete Password
 3: Clear All Passwords
 4: Help
 0: Exit
 Choose an action: 0
------------------- https://github.com/smartlegionlab/clipassman -----------------
----------------------- Copyright © 2025, Alexander Suvorov ----------------------
-=================================================================================
+----------------- https://github.com/smartlegionlab/clipassman -----------------
+--------------------- Copyright © 2025, Alexander Suvorov ----------------------
+================================================================================
 ```
