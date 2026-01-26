@@ -1,4 +1,4 @@
-# Copyright © 2025, Alexander Suvorov
+# Copyright © 2026, Alexander Suvorov
 import getpass
 from clipassman.config import Config
 from clipassman.smart_printer import SmartPrinter
