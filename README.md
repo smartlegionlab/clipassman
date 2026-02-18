@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v2.1.4</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v2.2.0</sup>
 
 ---
 
@@ -14,6 +14,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/clipassman)](https://pypi.org/project/clipassman)
 [![GitHub license](https://img.shields.io/github/license/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/blob/master/LICENSE)
 [![PyPI format](https://img.shields.io/pypi/format/clipassman)](https://pypi.org/project/clipassman)
+![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey)
 
 ---
 
@@ -32,14 +33,16 @@
 4. **Manage Services**: Organize passwords for different accounts and services
 5. **Secure Terminal Input**: Hidden secret phrase entry with getpass
 6. **Verify Secrets**: Prove knowledge of secrets without exposing them
-7. **Cross-Platform Management**: Works on any system with Python
-8. **No GUI Dependencies**: Pure terminal interface for servers and remote systems
+7. **Export/Import**: Backup and restore your password metadata
+8. **Cross-Platform Management**: Works on any system with Python
+9. **No GUI Dependencies**: Pure terminal interface for servers and remote systems
 
 **Key Features:**
 - ✅ **No Password Database**: Eliminates password storage completely
 - ✅ **Interactive Terminal UI**: Clean, centered text with visual framing
 - ✅ **Public Key Verification**: Verify secret knowledge without exposure
 - ✅ **List View**: See all your password metadata in clear lists
+- ✅ **Export/Import**: Backup and restore functionality with timestamped files
 - ✅ **Bulk Operations**: Clear all passwords with double confirmation
 - ✅ **Secure Hidden Input**: Hidden secret phrase entry via getpass
 - ✅ **No Dependencies**: Only Python standard library + smartpasslib
@@ -73,7 +76,7 @@
 
 ## 🔬 Technical Foundation
 
-Powered by **[smartpasslib v2.1.0+](https://github.com/smartlegionlab/smartpasslib)** - The core library for deterministic password generation.
+Powered by **[smartpasslib v2.2.0+](https://github.com/smartlegionlab/smartpasslib)** - The core library for deterministic password generation.
 
 **Key principle**: Instead of storing passwords, you store verification metadata. The actual password is regenerated on-demand from your secret phrase.
 
@@ -82,93 +85,69 @@ Powered by **[smartpasslib v2.1.0+](https://github.com/smartlegionlab/smartpassl
 - The actual password
 - Any reversible password data
 
-**What IS stored** (in `~/.cases.json`):
+**What IS stored** (in `~/.config/smart_password_manager/passwords.json`):
 - Public verification key (hash of secret)
 - Service description
 - Password length parameter
+
+**Export format**: Same JSON structure, can be backed up and restored across different machines running the same software version.
 
 **Security model**: Proof of secret knowledge without secret storage or password transmission.
 
 ---
 
-## 🆕 What's New in v2.1.4
+## 📁 File Locations
 
-### ⚠️ **BREAKING CHANGES WARNING**
+Starting from v2.2.0, configuration files are stored in:
 
-**CRITICAL**: v2.1.4 is **NOT** backward compatible with v1.x. All passwords generated with v1.x are now **INVALID**. You must recreate all passwords using your secret phrases.
+| Platform | Configuration Path |
+|----------|-------------------|
+| Linux | `~/.config/smart_password_manager/passwords.json` |
+| macOS | `~/.config/smart_password_manager/passwords.json` |
+| Windows | `C:\Users\Username\.config\smart_password_manager\passwords.json` |
 
-### Major Improvements:
+**Automatic Migration**:
+- Old `~/.cases.json` files are automatically migrated on first run
+- Original file is backed up as `~/.cases.json.bak`
+- Migration is one-time and non-destructive
+- All your existing passwords are preserved
 
-**Simplified Architecture:**
-- **Login parameter removed** - now uses only secret phrase and description
-- **Streamlined API** - single authentication factor (secret phrase)
-- **Cleaner codebase** - reduced complexity and better maintainability
+---
 
-**Enhanced Terminal Interface:**
-- **SmartPrinter class** for beautiful centered and framed text output
-- **Better visual hierarchy** with consistent symbol borders
-- **Improved menu layouts** for clearer navigation
-- **Automatic terminal width detection** for perfect centering
+## 🆕 What's New in v2.2.0
 
-**Security Improvements:**
+### Import/Export Functionality
+
+- **Export passwords**: Save your password metadata to JSON file with timestamp
+- **Import passwords**: Restore from previously exported files
+- **Format options**: Choose between pretty or minified JSON
+- **Metadata inclusion**: Optional timestamp and version info in export
+- **Safe import**: Merges with existing data, never overwrites existing entries
+- **Import preview**: See export metadata before confirming
+- **Statistics**: Clear feedback on added/skipped/invalid entries
+- **Filename suggestions**: Auto-generated timestamps prevent overwrites
+
+### Configuration Migration
+
+- **New config location**: Now uses `~/.config/smart_password_manager/passwords.json`
+- **Automatic migration**: Old `~/.cases.json` files are auto-migrated on first run
+- **Cross-platform paths**: Works on Linux, macOS, and Windows
+- **Safe backup**: Original file preserved as `.cases.json.bak`
+
+### Improved Terminal UI
+
+- **New menu option**: Export/Import in main menu (option 3)
+- **Better feedback**: Clear statistics after import
+- **Format selection**: Choose JSON format during export
+- **Filename suggestions**: Auto-generated timestamps
+- **Consistent visual styling** throughout the application
+
+### Security Improvements
+
 - **Stronger public key verification** using enhanced cryptographic methods
 - **Better input validation** with clear error messages
 - **Duplicate detection** - prevents creating multiple entries with same secret
 - **Case-sensitive secrets** with clear user warnings
-
-**User Experience:**
-- **Clear migration warnings** with step-by-step instructions
-- **Interactive confirmation dialogs** for destructive operations
-- **Better help system** with comprehensive documentation
-- **Password list numbering** for easy selection
-
-### Breaking Changes:
-
-**Compatibility:**
-- **NOT compatible** with v1.x password generation
-- Requires **smartpasslib v2.1.0+**
-- **All v1.x passwords must be recreated**
-- **Login parameter completely removed**
-
-**Migration Required:**
-```bash
-# Important: Backup old passwords before migration
-# Step 1: Recover passwords using v1.x if needed
-# Step 2: Delete old ~/.cases.json file
-# Step 3: Install clipassman v2.1.4
-# Step 4: Recreate all passwords with your secret phrases
-# Step 5: Update all account credentials
-```
-
-### New Features:
-
-**Terminal UI Enhancements:**
-```python
-# Centered text output with custom symbols
-# Framed text for important messages
-# Automatic terminal width detection
-# Consistent visual styling throughout
-```
-
-**Security Features:**
-- Duplicate secret phrase detection
-- Public key display (first and last 16 characters)
-- Clear case-sensitivity warnings
-- Input validation with helpful error messages
-
-**Management Features:**
-- Total password count display in main menu
-- Individual password deletion with confirmation
-- Bulk clear operation with double confirmation
-- Password list with descriptions and lengths
-
-### Key Improvements:
-
-1. **Simplified Workflow** - No login parameter needed
-2. **Better Terminal UI** - Professional-looking output
-3. **Enhanced Security** - Stronger verification methods
-4. **Clearer Migration** - Step-by-step upgrade path
-5. **Improved Error Handling** - User-friendly messages
 
 ---
 
@@ -177,6 +156,15 @@ Powered by **[smartpasslib v2.1.0+](https://github.com/smartlegionlab/smartpassl
 ### Prerequisites
 - **Python 3.7+** required
 - **pip** for package management
+
+### Quick Run from Repository
+
+```bash
+# Clone and run in one go
+git clone https://github.com/smartlegionlab/clipassman.git
+cd clipassman
+python clipassman/clipassman.py
+```
 
 ### Quick Installation
 ```bash
@@ -234,15 +222,25 @@ python -m clipassman.clipassman
 5. Enter your secret phrase (hidden input)
 6. Password regenerates identically
 
-### Managing Passwords
-```bash
-# Main menu options:
-1: Add Password          # Create new password
-2: Get/Delete Password   # Retrieve or remove password
-3: Clear All Passwords   # Remove all entries (double confirmation)
-4: Help                  # View documentation
-0: Exit                  # Quit application
-```
+### Exporting Passwords
+1. Launch `clipassman`
+2. Select option **3: Export/Import Passwords**
+3. Select **1: Export passwords to file**
+4. Choose filename (or press Enter for auto-generated with timestamp)
+5. Select format (1: pretty JSON, 2: minified JSON)
+6. Choose whether to include metadata (y/n)
+7. File is saved with all your password metadata
+8. Success message with filename and password count
+
+### Importing Passwords
+1. Launch `clipassman`
+2. Select option **3: Export/Import Passwords**
+3. Select **2: Import passwords from file**
+4. Enter filename to import
+5. Review export metadata if present (date, version, count)
+6. Confirm import (y/n)
+7. See statistics of added/skipped/invalid entries
+8. Table automatically refreshes with new passwords
 
 ### Deleting Passwords
 1. Select option **2: Get/Delete Password**
@@ -250,6 +248,23 @@ python -m clipassman.clipassman
 3. Select **2: Delete entry**
 4. Confirm deletion with 'y'
 5. Only metadata removed - password can be recreated with secret
+
+### Clearing All Passwords
+1. Select option **4: Clear All Passwords**
+2. First confirmation with 'y'
+3. Type 'DELETE ALL' to confirm
+4. All password entries are removed
+
+### Managing Passwords
+```bash
+# Main menu options:
+1: Add Password          # Create new password
+2: Get/Delete Password   # Retrieve or remove password
+3: Export/Import         # Backup or restore password metadata
+4: Clear All Passwords   # Remove all entries (double confirmation)
+5: Help                  # View documentation
+0: Exit                  # Quit application
+```
 
 ---
 
@@ -295,13 +310,13 @@ python -m venv venv
 ```cmd
 # Install PyInstaller in virtual environment
 pip install pyinstaller
-
+pip install smartpasslib>=2.2.0
 ```
 
 #### Step 6: Build Executable
 ```cmd
 # Build single .exe file
-pyinstaller --onefile --console --name "clipassman.exe" --additional-hooks-dir=. app.py
+pyinstaller --onefile --console --name "clipassman.exe" clipassman/clipassman.py
 
 # Wait for build to complete (1-2 minutes)
 ```
@@ -332,13 +347,14 @@ pyinstaller --onefile --console --name "clipassman.exe" --additional-hooks-dir=.
 **Main Menu:**
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.1.4 ***********************
-******************************* Version: v2.1.4 ********************************
+********************** Smart Password Manager CLI v2.2.0 ***********************
+******************************* Version: v2.2.0 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
-3: Clear All Passwords
-4: Help
+3: Export/Import Passwords
+4: Clear All Passwords
+5: Help
 0: Exit
 Choose an action:
 
@@ -356,6 +372,15 @@ Choose an action:
 - Secret phrase entry via getpass (hidden)
 - Public key verification
 - Password regeneration
+
+**Export/Import Interface:**
+```
+------------------------ Export/Import Menu ------------------------
+1: Export passwords to file
+2: Import passwords from file
+0: ← Back to Main Menu
+Choose an action:
+```
 
 ### Security Implementation
 
@@ -403,9 +428,10 @@ Length Strategy:
 **Best Practices:**
 1. **Unique per service** - Different secret for each account type
 2. **Memorable but complex** - Phrases you can remember but others can't guess
-3. **Case-sensitive** - v2.1.4 enforces exact case matching
+3. **Case-sensitive** - v2.2.0 enforces exact case matching
 4. **No digital storage** - Keep only in memory or physical backup
 5. **Backup plan** - Physical written backup in secure location
+6. **Export regularly** - Backup metadata after adding new passwords
 
 **Example Secret Phrases:**
 ```
@@ -413,6 +439,15 @@ Good: "MyFavoriteCoffeeShop@2025#Boston"
 Good: "PurpleElephantsDanceInMoonlight42"
 Avoid: "password123", "letmein", "123456"
 ```
+
+### Backup Strategy
+
+**Recommended workflow:**
+1. Export metadata after adding new passwords
+2. Store exports in secure, encrypted location
+3. Keep exports across different machines for synchronization
+4. Test import on a separate machine before relying on backups
+5. Use timestamped exports to maintain version history
 
 ---
 
@@ -433,8 +468,8 @@ Avoid: "password123", "letmein", "123456"
 - **[Web Smart Password Manager](https://github.com/smartlegionlab/smart-password-manager)** - Browser-based access
 
 ### Data Compatibility
-- Uses same `~/.cases.json` format as desktop manager
-- Compatible metadata with smartpasslib ecosystem
+- Uses same `~/.config/smart_password_manager/passwords.json` format as desktop manager
+- Export files compatible across all ecosystem tools
 - Consistent cryptographic operations across platforms
 - Can share password metadata between CLI and desktop versions
 
@@ -453,6 +488,7 @@ Avoid: "password123", "letmein", "123456"
 - Copy to clipboard with one click
 - Better visual feedback
 - Mouse support
+- Context menu for quick actions
 
 ---
 
@@ -481,16 +517,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 - **CLI Manager Issues**: [GitHub Issues](https://github.com/smartlegionlab/clipassman/issues)
 - **Core Library Issues**: [smartpasslib Issues](https://github.com/smartlegionlab/smartpasslib/issues)
-- **Documentation**: Inline help (option 4) and this README
+- **Documentation**: Inline help (option 5) and this README
 
 **Note**: Always test password generation with non-essential accounts first. Implementation security depends on proper usage.
 
 ---
 
 ## ⚠️ Security Warnings
-
-**Version Incompatibility**: v2.1.4 passwords are incompatible with v1.x.
-Never mix secret phrases across different versions.
 
 ### Secret Phrase Security
 
@@ -503,6 +536,14 @@ Never mix secret phrases across different versions.
 5. **Secure storage required**: Digital storage of secret phrases is prohibited
 
 **Critical**: Test password regeneration with non-essential accounts before production use
+
+### Export/Import Security Notes
+
+- Export files contain ONLY metadata (public keys, descriptions, lengths)
+- No passwords or secret phrases are ever exported
+- Export files are plain JSON - store them securely
+- Treat exported metadata as sensitive information
+- Timestamped exports help maintain backup history
 
 ---
 
@@ -560,11 +601,7 @@ Usage of this software constitutes your **FULL AND UNCONDITIONAL ACCEPTANCE** of
 
 ---
 
-**Version**: 2.1.4 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
-
----
-
-**Note**: This is v2.1.4. If migrating from v1.x, all passwords must be regenerated with new secret phrases.
+**Version**: 2.2.0 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
 
 ---
 
@@ -575,13 +612,14 @@ Usage of this software constitutes your **FULL AND UNCONDITIONAL ACCEPTANCE** of
 ### Main Interface
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.1.4 ***********************
-******************************* Version: v2.1.4 ********************************
+********************** Smart Password Manager CLI v2.2.0 ***********************
+******************************* Version: v2.2.0 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
-3: Clear All Passwords
-4: Help
+3: Export/Import Passwords
+4: Clear All Passwords
+5: Help
 0: Exit
 Choose an action: 1
 ---------------------------- Add new smart password ----------------------------
@@ -612,44 +650,70 @@ Press Enter to continue...
 ------------------------ Main Menu | Total passwords: 1 ------------------------
 1: Add Password
 2: Get/Delete Password
-3: Clear All Passwords
-4: Help
+3: Export/Import Passwords
+4: Clear All Passwords
+5: Help
 0: Exit
-Choose an action: 2
--------------------------------- Password List: --------------------------------
-1. Account 1 (16 chars)
-0. ← Back
-Select entry: 1
+Choose an action: 3
+------------------------------ Export/Import Menu ------------------------------
+1: Export passwords to file
+2: Import passwords from file
+0: ← Back to Main Menu
+Choose an action: 1
+------------------------------- Export Passwords -------------------------------
+Total passwords: 1
+Default filename: passwords_export_20260218_124959.json
+Enter filename (or press Enter for default): 
+
+Export format:
+1: Pretty JSON (readable, with indentation)
+2: Minified JSON (smaller size)
+Choose format (1/2): 1
+Include export metadata (timestamp, version)? (y/n): y
 --------------------------------------------------------------------------------
-Selected: Account 1
-Length: 16 characters
-1: Get password
-2: Delete entry
-0: ← Back
-Select action: 1
---------------------------- Retrieve Smart Password ----------------------------
-Description: Account 1
-Length: 16 characters
-Enter secret phrase (hidden): 
------------------------------ Generated Password: ------------------------------
-wcJjBKIhsgV%!6Iq
---------------------------------------------------------------------------------
+✓ Successfully exported 1 passwords to:
+  passwords_export_20260218_124959.json
 
 Press Enter to continue... 
--------------------------------- Password List: --------------------------------
-1. Account 1 (16 chars)
-0. ← Back
-Select entry: 0
+------------------------------ Export/Import Menu ------------------------------
+1: Export passwords to file
+2: Import passwords from file
+0: ← Back to Main Menu
+Choose an action: 2
+------------------------------- Import Passwords -------------------------------
+Current passwords: 1
+Enter filename to import: /home/user/passwords_export_20260218_124959.json
+
+Export metadata:
+  Date: 2026-02-18T12:50:18.597439
+  App version: 2.2.0
+  Passwords in file: 1
+
+Found 1 passwords in file
+
+Proceed with import? (y/n): y
+--------------------------------------------------------------------------------
+✓ Import completed:
+  • Added: 0 new passwords
+  • Skipped (already exist): 1
+
+Press Enter to continue... 
+------------------------------ Export/Import Menu ------------------------------
+1: Export passwords to file
+2: Import passwords from file
+0: ← Back to Main Menu
+Choose an action: 0
 ------------------------ Main Menu | Total passwords: 1 ------------------------
 1: Add Password
 2: Get/Delete Password
-3: Clear All Passwords
-4: Help
+3: Export/Import Passwords
+4: Clear All Passwords
+5: Help
 0: Exit
-Choose an action: 4
+Choose an action: 5
 ------------------------------------- Help -------------------------------------
 
-        CLIPASSMAN v2.1.4 - Console Smart Password Manager
+        CLIPASSMAN v2.2.0 - Console Smart Password Manager
 
         BREAKING CHANGES WARNING:
         • Login parameter completely removed
@@ -680,7 +744,8 @@ Choose an action: 4
         • Lost secret phrase = permanently lost passwords
         • Public key can be stored for verification
         
-        print(f"For more information, visit the project page on GitHub: https://github.com/smartlegionlab/clipassman")
+        For more information, visit the project page on GitHub: https://github.com/smartlegionlab/clipassman
+        
         
 ----------------------------------------------------------------------
 Complete documentation: https://github.com/smartlegionlab/smartpasslib
@@ -691,8 +756,9 @@ Press Enter to continue...
 ------------------------ Main Menu | Total passwords: 1 ------------------------
 1: Add Password
 2: Get/Delete Password
-3: Clear All Passwords
-4: Help
+3: Export/Import Passwords
+4: Clear All Passwords
+5: Help
 0: Exit
 Choose an action: 0
 ----------------- https://github.com/smartlegionlab/clipassman -----------------

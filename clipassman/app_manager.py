@@ -33,8 +33,9 @@ class AppManager:
             self._smart_printer.print_center(text=f'Main Menu | Total passwords: {self._manager.password_count}', symbol='-')
             print(f'1: Add Password')
             print(f'2: Get/Delete Password')
-            print(f'3: Clear All Passwords')
-            print(f'4: Help')
+            print(f'3: Export/Import Passwords')
+            print(f'4: Clear All Passwords')
+            print(f'5: Help')
             print(f'0: Exit')
 
             cmd = input("Choose an action: ").lower()
@@ -46,8 +47,10 @@ class AppManager:
             elif cmd == '2':
                 self._get_password()
             elif cmd == '3':
-                self._clear_passwords()
+                self._export_import_menu()
             elif cmd == '4':
+                self._clear_passwords()
+            elif cmd == '5':
                 self._help()
             else:
                 self._show_error()
@@ -333,6 +336,158 @@ class AppManager:
     @staticmethod
     def _continue():
         input('\nPress Enter to continue... ')
+
+    def _export_import_menu(self):
+        while True:
+            self._smart_printer.print_center(text='Export/Import Menu', symbol='-')
+            print(f'1: Export passwords to file')
+            print(f'2: Import passwords from file')
+            print(f'0: ← Back to Main Menu')
+
+            cmd = input("Choose an action: ").lower()
+
+            if cmd == '0':
+                return
+            elif cmd == '1':
+                self._export_passwords()
+            elif cmd == '2':
+                self._import_passwords()
+            else:
+                self._show_error()
+
+    def _export_passwords(self):
+        if self._manager.password_count == 0:
+            print("No passwords to export")
+            self._continue()
+            return
+
+        from datetime import datetime
+        import json
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        default_filename = f"passwords_export_{timestamp}.json"
+
+        self._smart_printer.print_center(text='Export Passwords', symbol='-')
+        print(f"Total passwords: {self._manager.password_count}")
+        print(f"Default filename: {default_filename}")
+
+        filename = input("Enter filename (or press Enter for default): ").strip()
+        if not filename:
+            filename = default_filename
+        elif not filename.endswith('.json'):
+            filename += '.json'
+
+        print("\nExport format:")
+        print("1: Pretty JSON (readable, with indentation)")
+        print("2: Minified JSON (smaller size)")
+        format_choice = input("Choose format (1/2): ").strip()
+
+        pretty = format_choice != '2'
+
+        include_meta = input("Include export metadata (timestamp, version)? (y/n): ").strip().lower()
+        include_metadata = include_meta in ['y', 'yes']
+
+        try:
+            export_data = {}
+
+            if include_metadata:
+                from smartpasslib import __version__ as lib_version
+                from clipassman import __version__ as app_version
+
+                export_data["_metadata"] = {
+                    "exported_at": datetime.now().isoformat(),
+                    "app_version": app_version,
+                    "lib_version": lib_version,
+                    "count": self._manager.password_count
+                }
+
+            for public_key, sp in self._manager.passwords.items():
+                export_data[public_key] = sp.to_dict()
+
+            with open(filename, 'w') as f:
+                if pretty:
+                    json.dump(export_data, f, indent=2)
+                else:
+                    json.dump(export_data, f, separators=(',', ':'))
+
+            self._smart_printer.print_center()
+            print(f"✓ Successfully exported {self._manager.password_count} passwords to:")
+            print(f"  {filename}")
+
+        except Exception as e:
+            self._show_error(text=f"Export failed: {str(e)}")
+
+        self._continue()
+
+    def _import_passwords(self):
+        from pathlib import Path
+        import json
+        from smartpasslib import SmartPassword
+
+        self._smart_printer.print_center(text='Import Passwords', symbol='-')
+
+        print(f"Current passwords: {self._manager.password_count}")
+
+        filename = input("Enter filename to import: ").strip()
+        if not filename:
+            return
+
+        if not Path(filename).exists():
+            self._show_error(text=f"File not found: {filename}")
+            return
+
+        try:
+            with open(filename, 'r') as f:
+                import_data = json.load(f)
+
+            if "_metadata" in import_data:
+                metadata = import_data.pop("_metadata")
+                print(f"\nExport metadata:")
+                print(f"  Date: {metadata.get('exported_at', 'unknown')}")
+                print(f"  App version: {metadata.get('app_version', 'unknown')}")
+                print(f"  Passwords in file: {metadata.get('count', len(import_data))}")
+
+            print(f"\nFound {len(import_data)} passwords in file")
+
+            confirm = input("\nProceed with import? (y/n): ").strip().lower()
+            if confirm not in ['y', 'yes']:
+                print("Import cancelled")
+                self._continue()
+                return
+
+            added = 0
+            skipped = 0
+            invalid = 0
+
+            for public_key, data in import_data.items():
+                if not isinstance(data, dict) or 'public_key' not in data:
+                    invalid += 1
+                    continue
+
+                if public_key in self._manager.passwords:
+                    skipped += 1
+                    continue
+
+                try:
+                    sp = SmartPassword.from_dict(data)
+                    self._manager.add_smart_password(sp)
+                    added += 1
+                except:
+                    invalid += 1
+
+            self._smart_printer.print_center()
+            print(f"✓ Import completed:")
+            print(f"  • Added: {added} new passwords")
+            print(f"  • Skipped (already exist): {skipped}")
+            if invalid > 0:
+                print(f"  • Invalid entries: {invalid}")
+
+        except json.JSONDecodeError:
+            self._show_error(text="Invalid JSON file format")
+        except Exception as e:
+            self._show_error(text=f"Import failed: {str(e)}")
+
+        self._continue()
 
     def run(self):
         self._show_logo()
