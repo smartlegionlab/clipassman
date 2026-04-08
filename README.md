@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v2.2.0</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v2.2.1</sup>
 
 ---
 
@@ -24,7 +24,7 @@
 
 **Summary:** Software provided "AS IS" without warranty. You assume all risks.
 
-**Full legal disclaimer:** See [DISCLAIMER.md](https://github.com/smartlegionlab/smartpasslib/blob/master/DISCLAIMER.md)
+**Full legal disclaimer:** See [DISCLAIMER.md](https://github.com/smartlegionlab/clipassman/blob/master/DISCLAIMER.md)
 
 ---
 
@@ -100,7 +100,7 @@ Powered by **[smartpasslib v2.2.0+](https://github.com/smartlegionlab/smartpassl
 
 ## File Locations
 
-Starting from v2.2.0, configuration files are stored in:
+Starting from v2.2.1, configuration files are stored in:
 
 | Platform | Configuration Path |
 |----------|-------------------|
@@ -116,7 +116,7 @@ Starting from v2.2.0, configuration files are stored in:
 
 ---
 
-## What's New in v2.2.0
+## What's New in v2.2.1
 
 ### Import/Export Functionality
 
@@ -349,8 +349,8 @@ pyinstaller --onefile --console --name "clipassman.exe" clipassman/clipassman.py
 **Main Menu:**
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.2.0 ***********************
-******************************* Version: v2.2.0 ********************************
+********************** Smart Password Manager CLI v2.2.1 ***********************
+******************************* Version: v2.2.1 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -430,7 +430,7 @@ Length Strategy:
 **Best Practices:**
 1. **Unique per service** - Different secret for each account type
 2. **Memorable but complex** - Phrases you can remember but others can't guess
-3. **Case-sensitive** - v2.2.0 enforces exact case matching
+3. **Case-sensitive** - v2.2.1 enforces exact case matching
 4. **No digital storage** - Keep only in memory or physical backup
 5. **Backup plan** - Physical written backup in secure location
 6. **Export regularly** - Backup metadata after adding new passwords
@@ -536,7 +536,7 @@ Copyright (c) 2026, Alexander Suvorov
 
 ---
 
-**Version**: 2.2.0 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
+**Version**: 2.2.1 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
 
 ---
 
@@ -547,8 +547,8 @@ Copyright (c) 2026, Alexander Suvorov
 ### Main Interface
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.2.0 ***********************
-******************************* Version: v2.2.0 ********************************
+********************** Smart Password Manager CLI v2.2.1 ***********************
+******************************* Version: v2.2.1 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -621,7 +621,7 @@ Enter filename to import: /home/user/passwords_export_20260218_124959.json
 
 Export metadata:
   Date: 2026-02-18T12:50:18.597439
-  App version: 2.2.0
+  App version: 2.2.1
   Passwords in file: 1
 
 Found 1 passwords in file
@@ -648,7 +648,7 @@ Choose an action: 0
 Choose an action: 5
 ------------------------------------- Help -------------------------------------
 
-        CLIPASSMAN v2.2.0 - Console Smart Password Manager
+        CLIPASSMAN v2.2.1 - Console Smart Password Manager
 
         HOW IT WORKS:
         1. Provide a secret phrase
