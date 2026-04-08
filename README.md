@@ -18,13 +18,25 @@
 
 ---
 
-## **🔐 Core Principles:**
+## ⚠️ Disclaimer
 
-- 🔐 **Zero-Password Storage**: No passwords are ever stored or transmitted
-- 🔑 **Deterministic Regeneration**: Passwords are recreated identically from your secret phrase
-- 📝 **Metadata Management**: Store only descriptions and verification keys
-- 💻 **Terminal Processing**: All cryptographic operations happen in your CLI
-- 🔄 **On-Demand Discovery**: Passwords exist only when you generate them
+**By using this software, you agree to the full disclaimer terms.**
+
+**Summary:** Software provided "AS IS" without warranty. You assume all risks.
+
+**Full legal disclaimer:** See [DISCLAIMER.md](https://github.com/smartlegionlab/smartpasslib/blob/master/DISCLAIMER.md)
+
+---
+
+---
+
+## **Core Principles:**
+
+- **Zero-Password Storage**: No passwords are ever stored or transmitted
+- **Deterministic Regeneration**: Passwords are recreated identically from your secret phrase
+- **Metadata Management**: Store only descriptions and verification keys
+- **Terminal Processing**: All cryptographic operations happen in your CLI
+- **On-Demand Discovery**: Passwords exist only when you generate them
 
 **What You Can Do:**
 1. **Create Smart Passwords**: Generate deterministic passwords from secret phrases
@@ -38,15 +50,15 @@
 9. **No GUI Dependencies**: Pure terminal interface for servers and remote systems
 
 **Key Features:**
-- ✅ **No Password Database**: Eliminates password storage completely
-- ✅ **Interactive Terminal UI**: Clean, centered text with visual framing
-- ✅ **Public Key Verification**: Verify secret knowledge without exposure
-- ✅ **List View**: See all your password metadata in clear lists
-- ✅ **Export/Import**: Backup and restore functionality with timestamped files
-- ✅ **Bulk Operations**: Clear all passwords with double confirmation
-- ✅ **Secure Hidden Input**: Hidden secret phrase entry via getpass
-- ✅ **No Dependencies**: Only Python standard library + smartpasslib
-- ✅ **Server Ready**: Perfect for headless systems and remote management
+- **No Password Database**: Eliminates password storage completely
+- **Interactive Terminal UI**: Clean, centered text with visual framing
+- **Public Key Verification**: Verify secret knowledge without exposure
+- **List View**: See all your password metadata in clear lists
+- **Export/Import**: Backup and restore functionality with timestamped files
+- **Bulk Operations**: Clear all passwords with double confirmation
+- **Secure Hidden Input**: Hidden secret phrase entry via getpass
+- **No Dependencies**: Only Python standard library + smartpasslib
+- **Server Ready**: Perfect for headless systems and remote management
 
 **Security Model:**
 - **Proof of Knowledge**: Verify you know a secret without storing it
@@ -57,24 +69,14 @@
 
 ---
 
-## ⚠️ Critical Notice
-
-**BEFORE USING THIS SOFTWARE, READ THE COMPLETE LEGAL DISCLAIMER BELOW**
-
-[View Legal Disclaimer & Liability Waiver](#-legal-disclaimer)
-
-*Usage of this software constitutes acceptance of all terms and conditions.*
-
----
-
-## 📚 Research Paradigms & Publications
+## Research Paradigms & Publications
 
 - **[Pointer-Based Security Paradigm](https://doi.org/10.5281/zenodo.17204738)** - Architectural Shift from Data Protection to Data Non-Existence
 - **[Local Data Regeneration Paradigm](https://doi.org/10.5281/zenodo.17264327)** - Ontological Shift from Data Transmission to Synchronous State Discovery
 
 ---
 
-## 🔬 Technical Foundation
+## Technical Foundation
 
 Powered by **[smartpasslib v2.2.0+](https://github.com/smartlegionlab/smartpasslib)** - The core library for deterministic password generation.
 
@@ -96,7 +98,7 @@ Powered by **[smartpasslib v2.2.0+](https://github.com/smartlegionlab/smartpassl
 
 ---
 
-## 📁 File Locations
+## File Locations
 
 Starting from v2.2.0, configuration files are stored in:
 
@@ -114,7 +116,7 @@ Starting from v2.2.0, configuration files are stored in:
 
 ---
 
-## 🆕 What's New in v2.2.0
+## What's New in v2.2.0
 
 ### Import/Export Functionality
 
@@ -151,7 +153,7 @@ Starting from v2.2.0, configuration files are stored in:
 
 ---
 
-## 📦 Installation & Quick Start
+## Installation & Quick Start
 
 ### Prerequisites
 - **Python 3.7+** required
@@ -193,7 +195,7 @@ pip install .
 
 ---
 
-## 🚀 Quick Usage Guide
+## Quick Usage Guide
 
 ### Launching the Application
 ```bash
@@ -268,7 +270,7 @@ python -m clipassman.clipassman
 
 ---
 
-## 📦 Windows Standalone Executable
+## Windows Standalone Executable
 
 ### Creating a Single-File *.exe
 
@@ -284,7 +286,7 @@ Build a standalone `clipassman.exe` that runs without Python installation:
 #### Step 2: Install Python
 1. Download Python installer from: https://python.org/downloads/
 2. Run installer
-3. **IMPORTANT:** Check ✅ "Add Python to PATH"
+3. **IMPORTANT:** Check "Add Python to PATH"
 4. Click "Install Now"
 
 #### Step 3: Open Command Prompt
@@ -340,7 +342,7 @@ pyinstaller --onefile --console --name "clipassman.exe" clipassman/clipassman.py
 
 ---
 
-## 🏗️ Core Components
+## Core Components
 
 ### Terminal Interface Features
 
@@ -404,7 +406,7 @@ password = SmartPasswordMaster.generate_smart_password(secret, length)
 
 ---
 
-## 💡 Advanced Usage
+## Advanced Usage
 
 ### Password Management Strategy
 
@@ -451,7 +453,7 @@ Avoid: "password123", "letmein", "123456"
 
 ---
 
-## 🔧 Ecosystem Integration
+## Ecosystem Integration
 
 ### Part of Smart Password Suite
 
@@ -492,28 +494,15 @@ Avoid: "password123", "letmein", "123456"
 
 ---
 
-## 📜 License
+## License
 
 **[BSD 3-Clause License](LICENSE)**
 
 Copyright (c) 2026, Alexander Suvorov
 
-```
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-```
-
 ---
 
-## 🆘 Support
+## Support
 
 - **CLI Manager Issues**: [GitHub Issues](https://github.com/smartlegionlab/clipassman/issues)
 - **Core Library Issues**: [smartpasslib Issues](https://github.com/smartlegionlab/smartpasslib/issues)
@@ -523,7 +512,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ---
 
-## ⚠️ Security Warnings
+## Security Warnings
 
 ### Secret Phrase Security
 
@@ -544,60 +533,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - Export files are plain JSON - store them securely
 - Treat exported metadata as sensitive information
 - Timestamped exports help maintain backup history
-
----
-
-## 📄 Legal Disclaimer
-
-**COMPLETE AND ABSOLUTE RELEASE FROM ALL LIABILITY**
-
-**SOFTWARE PROVIDED "AS IS" WITHOUT ANY WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.**
-
-The copyright holder, contributors, and any associated parties **EXPLICITLY DISCLAIM AND DENY ALL RESPONSIBILITY AND LIABILITY** for:
-
-1. **ANY AND ALL DATA LOSS**: Complete or partial loss of passwords, accounts, credentials, cryptographic keys, or any data whatsoever
-2. **ANY AND ALL SECURITY INCIDENTS**: Unauthorized access, data breaches, account compromises, theft, or exposure of sensitive information
-3. **ANY AND ALL FINANCIAL LOSSES**: Direct, indirect, incidental, special, consequential, or punitive damages of any kind
-4. **ANY AND ALL OPERATIONAL DISRUPTIONS**: Service interruptions, account lockouts, authentication failures, or denial of service
-5. **ANY AND ALL IMPLEMENTATION ISSUES**: Bugs, errors, vulnerabilities, misconfigurations, or incorrect usage
-6. **ANY AND ALL LEGAL OR REGULATORY CONSEQUENCES**: Violations of laws, regulations, compliance requirements, or terms of service
-7. **ANY AND ALL PERSONAL OR BUSINESS DAMAGES**: Reputational harm, business interruption, loss of revenue, or any other damages
-8. **ANY AND ALL THIRD-PARTY CLAIMS**: Claims made by any other parties affected by software usage
-
-**USER ACCEPTS FULL AND UNCONDITIONAL RESPONSIBILITY**
-
-By installing, accessing, or using this software in any manner, you irrevocably agree that:
-
-- You assume **ALL** risks associated with software usage
-- You bear **SOLE** responsibility for secret phrase management and security
-- You accept **COMPLETE** responsibility for all testing and validation
-- You are **EXCLUSIVELY** liable for compliance with all applicable laws
-- You accept **TOTAL** responsibility for any and all consequences
-- You **PERMANENTLY AND IRREVOCABLY** waive, release, and discharge all claims against the copyright holder, contributors, distributors, and any associated entities
-
-**NO WARRANTY OF ANY KIND**
-
-This software comes with **ABSOLUTELY NO GUARANTEES** regarding:
-- Security effectiveness or cryptographic strength
-- Reliability or availability
-- Fitness for any particular purpose
-- Accuracy or correctness
-- Freedom from defects or vulnerabilities
-
-**NOT A SECURITY PRODUCT OR SERVICE**
-
-This is experimental software. It is not:
-- Security consultation or advice
-- A certified cryptographic product
-- A guaranteed security solution
-- Professional security software
-- Endorsed by any security authority
-
-**FINAL AND BINDING AGREEMENT**
-
-Usage of this software constitutes your **FULL AND UNCONDITIONAL ACCEPTANCE** of this disclaimer. If you do not accept **ALL** terms and conditions, **DO NOT USE THE SOFTWARE.**
-
-**BY PROCEEDING, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS DISCLAIMER IN ITS ENTIRETY, UNDERSTAND ITS TERMS COMPLETELY, AND ACCEPT THEM WITHOUT RESERVATION OR EXCEPTION.**
 
 ---
 
@@ -714,19 +649,6 @@ Choose an action: 5
 ------------------------------------- Help -------------------------------------
 
         CLIPASSMAN v2.2.0 - Console Smart Password Manager
-
-        BREAKING CHANGES WARNING:
-        • Login parameter completely removed
-        • Now uses ONLY secret phrase
-        • All v1.x passwords are INVALID
-        • Old password metadata cannot be migrated
-
-        MIGRATION REQUIRED:
-        If you have old passwords from v1.x:
-        1. Recover them using v1.x version
-        2. Generate new ones here with your secret phrases
-        3. Update all accounts with new passwords
-        4. Securely delete old password records
 
         HOW IT WORKS:
         1. Provide a secret phrase

@@ -60,19 +60,6 @@ class AppManager:
         print(f"""
         CLIPASSMAN {self._config.version} - Console Smart Password Manager
 
-        BREAKING CHANGES WARNING:
-        • Login parameter completely removed
-        • Now uses ONLY secret phrase
-        • All v1.x passwords are INVALID
-        • Old password metadata cannot be migrated
-
-        MIGRATION REQUIRED:
-        If you have old passwords from v1.x:
-        1. Recover them using v1.x version
-        2. Generate new ones here with your secret phrases
-        3. Update all accounts with new passwords
-        4. Securely delete old password records
-
         HOW IT WORKS:
         1. Provide a secret phrase
         2. System generates a public key from the secret
