@@ -28,8 +28,6 @@
 
 ---
 
----
-
 ## **Core Principles:**
 
 - **Zero-Password Storage**: No passwords are ever stored or transmitted
