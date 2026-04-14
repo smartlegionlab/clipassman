@@ -30,7 +30,8 @@ class AppManager:
 
     def main_menu(self):
         while True:
-            self._smart_printer.print_center(text=f'Main Menu | Total passwords: {self._manager.password_count}', symbol='-')
+            self._smart_printer.print_center(text=f'Main Menu | Total passwords: {self._manager.password_count}',
+                                             symbol='-')
             print(f'1: Add Password')
             print(f'2: Get/Delete Password')
             print(f'3: Export/Import Passwords')
@@ -61,7 +62,7 @@ class AppManager:
         CLIPASSMAN {self._config.version} - Console Smart Password Manager
 
         HOW IT WORKS:
-        1. Provide a secret phrase
+        1. Provide a secret phrase (minimum 12 characters)
         2. System generates a public key from the secret
         3. Password is generated deterministically
         4. Same secret + same length = same password every time
@@ -72,12 +73,13 @@ class AppManager:
 
         SECURITY NOTES:
         • Passwords are NEVER stored anywhere
+        • Secret phrases must be at least 12 characters
         • Case-sensitive secret phrases
         • Lost secret phrase = permanently lost passwords
         • Public key can be stored for verification
-        
+
         For more information, visit the project page on GitHub: {self._config.url}
-        
+
         """)
         self._smart_printer.print_framed(f'Complete documentation: {self._config.help_url}')
         self._smart_printer.print_center()
@@ -89,6 +91,15 @@ class AppManager:
             description = self._get_description()
             secret = self._get_secret(secure_flag=True)
             length = self._get_password_length()
+
+            if len(secret) < 12:
+                self._smart_printer.print_center(text="WARNING!")
+                print(f"Secret phrase must be at least 12 characters.")
+                print(f"Current length: {len(secret)} characters.")
+                print("\nPlease use a longer, more secure secret phrase.")
+                print("Example: 'MyCat🐱Hippo2026' or 'P@ssw0rd!LongSecret'")
+                self._continue()
+                continue
 
             try:
                 public_key = self._master.generate_public_key(secret=secret)
@@ -172,6 +183,15 @@ class AppManager:
         print(f'Length: {smart_pass.length} characters')
 
         secret = getpass.getpass("Enter secret phrase (hidden): ")
+
+        if len(secret) < 12:
+            self._show_error(
+                title='Secret Too Short',
+                text='Secret phrase must be at least 12 characters.\n'
+                     f'Current length: {len(secret)} characters.\n'
+                     'Please use the correct secret phrase.'
+            )
+            return
 
         try:
             is_valid = self._master.check_public_key(
@@ -273,11 +293,13 @@ class AppManager:
     def _get_secret(self, secure_flag=True):
         secret = ''
         while not secret:
-            print("\nIMPORTANT: Your secret phrase:")
+            print("\nIMPORTANT: Your secret phrase (minimum 12 characters):")
             print("• Is case-sensitive")
             print("• Should be memorable but secure")
             print("• Will generate the same password every time")
-            print("• Is never stored - only the hash is saved\n")
+            print("• Is never stored - only the hash is saved")
+            print("\nGood examples: 'MyCat🐱Hippo2026' or 'P@ssw0rd!LongSecret'")
+            print("Bad examples: 'password123', 'qwerty', 'mysecret'\n")
 
             if secure_flag:
                 secret = getpass.getpass("Enter secret phrase (hidden): ")
@@ -286,6 +308,12 @@ class AppManager:
 
             if not secret:
                 print('Error: Secret phrase cannot be empty')
+                self._continue()
+                continue
+
+            if len(secret) < 12:
+                print(f'Error: Secret phrase must be at least 12 characters (current: {len(secret)})')
+                secret = ''
                 self._continue()
                 continue
 
@@ -304,11 +332,11 @@ class AppManager:
     def _get_password_length(self):
         while True:
             try:
-                length = input('Enter password length (4-100): ')
+                length = input('Enter password length (12-100, recommended 16-24): ')
                 length = int(length)
 
-                if length < 4:
-                    print('Error: Minimum length is 4 characters')
+                if length < 12:
+                    print('Error: Minimum password length is 12 characters for security')
                     continue
                 elif length > 100:
                     print('Error: Maximum length is 100 characters')

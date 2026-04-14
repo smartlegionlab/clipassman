@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v3.0.0</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v3.0.1</sup>
 
 ---
 
@@ -32,7 +32,7 @@
 
 ## 🔄 Important: smartpasslib v3.0.0 Breaking Change
 
-> **⚠️ This release (v3.0.0) uses [smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.0.0, which is NOT backward compatible with v2.x.x**
+> **⚠️ This release (v3.0.1) uses [smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.0.0, which is NOT backward compatible with v2.x.x**
 
 ### Why the change?
 
@@ -46,8 +46,8 @@
 ### What changed:
 
 - The core password generation algorithm has been completely redesigned
-- Passwords created with v2.2.2 or earlier **cannot be regenerated** using v3.0.0
-- Old metadata (`passwords.json`) will produce **different passwords** if used with v3.0.0
+- Passwords created with v2.2.2 or earlier **cannot be regenerated** using v3.0.1
+- Old metadata (`passwords.json`) will produce **different passwords** if used with v3.0.1
 
 ### What you need to do:
 
@@ -113,11 +113,11 @@ Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.0
 
 > ⚠️ **BREAKING CHANGE NOTICE**  
 > **smartpasslib v3.0.0 is NOT backward compatible with v2.x.x**  
-> Passwords generated with v2.x.x cannot be regenerated using v3.0.0 due to fundamental changes in the deterministic generation algorithm.
+> Passwords generated with v2.x.x cannot be regenerated using v3.0.1 due to fundamental changes in the deterministic generation algorithm.
 
 **What this means for you:**
 - All passwords created with **v2.2.2 or earlier** must be **regenerated** after upgrading
-- Old metadata (`passwords.json`) remains readable but will produce **different passwords** if used with v3.0.0
+- Old metadata (`passwords.json`) remains readable but will produce **different passwords** if used with v3.0.1
 - You have two options:
   1. **Before upgrading** — manually retrieve and save all passwords from old version
   2. **After upgrading** — re-enter your secret phrases and recreate each entry with correct passwords
@@ -134,7 +134,7 @@ Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.0
 - Service description
 - Password length parameter
 
-**Export format**: Same JSON structure, but v3.0.0 exports are **incompatible** with older versions. Always note which version created the export.
+**Export format**: Same JSON structure, but v3.0.1 exports are **incompatible** with older versions. Always note which version created the export.
 
 **Security model**: Proof of secret knowledge without secret storage or password transmission.
 
@@ -142,7 +142,7 @@ Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.0
 
 ## File Locations
 
-Starting from v3.0.0, configuration files are stored in:
+Starting from v3.0.1, configuration files are stored in:
 
 | Platform | Configuration Path |
 |----------|-------------------|
@@ -160,7 +160,7 @@ Starting from v3.0.0, configuration files are stored in:
 
 ## Migration Section
 
-### Migrating from v2.x.x to v3.0.0
+### Migrating from v2.x.x to v3.0.1
 
 **⚠️ Before upgrading — follow these steps carefully**
 
@@ -178,10 +178,10 @@ Starting from v3.0.0, configuration files are stored in:
 - Choose **1: Export passwords to file**
 - Save the JSON file as `passwords_v2_backup.json`
 
-**Step 3: Upgrade to v3.0.0**
+**Step 3: Upgrade to v3.0.1**
 ```bash
 # Update via pip
-pip install clipassman==3.0.0
+pip install clipassman==3.0.1
 
 # Or update smartpasslib
 pip install smartpasslib==3.0.0
@@ -194,20 +194,26 @@ pip install smartpasslib==3.0.0
 - Option B: Keep metadata but manually verify each password (not recommended — easy to make mistakes)
 
 **Step 5: Update passwords in all your services**
-- After regenerating passwords with v3.0.0, update them in each website/service
+- After regenerating passwords with v3.0.1, update them in each website/service
 - Test login before removing old access
 
-**Important**: v2.x.x and v3.0.0 cannot share the same metadata file. Keep them completely separate.
+**Important**: v2.x.x and v3.0.1 cannot share the same metadata file. Keep them completely separate.
 
 ---
 
-## What's New in v3.0.0
+## What's New in v3.0.1
 
 ### Breaking Change: smartpasslib v3.0.0
 
 - **New cryptographic algorithm** — stronger and faster password generation
 - **NOT backward compatible** with v2.x.x — all passwords must be regenerated
 - **See migration section above** for detailed upgrade instructions
+
+### Secret Phrase Requirements
+
+- **Minimum 12 characters** enforced for all secret phrases
+- **Password length minimum increased** from 4 to 12 characters
+- **Better security guidance** with strong/weak examples
 
 ### Import/Export Functionality (from v2.2.2)
 
@@ -262,10 +268,10 @@ python clipassman/clipassman.py
 ### Quick Installation
 ```bash
 # Install from PyPI
-pip install clipassman==3.0.0
+pip install clipassman==3.0.1
 
 # For systems with package conflicts
-pip install clipassman==3.0.0 --break-system-packages
+pip install clipassman==3.0.1 --break-system-packages
 
 # Verify installation
 clipassman
@@ -301,9 +307,10 @@ python -m clipassman.clipassman
 1. Launch `clipassman`
 2. Select option **1: Add Password**
 3. Enter service description (e.g., "GitHub Account")
-4. Enter your secret phrase (never shared or stored)
+4. Enter your secret phrase (minimum 12 characters, never stored)
+   - Good examples: `"MyCat🐱Hippo2026"` or `"P@ssw0rd!LongSecret"`
 5. Confirm your secret phrase
-6. Set password length (4-100 characters)
+6. Set password length (12-100 characters, 16-24 recommended)
 7. Password is generated and displayed
 8. Save it securely (not stored by system)
 
@@ -440,8 +447,8 @@ pyinstaller --onefile --console --name "clipassman.exe" clipassman/clipassman.py
 **Main Menu:**
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v3.0.0 ***********************
-******************************* Version: v3.0.0 ********************************
+********************** Smart Password Manager CLI v3.0.1 ***********************
+******************************* Version: v3.0.1 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -455,8 +462,8 @@ Choose an action:
 
 **Password Creation:**
 - Description input with validation
-- Secret phrase entry with confirmation
-- Password length selection (4-100 characters)
+- Secret phrase entry with confirmation (minimum 12 characters)
+- Password length selection (12-100 characters)
 - Public key generation and display
 - Generated password display
 
@@ -494,6 +501,7 @@ password = SmartPasswordMaster.generate_smart_password(secret, length)
 - Case-sensitive secret validation
 - Duplicate detection prevention
 - Input sanitization and validation
+- **Minimum 12 character enforcement**
 
 ---
 
@@ -513,25 +521,40 @@ Length Strategy:
 - Critical accounts: 20-24 characters
 - Important accounts: 16-20 characters
 - General accounts: 12-16 characters
-- Temporary accounts: 8-12 characters
+- Temporary accounts: 12-16 characters
 ```
 
 ### Secret Phrase Management
 
-**Best Practices:**
+**Your secret phrase is the only key to all your passwords. Keep it safe, keep it secret.**
+
+#### Minimum Requirements (enforced by the app):
+- **At least 12 characters** — shorter secrets are not accepted
+- **Case-sensitive** — "MySecret" and "mysecret" are different
+
+#### Strong Secret Examples:
+```
+✅ "MyCat🐱Hippo2026"        — emoji + mixed case + numbers
+✅ "P@ssw0rd!LongSecret"     — special chars + numbers + length
+✅ "КотБегемот2026НаДиете"   — Cyrillic + numbers
+✅ "Correct-Horse-Battery-42" — memorable phrase with separator
+```
+
+#### Weak Secret Examples (avoid):
+```
+❌ "password"                — dictionary word, too short
+❌ "1234567890"              — only digits, too short
+❌ "qwerty123"               — keyboard pattern
+❌ "mysecret"                — common phrase, too short
+```
+
+#### Best Practices:
 1. **Unique per service** - Different secret for each account type
-2. **Memorable but complex** - Phrases you can remember but others can't guess
-3. **Case-sensitive** - v3.0.0 enforces exact case matching
-4. **No digital storage** - Keep only in memory or physical backup
+2. **Memorable but complex** - Phrases you can remember
+3. **Case-sensitive** - v3.0.1 enforces exact case matching
+4. **No digital storage** - Keep only in memory
 5. **Backup plan** - Physical written backup in secure location
 6. **Export regularly** - Backup metadata after adding new passwords
-
-**Example Secret Phrases:**
-```
-Good: "MyFavoriteCoffeeShop@2025#Boston"
-Good: "PurpleElephantsDanceInMoonlight42"
-Avoid: "password123", "letmein", "123456"
-```
 
 ### Backup Strategy
 
@@ -589,8 +612,8 @@ Avoid: "password123", "letmein", "123456"
 
 | Version | smartpasslib | Status | Migration Required |
 |---------|--------------|--------|---------------------|
-| v2.2.2 and below | v2.x.x | ❌ Deprecated/Unsupported | Must migrate to v3.0.0 |
-| v3.0.0+ | v3.0.0 | ✅ Current | N/A |
+| v2.2.2 and below | v2.x.x | ❌ Deprecated/Unsupported | Must migrate to v3.0.1 |
+| v3.0.1+ | v3.0.0 | ✅ Current | N/A |
 
 ---
 
@@ -626,6 +649,18 @@ Copyright (c) 2026, Alexander Suvorov
 
 **Critical**: Test password regeneration with non-essential accounts before production use
 
+### Secret Phrase Strength
+
+**The security of your passwords depends entirely on your secret phrase.**
+
+- **Minimum 12 characters** is enforced by the application
+- Short secrets (under 12 chars) are **automatically rejected**
+- Weak secrets like "password123" or "qwerty" will be rejected
+- Use a mix of: uppercase, lowercase, numbers, symbols, emoji, or Cyrillic
+- A 12-character secret with diverse character types provides **practical brute-force immunity**
+
+**Remember:** The app cannot recover your secret phrase. If you lose it, all passwords are permanently lost.
+
 ### Export/Import Security Notes
 
 - Export files contain ONLY metadata (public keys, descriptions, lengths)
@@ -636,7 +671,7 @@ Copyright (c) 2026, Alexander Suvorov
 
 ---
 
-**Version**: 3.0.0 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
+**Version**: 3.0.1 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
 
 ---
 
@@ -647,8 +682,8 @@ Copyright (c) 2026, Alexander Suvorov
 ### Main Interface
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v3.0.0 ***********************
-******************************* Version: v3.0.0 ********************************
+********************** Smart Password Manager CLI v3.0.1 ***********************
+******************************* Version: v3.0.1 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -663,22 +698,25 @@ Enter a descriptive name for this password (e.g., "GitHub Account")
 -------------------------------------------------------------------
 Description: Account 1
 
-IMPORTANT: Your secret phrase:
+IMPORTANT: Your secret phrase (minimum 12 characters):
 • Is case-sensitive
 • Should be memorable but secure
 • Will generate the same password every time
 • Is never stored - only the hash is saved
 
+Good examples: 'MyCat🐱Hippo2026' or 'P@ssw0rd!LongSecret'
+Bad examples: 'password123', 'qwerty', 'mysecret'
+
 Enter secret phrase (hidden): 
 Confirm secret phrase (hidden): 
-Enter password length (4-100): 16
+Enter password length (12-100, recommended 16-24): 16
 --------------------------------------------------------------------------------
 ✓ Password metadata added successfully!
 Description: Account 1
 Length: 16 characters
-Public Key: d8295cdc1a8e3094...bb4b558bf7d70b4b
+Public Key: 9e279e242cbfd802...2d1d6c79c3dfa348
 --------------------------- Your generated password: ---------------------------
-wcJjBKIhsgV%!6Iq
+lklkVJxrHffoT@5E
 --------------------------------------------------------------------------------
 
 Press Enter to continue... 
@@ -689,55 +727,38 @@ Press Enter to continue...
 4: Clear All Passwords
 5: Help
 0: Exit
-Choose an action: 3
------------------------------- Export/Import Menu ------------------------------
-1: Export passwords to file
-2: Import passwords from file
-0: ← Back to Main Menu
-Choose an action: 1
-------------------------------- Export Passwords -------------------------------
-Total passwords: 1
-Default filename: passwords_export_20260218_124959.json
-Enter filename (or press Enter for default): 
-
-Export format:
-1: Pretty JSON (readable, with indentation)
-2: Minified JSON (smaller size)
-Choose format (1/2): 1
-Include export metadata (timestamp, version)? (y/n): y
---------------------------------------------------------------------------------
-✓ Successfully exported 1 passwords to:
-  passwords_export_20260218_124959.json
-
-Press Enter to continue... 
------------------------------- Export/Import Menu ------------------------------
-1: Export passwords to file
-2: Import passwords from file
-0: ← Back to Main Menu
 Choose an action: 2
-------------------------------- Import Passwords -------------------------------
-Current passwords: 1
-Enter filename to import: /home/user/passwords_export_20260218_124959.json
-
-Export metadata:
-  Date: 2026-02-18T12:50:18.597439
-  App version: 3.0.0
-  Passwords in file: 1
-
-Found 1 passwords in file
-
-Proceed with import? (y/n): y
+-------------------------------- Password List: --------------------------------
+1. Account 1 (16 chars)
+0. ← Back
+Select entry: 1
 --------------------------------------------------------------------------------
-✓ Import completed:
-  • Added: 0 new passwords
-  • Skipped (already exist): 1
+Selected: Account 1
+Length: 16 characters
+1: Get password
+2: Delete entry
+0: ← Back
+Select action: 1
+--------------------------- Retrieve Smart Password ----------------------------
+Description: Account 1
+Length: 16 characters
+Enter secret phrase (hidden): 
+----------------------------- Generated Password: ------------------------------
+lklkVJxrHffoT@5E
+--------------------------------------------------------------------------------
 
 Press Enter to continue... 
------------------------------- Export/Import Menu ------------------------------
-1: Export passwords to file
-2: Import passwords from file
-0: ← Back to Main Menu
-Choose an action: 0
+--------------------------------------------------------------------------------
+Selected: Account 1
+Length: 16 characters
+1: Get password
+2: Delete entry
+0: ← Back
+Select action: 0
+-------------------------------- Password List: --------------------------------
+1. Account 1 (16 chars)
+0. ← Back
+Select entry: 0
 ------------------------ Main Menu | Total passwords: 1 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -748,10 +769,10 @@ Choose an action: 0
 Choose an action: 5
 ------------------------------------- Help -------------------------------------
 
-        CLIPASSMAN v3.0.0 - Console Smart Password Manager
+        CLIPASSMAN v3.0.1 - Console Smart Password Manager
 
         HOW IT WORKS:
-        1. Provide a secret phrase
+        1. Provide a secret phrase (minimum 12 characters)
         2. System generates a public key from the secret
         3. Password is generated deterministically
         4. Same secret + same length = same password every time
@@ -762,12 +783,13 @@ Choose an action: 5
 
         SECURITY NOTES:
         • Passwords are NEVER stored anywhere
+        • Secret phrases must be at least 12 characters
         • Case-sensitive secret phrases
         • Lost secret phrase = permanently lost passwords
         • Public key can be stored for verification
-        
+
         For more information, visit the project page on GitHub: https://github.com/smartlegionlab/clipassman
-        
+
         
 ----------------------------------------------------------------------
 Complete documentation: https://github.com/smartlegionlab/smartpasslib
@@ -786,6 +808,8 @@ Choose an action: 0
 ----------------- https://github.com/smartlegionlab/clipassman -----------------
 --------------------- Copyright © 2026, Alexander Suvorov ----------------------
 ================================================================================
+
+
 ```
 
 ---
