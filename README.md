@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v2.2.2</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v3.0.0</sup>
 
 ---
 
@@ -27,6 +27,37 @@
 **Summary:** Software provided "AS IS" without warranty. You assume all risks.
 
 **Full legal disclaimer:** See [DISCLAIMER.md](https://github.com/smartlegionlab/clipassman/blob/master/DISCLAIMER.md)
+
+---
+
+## 🔄 Important: smartpasslib v3.0.0 Breaking Change
+
+> **⚠️ This release (v3.0.0) uses [smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.0.0, which is NOT backward compatible with v2.x.x**
+
+### Why the change?
+
+**Smartpasslib v3.0.0 introduces fundamental improvements:**
+- **Stronger cryptographic algorithm** — enhanced deterministic generation with better entropy distribution
+- **Improved performance** — faster password generation, especially for longer passwords
+- **Better cross-platform consistency** — identical results guaranteed across all platforms
+- **Extended character set support** — wider range of special characters for stronger passwords
+- **Future-proof architecture** — easier updates and security patches
+
+### What changed:
+
+- The core password generation algorithm has been completely redesigned
+- Passwords created with v2.2.2 or earlier **cannot be regenerated** using v3.0.0
+- Old metadata (`passwords.json`) will produce **different passwords** if used with v3.0.0
+
+### What you need to do:
+
+1. **Before upgrading** — retrieve and save all your existing passwords from the old version
+2. **After upgrading** — recreate each password using the same secret phrases + lengths
+3. **Update** your passwords on all websites/services
+
+**No automatic migration** — you must manually regenerate every password.
+
+📖 **Full migration instructions** → see [Migration Section](#migration-section)
 
 ---
 
@@ -78,11 +109,22 @@
 
 ## Technical Foundation
 
-Powered by **[smartpasslib v2.2.0+](https://github.com/smartlegionlab/smartpasslib)** - The core library for deterministic password generation.
+Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.0.0+** — The core library for deterministic password generation.
 
-**Key principle**: Instead of storing passwords, you store verification metadata. The actual password is regenerated on-demand from your secret phrase.
+> ⚠️ **BREAKING CHANGE NOTICE**  
+> **smartpasslib v3.0.0 is NOT backward compatible with v2.x.x**  
+> Passwords generated with v2.x.x cannot be regenerated using v3.0.0 due to fundamental changes in the deterministic generation algorithm.
 
-**What's NOT stored**:
+**What this means for you:**
+- All passwords created with **v2.2.2 or earlier** must be **regenerated** after upgrading
+- Old metadata (`passwords.json`) remains readable but will produce **different passwords** if used with v3.0.0
+- You have two options:
+  1. **Before upgrading** — manually retrieve and save all passwords from old version
+  2. **After upgrading** — re-enter your secret phrases and recreate each entry with correct passwords
+
+**Key principle** (unchanged): Instead of storing passwords, you store verification metadata. The actual password is regenerated on-demand from your secret phrase.
+
+**What's NOT stored** (unchanged):
 - Your secret phrase
 - The actual password
 - Any reversible password data
@@ -92,7 +134,7 @@ Powered by **[smartpasslib v2.2.0+](https://github.com/smartlegionlab/smartpassl
 - Service description
 - Password length parameter
 
-**Export format**: Same JSON structure, can be backed up and restored across different machines running the same software version.
+**Export format**: Same JSON structure, but v3.0.0 exports are **incompatible** with older versions. Always note which version created the export.
 
 **Security model**: Proof of secret knowledge without secret storage or password transmission.
 
@@ -100,7 +142,7 @@ Powered by **[smartpasslib v2.2.0+](https://github.com/smartlegionlab/smartpassl
 
 ## File Locations
 
-Starting from v2.2.2, configuration files are stored in:
+Starting from v3.0.0, configuration files are stored in:
 
 | Platform | Configuration Path |
 |----------|-------------------|
@@ -116,9 +158,58 @@ Starting from v2.2.2, configuration files are stored in:
 
 ---
 
-## What's New in v2.2.2
+## Migration Section
 
-### Import/Export Functionality
+### Migrating from v2.x.x to v3.0.0
+
+**⚠️ Before upgrading — follow these steps carefully**
+
+**Step 1: Document your existing passwords**
+- Open your current CLIPassMan (v2.2.2 or earlier)
+- For each service, retrieve the password using your secret phrase
+- Save passwords in a secure temporary location (e.g., encrypted note)
+
+**Alternative method (more secure but manual):**
+- Write down for each service: **Service description + Secret phrase + Length**
+- After upgrading, you'll manually recreate entries and update passwords in services
+
+**Step 2: Export old metadata (optional backup)**
+- Select option **3: Export/Import Passwords**
+- Choose **1: Export passwords to file**
+- Save the JSON file as `passwords_v2_backup.json`
+
+**Step 3: Upgrade to v3.0.0**
+```bash
+# Update via pip
+pip install clipassman==3.0.0
+
+# Or update smartpasslib
+pip install smartpasslib==3.0.0
+
+# Or rebuild executable with new version
+```
+
+**Step 4: Migrate your data**
+- Option A: Start fresh — delete old `passwords.json` and add entries manually
+- Option B: Keep metadata but manually verify each password (not recommended — easy to make mistakes)
+
+**Step 5: Update passwords in all your services**
+- After regenerating passwords with v3.0.0, update them in each website/service
+- Test login before removing old access
+
+**Important**: v2.x.x and v3.0.0 cannot share the same metadata file. Keep them completely separate.
+
+---
+
+## What's New in v3.0.0
+
+### Breaking Change: smartpasslib v3.0.0
+
+- **New cryptographic algorithm** — stronger and faster password generation
+- **NOT backward compatible** with v2.x.x — all passwords must be regenerated
+- **See migration section above** for detailed upgrade instructions
+
+### Import/Export Functionality (from v2.2.2)
 
 - **Export passwords**: Save your password metadata to JSON file with timestamp
 - **Import passwords**: Restore from previously exported files
@@ -129,22 +220,22 @@ Starting from v2.2.2, configuration files are stored in:
 - **Statistics**: Clear feedback on added/skipped/invalid entries
 - **Filename suggestions**: Auto-generated timestamps prevent overwrites
 
-### Configuration Migration
+### Configuration Migration (from v2.2.2)
 
-- **New config location**: Now uses `~/.config/smart_password_manager/passwords.json`
+- **New config location**: Uses `~/.config/smart_password_manager/passwords.json`
 - **Automatic migration**: Old `~/.cases.json` files are auto-migrated on first run
 - **Cross-platform paths**: Works on Linux, macOS, and Windows
 - **Safe backup**: Original file preserved as `.cases.json.bak`
 
-### Improved Terminal UI
+### Improved Terminal UI (from v2.2.2)
 
-- **New menu option**: Export/Import in main menu (option 3)
+- **Export/Import menu**: Dedicated option in main menu (option 3)
 - **Better feedback**: Clear statistics after import
 - **Format selection**: Choose JSON format during export
 - **Filename suggestions**: Auto-generated timestamps
 - **Consistent visual styling** throughout the application
 
-### Security Improvements
+### Security Improvements (from v2.2.2)
 
 - **Stronger public key verification** using enhanced cryptographic methods
 - **Better input validation** with clear error messages
@@ -171,10 +262,10 @@ python clipassman/clipassman.py
 ### Quick Installation
 ```bash
 # Install from PyPI
-pip install clipassman
+pip install clipassman==3.0.0
 
 # For systems with package conflicts
-pip install clipassman --break-system-packages
+pip install clipassman==3.0.0 --break-system-packages
 
 # Verify installation
 clipassman
@@ -312,7 +403,7 @@ python -m venv venv
 ```cmd
 # Install PyInstaller in virtual environment
 pip install pyinstaller
-pip install smartpasslib>=2.2.0
+pip install smartpasslib==3.0.0
 ```
 
 #### Step 6: Build Executable
@@ -349,8 +440,8 @@ pyinstaller --onefile --console --name "clipassman.exe" clipassman/clipassman.py
 **Main Menu:**
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.2.2 ***********************
-******************************* Version: v2.2.2 ********************************
+********************** Smart Password Manager CLI v3.0.0 ***********************
+******************************* Version: v3.0.0 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -430,7 +521,7 @@ Length Strategy:
 **Best Practices:**
 1. **Unique per service** - Different secret for each account type
 2. **Memorable but complex** - Phrases you can remember but others can't guess
-3. **Case-sensitive** - v2.2.2 enforces exact case matching
+3. **Case-sensitive** - v3.0.0 enforces exact case matching
 4. **No digital storage** - Keep only in memory or physical backup
 5. **Backup plan** - Physical written backup in secure location
 6. **Export regularly** - Backup metadata after adding new passwords
@@ -467,7 +558,7 @@ Avoid: "password123", "letmein", "123456"
 - **[CLI Smart Password Generator](https://github.com/smartlegionlab/clipassgen/)** - Terminal-based password generation only
 
 **Web Interface:**
-- **[Web Smart Password Manager](https://github.com/smartlegionlab/smart-password-manager)** - Browser-based access
+- **[Web Smart Password Manager](https://github.com/smartlegionlab/smart-password-manager-web)** - Browser-based access
 
 ### Data Compatibility
 - Uses same `~/.config/smart_password_manager/passwords.json` format as desktop manager
@@ -491,6 +582,15 @@ Avoid: "password123", "letmein", "123456"
 - Better visual feedback
 - Mouse support
 - Context menu for quick actions
+
+---
+
+## Version History
+
+| Version | smartpasslib | Status | Migration Required |
+|---------|--------------|--------|---------------------|
+| v2.2.2 and below | v2.x.x | ❌ Deprecated/Unsupported | Must migrate to v3.0.0 |
+| v3.0.0+ | v3.0.0 | ✅ Current | N/A |
 
 ---
 
@@ -536,7 +636,7 @@ Copyright (c) 2026, Alexander Suvorov
 
 ---
 
-**Version**: 2.2.2 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
+**Version**: 3.0.0 | [**Author**](https://smartlegionlab.ru): [Alexander Suvorov](https://alexander-suvorov.ru)
 
 ---
 
@@ -547,8 +647,8 @@ Copyright (c) 2026, Alexander Suvorov
 ### Main Interface
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v2.2.2 ***********************
-******************************* Version: v2.2.2 ********************************
+********************** Smart Password Manager CLI v3.0.0 ***********************
+******************************* Version: v3.0.0 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -621,7 +721,7 @@ Enter filename to import: /home/user/passwords_export_20260218_124959.json
 
 Export metadata:
   Date: 2026-02-18T12:50:18.597439
-  App version: 2.2.2
+  App version: 3.0.0
   Passwords in file: 1
 
 Found 1 passwords in file
@@ -648,7 +748,7 @@ Choose an action: 0
 Choose an action: 5
 ------------------------------------- Help -------------------------------------
 
-        CLIPASSMAN v2.2.2 - Console Smart Password Manager
+        CLIPASSMAN v3.0.0 - Console Smart Password Manager
 
         HOW IT WORKS:
         1. Provide a secret phrase
@@ -687,3 +787,6 @@ Choose an action: 0
 --------------------- Copyright © 2026, Alexander Suvorov ----------------------
 ================================================================================
 ```
+
+---
+
