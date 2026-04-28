@@ -59,28 +59,40 @@ class AppManager:
     def _help(self):
         self._smart_printer.print_center('Help')
         print(f"""
-        CLIPASSMAN {self._config.version} - Console Smart Password Manager
+    CLIPASSMAN {self._config.version} - Console Smart Password Manager
 
-        HOW IT WORKS:
-        1. Provide a secret phrase (minimum 12 characters)
-        2. System generates a public key from the secret
-        3. Password is generated deterministically
-        4. Same secret + same length = same password every time
+    DECENTRALIZED BY DESIGN:
+    • No cloud, no database, no trust required
+    • Your secrets never leave your device
+    • There is no "forgot password" button — you are in complete control
+    • Metadata can be synced via any channel (USB, cloud, even paper)
 
-        To retrieve a password:
-        1. Enter the same secret phrase
-        2. Password is regenerated identically
+    HOW IT WORKS:
+    1. Provide a secret phrase (minimum 12 characters)
+    2. System generates a public key from the secret
+    3. Password is generated deterministically
+    4. Same secret + same length = same password across all platforms
 
-        SECURITY NOTES:
-        • Passwords are NEVER stored anywhere
-        • Secret phrases must be at least 12 characters
-        • Case-sensitive secret phrases
-        • Lost secret phrase = permanently lost passwords
-        • Public key can be stored for verification
+    To retrieve a password:
+    1. Enter the same secret phrase
+    2. Password is regenerated identically
 
-        For more information, visit the project page on GitHub: {self._config.url}
+    SECURITY NOTES:
+    • Passwords are NEVER stored anywhere
+    • Secret phrases must be at least 12 characters
+    • Case-sensitive secret phrases
+    • Lost secret phrase = permanently lost passwords
+    • Public key can be stored for verification
 
-        """)
+    CROSS-PLATFORM COMPATIBILITY:
+    Same secret + same length = identical passwords on:
+    • Python (Desktop, CLI)
+    • C# (Desktop, CLI)
+    • Web, Android, and all smartpasslib implementations
+
+    For more information, visit the project page on GitHub: {self._config.url}
+
+    """)
         self._smart_printer.print_framed(f'Complete documentation: {self._config.help_url}')
         self._smart_printer.print_center()
         self._continue()
