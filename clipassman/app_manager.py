@@ -16,7 +16,6 @@ class AppManager:
     def _show_logo(self):
         self._smart_printer.print_center(symbol='*')
         self._smart_printer.print_center(text=self._config.name, symbol='*')
-        self._smart_printer.print_center(text=f"Version: {self._config.version}", symbol='*')
 
     def _show_footer(self):
         self._smart_printer.print_center(text=self._config.url, symbol='-')
@@ -59,40 +58,43 @@ class AppManager:
     def _help(self):
         self._smart_printer.print_center('Help')
         print(f"""
-    CLIPASSMAN {self._config.version} - Console Smart Password Manager
+CLIPASSMAN {self._config.version} - Console Smart Password Manager
 
-    DECENTRALIZED BY DESIGN:
-    • No cloud, no database, no trust required
-    • Your secrets never leave your device
-    • There is no "forgot password" button — you are in complete control
-    • Metadata can be synced via any channel (USB, cloud, even paper)
+DECENTRALIZED BY DESIGN:
+• No cloud, no database, no trust required
+• Your secrets never leave your device
+• There is no "forgot password" button — you are in complete control
+• Metadata can be synced via any channel (USB, cloud, even paper)
 
-    HOW IT WORKS:
-    1. Provide a secret phrase (minimum 12 characters)
-    2. System generates a public key from the secret
-    3. Password is generated deterministically
-    4. Same secret + same length = same password across all platforms
+HOW IT WORKS:
+1. Provide a secret phrase (minimum 12 characters)
+2. System generates a public key from the secret (45-60 dynamic iterations)
+3. Password is generated deterministically from private key (15-30 dynamic iterations)
+4. Same secret + same length = same password across all platforms
 
-    To retrieve a password:
-    1. Enter the same secret phrase
-    2. Password is regenerated identically
+To retrieve a password:
+1. Enter the same secret phrase
+2. Password is regenerated identically
 
-    SECURITY NOTES:
-    • Passwords are NEVER stored anywhere
-    • Secret phrases must be at least 12 characters
-    • Case-sensitive secret phrases
-    • Lost secret phrase = permanently lost passwords
-    • Public key can be stored for verification
+SECURITY NOTES:
+• Passwords are NEVER stored anywhere
+• Secret phrases must be at least 12 characters (enforced)
+• Case-sensitive secret phrases
+• Lost secret phrase = permanently lost passwords
+• Public key can be stored for verification
+• Google-compatible character set with 26 special symbols
+• Dynamic iteration counts per secret for maximum security
 
-    CROSS-PLATFORM COMPATIBILITY:
-    Same secret + same length = identical passwords on:
-    • Python (Desktop, CLI)
-    • C# (Desktop, CLI)
-    • Web, Android, and all smartpasslib implementations
+CROSS-PLATFORM COMPATIBILITY:
+Same secret + same length = identical passwords on:
+• Python (Desktop, CLI)
+• C# (Desktop, CLI)
+• Go, Kotlin, JavaScript
+• Web, Android, and all smartpasslib implementations
 
-    For more information, visit the project page on GitHub: {self._config.url}
+For more information, visit the project page on GitHub: {self._config.url}
 
-    """)
+        """)
         self._smart_printer.print_framed(f'Complete documentation: {self._config.help_url}')
         self._smart_printer.print_center()
         self._continue()

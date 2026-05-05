@@ -2,5 +2,5 @@
 """Terminal-based smart password manager with deterministic password generation.
 Generate, manage, and retrieve passwords without storing them - all from your command line."""
 
-__version__ = '3.0.3'
+__version__ = '4.0.0'
 __author__ = 'Alexander Suvorov'

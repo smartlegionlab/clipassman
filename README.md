@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v3.0.3</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v4.0.0</sup>
 
 ---
 
@@ -18,7 +18,7 @@ Smart Password Manager stores nothing. Your secrets never leave your device. Pas
 [![PyPI version](https://img.shields.io/pypi/v/clipassman)](https://pypi.org/project/clipassman)
 [![GitHub license](https://img.shields.io/github/license/smartlegionlab/clipassman)](https://github.com/smartlegionlab/clipassman/blob/master/LICENSE)
 [![PyPI format](https://img.shields.io/pypi/format/clipassman)](https://pypi.org/project/clipassman)
-![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey)
+![Platform](https://img.shields.io/badge/platform-linux-lightgrey)
 [![GitHub stars](https://img.shields.io/github/stars/smartlegionlab/clipassman?style=social)](https://github.com/smartlegionlab/clipassman/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/smartlegionlab/clipassman?style=social)](https://github.com/smartlegionlab/clipassman/network/members)
 
@@ -34,11 +34,11 @@ Smart Password Manager stores nothing. Your secrets never leave your device. Pas
 
 ---
 
-## 🔄 Breaking Change (v3.x.x)
+## 🔄 Breaking Change (v4.0.0)
 
-> **⚠️ This release uses [smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.x.x, which is NOT backward compatible with v2.x.x**
+> **⚠️ This release uses [smartpasslib](https://github.com/smartlegionlab/smartpasslib) v4.0.0, which is NOT backward compatible with v2.x.x or v3.x.x**
 
-Passwords created with v2.x.x or earlier **cannot be regenerated** using v3.x.x.
+Smart passwords created with older versions **cannot be regenerated** using v4.0.0.
 
 📖 **Full migration instructions** → see [MIGRATION.md](https://github.com/smartlegionlab/clipassman/blob/master/MIGRATION.md)
 
@@ -97,16 +97,23 @@ Passwords created with v2.x.x or earlier **cannot be regenerated** using v3.x.x.
 
 ## Technical Foundation
 
-Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.x.x+** — The core library for deterministic password generation.
+Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v4.0.0+** — The core library for deterministic password generation.
 
-**Key derivation (same as Python/JS/Kotlin/Go/C# versions):**
+**Key derivation (same as Python/JS/Kotlin/Go/C# versions v4.0.0):**
 
-| Key Type    | Iterations | Purpose                                               |
-|-------------|------------|-------------------------------------------------------|
-| Private Key | 30         | Password generation (never stored, never transmitted) |
-| Public Key  | 60         | Verification (stored locally)                         |
+| Key Type    | Iterations              | Purpose                                               |
+|-------------|-------------------------|-------------------------------------------------------|
+| Private Key | 15-30 (dynamic)         | Password generation (never stored, never transmitted) |
+| Public Key  | 45-60 (dynamic)         | Verification (stored locally)                         |
 
-**Character Set:** `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$&*-_`
+**Character Set (Google-compatible):**
+```
+!@#$%^&*()_+-=[]{};:,.<>?/ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz
+```
+
+**Validation Rules:**
+- Secret phrase: minimum 12 characters
+- Password length: 12-100 characters
 
 **Decentralized Architecture**:
 - No central authority required
@@ -124,25 +131,23 @@ Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v3.x
 - Service description
 - Password length parameter
 
-**Export format**: Same JSON structure, but v3.x.x exports are **incompatible** with older versions. Always note which version created the export.
-
 ---
 
 ## File Locations
 
-Starting from v3.x.x, configuration files are stored in:
+Configuration files are stored in:
 
 | Platform | Configuration Path                                                |
 |----------|-------------------------------------------------------------------|
 | Linux    | `~/.config/smart_password_manager/passwords.json`                 |
-| macOS    | `~/.config/smart_password_manager/passwords.json`                 |
-| Windows  | `C:\Users\Username\.config\smart_password_manager\passwords.json` |
 
-**Automatic Migration**:
-- Old `~/.cases.json` files are automatically migrated on first run
-- Original file is backed up as `~/.cases.json.bak`
-- Migration is one-time and non-destructive
-- All your existing passwords are preserved
+**Legacy Migration**:
+- Old `~/.cases.json` files from v1.x.x/v2.x.x/v3.x.x are **NOT compatible** with v4.0.0
+- Public keys in old files use different derivation (fixed iterations, no salt)
+- These files will **not** be migrated automatically
+- If you have existing metadata, you need to recreate entries manually
+- Keep old file as backup: `~/.cases.json.v3.bak`
+- See [MIGRATION.md](MIGRATION.md) for detailed instructions
 
 ---
 
@@ -152,25 +157,25 @@ Starting from v3.x.x, configuration files are stored in:
 - **Python 3.7+** required
 - **pip** for package management
 
+### Quick Installation
+```bash
+# Install from PyPI
+pip install clipassman==4.0.0
+
+# For systems with package conflicts
+pip install clipassman==4.0.0 --break-system-packages
+
+# Verify installation
+clipassman
+```
+
 ### Quick Run from Repository
 
 ```bash
 # Clone and run in one go
 git clone https://github.com/smartlegionlab/clipassman.git
 cd clipassman
-python clipassman/clipassman.py
-```
-
-### Quick Installation
-```bash
-# Install from PyPI
-pip install clipassman==3.0.3
-
-# For systems with package conflicts
-pip install clipassman==3.0.3 --break-system-packages
-
-# Verify installation
-clipassman
+python app.py
 ```
 
 ### Manual Installation
@@ -226,113 +231,26 @@ python -m clipassman.clipassman
 5. Select format (1: pretty JSON, 2: minified JSON)
 6. Choose whether to include metadata (y/n)
 7. File is saved with all your password metadata
-8. Success message with filename and password count
 
 ### Importing Passwords
 1. Launch `clipassman`
 2. Select option **3: Export/Import Passwords**
 3. Select **2: Import passwords from file**
 4. Enter filename to import
-5. Review export metadata if present (date, version, count)
+5. Review export metadata if present
 6. Confirm import (y/n)
 7. See statistics of added/skipped/invalid entries
-8. Table automatically refreshes with new passwords
 
 ### Deleting Passwords
 1. Select option **2: Get/Delete Password**
 2. Choose password entry
 3. Select **2: Delete entry**
 4. Confirm deletion with 'y'
-5. Only metadata removed - password can be recreated with secret
 
 ### Clearing All Passwords
 1. Select option **4: Clear All Passwords**
 2. First confirmation with 'y'
 3. Type 'DELETE ALL' to confirm
-4. All password entries are removed
-
-### Managing Passwords
-```bash
-# Main menu options:
-1: Add Password          # Create new password
-2: Get/Delete Password   # Retrieve or remove password
-3: Export/Import         # Backup or restore password metadata
-4: Clear All Passwords   # Remove all entries (double confirmation)
-5: Help                  # View documentation
-0: Exit                  # Quit application
-```
-
----
-
-## Windows Standalone Executable
-
-### Creating a Single-File *.exe
-
-Build a standalone `clipassman.exe` that runs without Python installation:
-
-#### Step 1: Get the Project Files
-1. **Download project ZIP:**
-   - Go to: https://github.com/smartlegionlab/clipassman
-   - Click green "Code" button
-   - Select "Download ZIP"
-   - Extract to: `C:\clipassman-master`
-
-#### Step 2: Install Python
-1. Download Python installer from: https://python.org/downloads/
-2. Run installer
-3. **IMPORTANT:** Check "Add Python to PATH"
-4. Click "Install Now"
-
-#### Step 3: Open Command Prompt
-1. Press `Win + R`
-2. Type `cmd`, press Enter
-3. Navigate to project folder:
-   ```cmd
-   cd C:\clipassman-master
-   ```
-
-#### Step 4: Create Virtual Environment
-```cmd
-# Create virtual environment
-python -m venv venv
-
-# Activate it (IMPORTANT!)
-.\venv\Scripts\activate
-
-# You should see (venv) in your command prompt
-```
-
-#### Step 5: Install Dependencies
-```cmd
-# Install PyInstaller in virtual environment
-pip install pyinstaller
-pip install smartpasslib==3.0.0
-```
-
-#### Step 6: Build Executable
-```cmd
-# Build single .exe file
-pyinstaller --onefile --console --name "clipassman.exe" clipassman/clipassman.py
-
-# Wait for build to complete (1-2 minutes)
-```
-
-#### Step 7: Find and Use
-**Location:** `C:\clipassman-master\dist\clipassman.exe`
-
-**Create desktop shortcut:**
-1. Open `C:\clipassman-master\dist\` folder
-2. Right-click `clipassman.exe`
-3. Select "Create shortcut"
-4. Drag shortcut to desktop
-5. Rename shortcut to "CLIPassMan"
-6. Double-click to start
-
-**What you get:**
-- Single file: `clipassman.exe` (~10MB)
-- No Python required to run
-- Works on any Windows 10/11 PC
-- Can be copied to USB drive
 
 ---
 
@@ -341,7 +259,7 @@ pyinstaller --onefile --console --name "clipassman.exe" clipassman/clipassman.py
 ### Secret Phrase
 - **Minimum 12 characters** (enforced)
 - Case-sensitive
-- Use mix of: uppercase, lowercase, numbers, symbols, emoji, or Cyrillic
+- Use mix of: uppercase, lowercase, numbers, symbols
 - Never store digitally
 - **NEVER use your password description as secret phrase**
 
@@ -358,7 +276,6 @@ pyinstaller --onefile --console --name "clipassman.exe" clipassman/clipassman.py
 ❌ "password"                    — dictionary word, too short
 ❌ "1234567890"                  — only digits, too short
 ❌ "qwerty123"                   — keyboard pattern
-❌ Same as description           — never use the same value as password description
 ```
 
 ### Decentralized Nature
@@ -416,8 +333,9 @@ CLIPassMan produces **identical passwords** to:
 
 | Version          | smartpasslib | Status                   | Migration Required     |
 |------------------|--------------|--------------------------|------------------------|
-| v2.2.2 and below | v2.x.x       | ❌ Deprecated/Unsupported | Must migrate to v3.x.x |
-| v3.x.x+          | v3.x.x       | ✅ Current                | N/A                    |
+| v2.x.x and below | v2.x.x       | ❌ Deprecated/Unsupported | Must migrate to v4.x.x |
+| v3.x.x           | v3.x.x       | ❌ Deprecated/Unsupported | Must migrate to v4.x.x |
+| **v4.0.0+**      | **v4.0.0+**  | ✅ Current                | N/A                    |
 
 ## Security Warnings
 
@@ -439,171 +357,10 @@ CLIPassMan produces **identical passwords** to:
 
 - **Minimum 12 characters** is enforced by the application
 - Short secrets (under 12 chars) are **automatically rejected**
-- Weak secrets like "password123" or "qwerty" will be rejected
-- Use a mix of: uppercase, lowercase, numbers, symbols, emoji, or Cyrillic
+- Use a mix of: uppercase, lowercase, numbers, symbols
 - A 12-character secret with diverse character types provides **practical brute-force immunity**
 
 **Remember:** The app cannot recover your secret phrase. If you lose it, all passwords are permanently lost.
-
-### Export/Import Security Notes
-
-- Export files contain ONLY metadata (public keys, descriptions, lengths)
-- No passwords or secret phrases are ever exported
-- Export files are plain JSON - store them securely
-- Treat exported metadata as sensitive information
-- Timestamped exports help maintain backup history
-
----
-
-## Terminal Interface Examples
-
-![clipassman](https://github.com/smartlegionlab/clipassman/blob/master/data/images/clipassman.png)
-
-### Main Interface
-```
-********************************************************************************
-********************** Smart Password Manager CLI v3.0.3 ***********************
-******************************* Version: v3.0.3 ********************************
------------------------- Main Menu | Total passwords: 0 ------------------------
-1: Add Password
-2: Get/Delete Password
-3: Export/Import Passwords
-4: Clear All Passwords
-5: Help
-0: Exit
-Choose an action: 1
----------------------------- Add new smart password ----------------------------
--------------------------------------------------------------------
-Enter a descriptive name for this password (e.g., "GitHub Account")
--------------------------------------------------------------------
-Description: Account 1
-
-IMPORTANT: Your secret phrase (minimum 12 characters):
-• Is case-sensitive
-• Should be memorable but secure
-• Will generate the same password every time
-• Is never stored - only the hash is saved
-
-Good examples: 'MyCat🐱Hippo2026' or 'P@ssw0rd!LongSecret'
-Bad examples: 'password123', 'qwerty', 'mysecret'
-
-Enter secret phrase (hidden): 
-Confirm secret phrase (hidden): 
-Enter password length (12-100, recommended 16-24): 16
---------------------------------------------------------------------------------
-✓ Password metadata added successfully!
-Description: Account 1
-Length: 16 characters
-Public Key: 9e279e242cbfd802...2d1d6c79c3dfa348
---------------------------- Your generated password: ---------------------------
-lklkVJxrHffoT@5E
---------------------------------------------------------------------------------
-
-Press Enter to continue... 
------------------------- Main Menu | Total passwords: 1 ------------------------
-1: Add Password
-2: Get/Delete Password
-3: Export/Import Passwords
-4: Clear All Passwords
-5: Help
-0: Exit
-Choose an action: 2
--------------------------------- Password List: --------------------------------
-1. Account 1 (16 chars)
-0. ← Back
-Select entry: 1
---------------------------------------------------------------------------------
-Selected: Account 1
-Length: 16 characters
-1: Get password
-2: Delete entry
-0: ← Back
-Select action: 1
---------------------------- Retrieve Smart Password ----------------------------
-Description: Account 1
-Length: 16 characters
-Enter secret phrase (hidden): 
------------------------------ Generated Password: ------------------------------
-lklkVJxrHffoT@5E
---------------------------------------------------------------------------------
-
-Press Enter to continue... 
---------------------------------------------------------------------------------
-Selected: Account 1
-Length: 16 characters
-1: Get password
-2: Delete entry
-0: ← Back
-Select action: 0
--------------------------------- Password List: --------------------------------
-1. Account 1 (16 chars)
-0. ← Back
-Select entry: 0
------------------------- Main Menu | Total passwords: 1 ------------------------
-1: Add Password
-2: Get/Delete Password
-3: Export/Import Passwords
-4: Clear All Passwords
-5: Help
-0: Exit
-Choose an action: 5
-------------------------------------- Help -------------------------------------
-
-
-    CLIPASSMAN v3.0.3 - Console Smart Password Manager
-
-    DECENTRALIZED BY DESIGN:
-    • No cloud, no database, no trust required
-    • Your secrets never leave your device
-    • There is no "forgot password" button — you are in complete control
-    • Metadata can be synced via any channel (USB, cloud, even paper)
-
-    HOW IT WORKS:
-    1. Provide a secret phrase (minimum 12 characters)
-    2. System generates a public key from the secret
-    3. Password is generated deterministically
-    4. Same secret + same length = same password across all platforms
-
-    To retrieve a password:
-    1. Enter the same secret phrase
-    2. Password is regenerated identically
-
-    SECURITY NOTES:
-    • Passwords are NEVER stored anywhere
-    • Secret phrases must be at least 12 characters
-    • Case-sensitive secret phrases
-    • Lost secret phrase = permanently lost passwords
-    • Public key can be stored for verification
-
-    CROSS-PLATFORM COMPATIBILITY:
-    Same secret + same length = identical passwords on:
-    • Python (Desktop, CLI)
-    • C# (Desktop, CLI)
-    • Web, Android, and all smartpasslib implementations
-
-    For more information, visit the project page on GitHub: https://github.com/smartlegionlab/clipassman
-
-    
-----------------------------------------------------------------------
-Complete documentation: https://github.com/smartlegionlab/smartpasslib
-----------------------------------------------------------------------
---------------------------------------------------------------------------------
-
-Press Enter to continue... 
------------------------- Main Menu | Total passwords: 1 ------------------------
-1: Add Password
-2: Get/Delete Password
-3: Export/Import Passwords
-4: Clear All Passwords
-5: Help
-0: Exit
-Choose an action: 0
------------------ https://github.com/smartlegionlab/clipassman -----------------
---------------------- Copyright © 2026, Alexander Suvorov ----------------------
-================================================================================
-
-
-```
 
 ---
 
@@ -617,7 +374,9 @@ Copyright (©) 2026, Alexander Suvorov
 
 - **CLI Manager Issues**: [GitHub Issues](https://github.com/smartlegionlab/clipassman/issues)
 - **Core Library Issues**: [smartpasslib Issues](https://github.com/smartlegionlab/smartpasslib/issues)
-- **Documentation**: Inline help (option 5) and this [README](https://github.com/smartlegionlab/clipassman/blob/master/README.md)
+- **Documentation**: Inline help (option 5) and this README
 
 **Note**: Always test password generation with non-essential accounts first. Implementation security depends on proper usage.
+
+---
 
