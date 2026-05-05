@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clipassman"
-version = "3.0.2"
+version = "3.0.3"
 description = "Console Smart Password Manager - Terminal-based smart password manager with deterministic password generation. Generate, manage, and retrieve passwords without storing them - all from your command line."
 authors = [
     {name = "Alexander Suvorov", email = "smartlegionlab@gmail.com"}

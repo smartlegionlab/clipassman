@@ -2,8 +2,8 @@
 
 
 class Config:
-    name = 'Smart Password Manager CLI v3.0.2'
+    name = 'Smart Password Manager CLI v3.0.3'
     url = 'https://github.com/smartlegionlab/clipassman'
     help_url = 'https://github.com/smartlegionlab/smartpasslib'
     info = 'Copyright © 2026, Alexander Suvorov'
-    version = "v3.0.2"
+    version = "v3.0.3"

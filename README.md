@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v3.0.2</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v3.0.3</sup>
 
 ---
 
@@ -164,10 +164,10 @@ python clipassman/clipassman.py
 ### Quick Installation
 ```bash
 # Install from PyPI
-pip install clipassman==3.0.2
+pip install clipassman==3.0.3
 
 # For systems with package conflicts
-pip install clipassman==3.0.2 --break-system-packages
+pip install clipassman==3.0.3 --break-system-packages
 
 # Verify installation
 clipassman
@@ -462,8 +462,8 @@ CLIPassMan produces **identical passwords** to:
 ### Main Interface
 ```
 ********************************************************************************
-********************** Smart Password Manager CLI v3.0.2 ***********************
-******************************* Version: v3.0.2 ********************************
+********************** Smart Password Manager CLI v3.0.3 ***********************
+******************************* Version: v3.0.3 ********************************
 ------------------------ Main Menu | Total passwords: 0 ------------------------
 1: Add Password
 2: Get/Delete Password
@@ -550,7 +550,7 @@ Choose an action: 5
 ------------------------------------- Help -------------------------------------
 
 
-    CLIPASSMAN v3.0.2 - Console Smart Password Manager
+    CLIPASSMAN v3.0.3 - Console Smart Password Manager
 
     DECENTRALIZED BY DESIGN:
     • No cloud, no database, no trust required
