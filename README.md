@@ -5,7 +5,7 @@
 **Console Smart Password Manager - Terminal-based smart password manager with deterministic password generation. Generate, manage, and retrieve passwords without storing them - all from your command line.**
 
 **Decentralized by Design**: Unlike traditional password managers that store encrypted vaults on central servers, 
-Smart Password Manager stores nothing. Your secrets never leave your device. Passwords are regenerated on-demand — 
+Smart Password Manager stores nothing. Your secrets never leave your device. Passwords are regenerated on-demand - 
 **no cloud, no database, no trust required**.
 
 ---
@@ -31,16 +31,6 @@ Smart Password Manager stores nothing. Your secrets never leave your device. Pas
 **Summary:** Software provided "AS IS" without warranty. You assume all risks.
 
 **Full legal disclaimer:** See [DISCLAIMER.md](https://github.com/smartlegionlab/clipassman/blob/master/DISCLAIMER.md)
-
----
-
-## 🔄 Breaking Change (v4.0.0)
-
-> **⚠️ This release uses [smartpasslib](https://github.com/smartlegionlab/smartpasslib) v4.0.0, which is NOT backward compatible with v2.x.x or v3.x.x**
-
-Smart passwords created with older versions **cannot be regenerated** using v4.0.0.
-
-📖 **Full migration instructions** → see [MIGRATION.md](https://github.com/smartlegionlab/clipassman/blob/master/MIGRATION.md)
 
 ---
 
@@ -80,7 +70,7 @@ Smart passwords created with older versions **cannot be regenerated** using v4.0
 ## Security Model
 
 - **Proof of Knowledge**: Public keys verify secrets without exposing them
-- **Decentralized Trust**: No third party needed — you control your secrets completely
+- **Decentralized Trust**: No third party needed - you control your secrets completely
 - **Deterministic Security**: Same secret + length = same password, always
 - **Metadata Separation**: Non-sensitive data stored separately from verification
 - **Local Processing**: No data leaves your computer
@@ -97,9 +87,9 @@ Smart passwords created with older versions **cannot be regenerated** using v4.0
 
 ## Technical Foundation
 
-Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v4.0.0+** — The core library for deterministic password generation.
+Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v4.0.0+** - The core library for deterministic password generation.
 
-**Key derivation (same as Python/JS/Kotlin/Go/C# versions v4.0.0):**
+**Key derivation (same as Python/JS/Kotlin/Go/C#/Rust versions v4.0.0):**
 
 | Key Type    | Iterations              | Purpose                                               |
 |-------------|-------------------------|-------------------------------------------------------|
@@ -119,7 +109,7 @@ Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v4.0
 - No central authority required
 - Metadata can be synced via any channel
 - Your security depends only on your secret phrase
-- Works offline — no internet connection required
+- Works offline - no internet connection required
 
 **What's NOT stored**:
 - Your secret phrase
@@ -140,14 +130,6 @@ Configuration files are stored in:
 | Platform | Configuration Path                                                |
 |----------|-------------------------------------------------------------------|
 | Linux    | `~/.config/smart_password_manager/passwords.json`                 |
-
-**Legacy Migration**:
-- Old `~/.cases.json` files from v1.x.x/v2.x.x/v3.x.x are **NOT compatible** with v4.0.0
-- Public keys in old files use different derivation (fixed iterations, no salt)
-- These files will **not** be migrated automatically
-- If you have existing metadata, you need to recreate entries manually
-- Keep old file as backup: `~/.cases.json.v3.bak`
-- See [MIGRATION.md](MIGRATION.md) for detailed instructions
 
 ---
 
@@ -265,17 +247,17 @@ python -m clipassman.clipassman
 
 ### Strong Secret Examples
 ```
-✅ "MyStrongSecretPhrase2026!"   — mixed case + numbers + symbols
-✅ "P@ssw0rd!LongSecret"         — special chars + numbers + length
-✅ "КотБегемот2026НаДиете"       — Cyrillic + numbers
+"MyStrongSecretPhrase2026!"   - mixed case + numbers + symbols
+"P@ssw0rd!LongSecret"         - special chars + numbers + length
+"КотБегемот2026НаДиете"       - Cyrillic + numbers
 ```
 
 ### Weak Secret Examples (avoid)
 ```
-❌ "GitHub Account"              — using description as secret (weak!)
-❌ "password"                    — dictionary word, too short
-❌ "1234567890"                  — only digits, too short
-❌ "qwerty123"                   — keyboard pattern
+"GitHub Account"              - using description as secret (weak!)
+"password"                    - dictionary word, too short
+"1234567890"                  - only digits, too short
+"qwerty123"                   - keyboard pattern
 ```
 
 ### Decentralized Nature
@@ -286,25 +268,23 @@ python -m clipassman.clipassman
 - No support team can recover your access
 - Your secret phrase is the ONLY key
 
-**This is the price of true decentralization** — you are completely in control.
+**This is the price of true decentralization** - you are completely in control.
 
 ## Cross-Platform Compatibility
 
 CLIPassMan produces **identical passwords** to:
 
-| Platform         | Application                                                                               |
-|------------------|-------------------------------------------------------------------------------------------|
-| Desktop Python   | [Desktop Manager](https://github.com/smartlegionlab/smart-password-manager-desktop)       |
-| Desktop C#       | [Desktop C# Manager](https://github.com/smartlegionlab/SmartPasswordManagerCsharpDesktop) |
-| CLI C#           | [CLI Manager (C#)](https://github.com/smartlegionlab/SmartPasswordManagerCsharpCli)       |
-| CLI Generator C# | [CLI Generator (C#)](https://github.com/smartlegionlab/SmartPasswordGeneratorCsharpCli)   |
-| Web              | [Web Manager](https://github.com/smartlegionlab/smart-password-manager-web)               |
-| Android          | [Android Manager](https://github.com/smartlegionlab/smart-password-manager-android)       |
-| Python Core      | [smartpasslib](https://github.com/smartlegionlab/smartpasslib)                            |
-| Go Core          | [smartpasslib-go](https://github.com/smartlegionlab/smartpasslib-go)                      |
-| Kotlin Core      | [smartpasslib-kotlin](https://github.com/smartlegionlab/smartpasslib-kotlin)              |
-| JS Core          | [smartpasslib-js](https://github.com/smartlegionlab/smartpasslib-js)                      |
-| C# Core          | [smartpasslib-csharp](https://github.com/smartlegionlab/smartpasslib-csharp)              |
+| Platform         | Application                                                                                    |
+|------------------|------------------------------------------------------------------------------------------------|
+| Desktop Python   | [Desktop Manager](https://github.com/smartlegionlab/smart-password-manager-desktop)            |
+| Desktop C#       | [Desktop C# Manager](https://github.com/smartlegionlab/SmartPasswordManagerCsharpDesktop)      |
+| CLI C#           | [CLI Manager (C#)](https://github.com/smartlegionlab/SmartPasswordManagerCsharpCli)            |
+| CLI Generator C# | [CLI Generator (C#)](https://github.com/smartlegionlab/SmartPasswordGeneratorCsharpCli)        |
+| Rust CLI         | [CLI Manager (Rust)](https://github.com/smartlegionlab/smart-password-manager-cli-rs)          |
+| Rust GUI         | [Desktop Manager (Rust, GUI)](https://github.com/smartlegionlab/smart-password-manager-gui-rs) |
+| Rust TUI         | [Desktop Manager (Rust, TUI)](https://github.com/smartlegionlab/smart-password-manager-tui-rs) |
+| Web              | [Web Manager](https://github.com/smartlegionlab/smart-password-manager-web)                    |
+| Android          | [Android Manager](https://github.com/smartlegionlab/smart-password-manager-android)            |
 
 ## Ecosystem
 
@@ -314,28 +294,24 @@ CLIPassMan produces **identical passwords** to:
 - **[smartpasslib-kotlin](https://github.com/smartlegionlab/smartpasslib-kotlin)** - Kotlin
 - **[smartpasslib-go](https://github.com/smartlegionlab/smartpasslib-go)** - Go
 - **[smartpasslib-csharp](https://github.com/smartlegionlab/smartpasslib-csharp)** - C#
+- **[smartpasslib-rs](https://github.com/smartlegionlab/smartpasslib-rs)** - Rust
 
 **CLI Applications:**
 - **[CLI Smart Password Manager (Python)](https://github.com/smartlegionlab/clipassman)** (this)
 - **[CLI Smart Password Generator (Python)](https://github.com/smartlegionlab/clipassgen)**
 - **[CLI Smart Password Manager (C#)](https://github.com/smartlegionlab/SmartPasswordManagerCsharpCli)**
 - **[CLI Smart Password Generator (C#)](https://github.com/smartlegionlab/SmartPasswordGeneratorCsharpCli)**
+- **[CLI Smart Password Manager (Rust)](https://github.com/smartlegionlab/smart-password-manager-cli-rs)**
 
 **Desktop Applications:**
 - **[Desktop Smart Password Manager (Python)](https://github.com/smartlegionlab/smart-password-manager-desktop)**
 - **[Desktop Smart Password Manager (C#)](https://github.com/smartlegionlab/SmartPasswordManagerCsharpDesktop)**
+- **[Desktop Smart Password Manager (Rust, GUI)](https://github.com/smartlegionlab/smart-password-manager-gui-rs)**
+- **[Desktop Smart Password Manager (Rust, TUI)](https://github.com/smartlegionlab/smart-password-manager-tui-rs)**
 
 **Other:**
 - **[Web Smart Password Manager](https://github.com/smartlegionlab/smart-password-manager-web)**
 - **[Android Smart Password Manager](https://github.com/smartlegionlab/smart-password-manager-android)**
-
-## Version History
-
-| Version          | smartpasslib | Status                   | Migration Required     |
-|------------------|--------------|--------------------------|------------------------|
-| v2.x.x and below | v2.x.x       | ❌ Deprecated/Unsupported | Must migrate to v4.x.x |
-| v3.x.x           | v3.x.x       | ❌ Deprecated/Unsupported | Must migrate to v4.x.x |
-| **v4.0.0+**      | **v4.0.0+**  | ✅ Current                | N/A                    |
 
 ## Security Warnings
 

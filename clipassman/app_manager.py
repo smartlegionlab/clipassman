@@ -63,7 +63,7 @@ CLIPASSMAN {self._config.version} - Console Smart Password Manager
 DECENTRALIZED BY DESIGN:
 • No cloud, no database, no trust required
 • Your secrets never leave your device
-• There is no "forgot password" button — you are in complete control
+• There is no "forgot password" button - you are in complete control
 • Metadata can be synced via any channel (USB, cloud, even paper)
 
 HOW IT WORKS:

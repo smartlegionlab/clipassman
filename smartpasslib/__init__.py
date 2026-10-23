@@ -4,7 +4,7 @@
 # Cryptographic password generation and management without storage. Generate passwords from secrets,
 # verify knowledge without exposure, manage metadata securely.
 # Same secret phrase + same length = same password across all platforms.
-# Decentralized by design — no central servers, no cloud dependency, no third-party trust required.
+# Decentralized by design - no central servers, no cloud dependency, no third-party trust required.
 #
 # Compatible with SmartPassLib C#/JS/Kotlin/Go implementations
 #
@@ -47,7 +47,7 @@
 """Smart Passwords Library: Cryptographic password generation and management without storage.
 Generate passwords from secrets, verify knowledge without exposure, manage metadata securely.
 
-Decentralized by design — no central servers, no cloud dependency, no third-party trust required.
+Decentralized by design - no central servers, no cloud dependency, no third-party trust required.
 """
 
 from smartpasslib.generators.base import BasePasswordGenerator
