@@ -1,4 +1,4 @@
-# CLIPassMan (Console Smart Password Manager) <sup>v4.0.0</sup>
+# CLIPassMan (Console Smart Password Manager) <sup>v4.0.1</sup>
 
 ---
 
@@ -87,9 +87,9 @@ Smart Password Manager stores nothing. Your secrets never leave your device. Pas
 
 ## Technical Foundation
 
-Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v4.0.0+** - The core library for deterministic password generation.
+Powered by **[smartpasslib](https://github.com/smartlegionlab/smartpasslib) v4.0.1+** - The core library for deterministic password generation.
 
-**Key derivation (same as Python/JS/Kotlin/Go/C#/Rust versions v4.0.0):**
+**Key derivation (same as Python/JS/Kotlin/Go/C#/Rust versions v4.0.1):**
 
 | Key Type    | Iterations              | Purpose                                               |
 |-------------|-------------------------|-------------------------------------------------------|
@@ -142,10 +142,10 @@ Configuration files are stored in:
 ### Quick Installation
 ```bash
 # Install from PyPI
-pip install clipassman==4.0.0
+pip install clipassman==4.0.1
 
 # For systems with package conflicts
-pip install clipassman==4.0.0 --break-system-packages
+pip install clipassman==4.0.1 --break-system-packages
 
 # Verify installation
 clipassman

@@ -6,4 +6,4 @@ class Config:
     url = 'https://github.com/smartlegionlab/clipassman'
     help_url = 'https://github.com/smartlegionlab/smartpasslib'
     info = 'Copyright © 2026, Alexander Suvorov'
-    version = "v4.0.0"
+    version = "v4.0.1"
